@@ -301,6 +301,9 @@ section { padding: 100px 0; }
 .prestations { background: var(--cream-soft); }
 .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
 .service-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   background: var(--white);
   border-radius: var(--radius);
   overflow: hidden;
@@ -408,6 +411,7 @@ section { padding: 100px 0; }
 .contact { background: var(--cream); }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
 .contact-info h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
+.contact-planity { margin: 28px 0 4px; }
 .contact-list { list-style: none; margin: 34px 0; }
 .contact-list li { display: flex; flex-direction: column; margin-bottom: 20px; }
 .contact-list strong {
