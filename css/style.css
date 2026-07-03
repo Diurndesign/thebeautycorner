@@ -308,114 +308,119 @@ section { padding: 100px 0; }
    ============================================================ */
 .prestations { background: var(--cream-soft); }
 
-/* ---------- Vitrine prestations : menu + image au survol ---------- */
-.prestations-showcase {
+/* ---------- Grille prestations : 6 blocs animés au survol / tap ---------- */
+.prestations-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 50px;
-  align-items: start;
-  margin-top: 30px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 36px;
 }
 
-.prestations-menu {
-  list-style: none;
-  border-top: 1px solid rgba(129,94,84,0.18);
-}
-.presta-row { border-bottom: 1px solid rgba(129,94,84,0.18); }
-.presta-row a {
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  padding: 26px 8px;
-  text-decoration: none;
-  color: inherit;
-  transition: padding-left .35s ease;
-}
-.presta-num {
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  letter-spacing: 0.15em;
-  color: var(--muted);
-  min-width: 28px;
-  transition: color .35s ease;
-}
-/* Vignette : masquée sur desktop (aperçu géré par le panneau), visible sur mobile */
-.presta-thumb {
-  display: none;
-  width: 64px;
-  height: 64px;
-  border-radius: 10px;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--cream);
-  flex-shrink: 0;
-}
-.presta-body { flex: 1; }
-.presta-name {
-  display: block;
-  font-family: var(--font-title);
-  font-weight: 500;
-  color: var(--dark);
-  font-size: clamp(1.6rem, 3.2vw, 2.5rem);
-  line-height: 1.06;
-  transition: color .35s ease;
-}
-.presta-desc {
-  display: block;
-  font-size: 0.92rem;
-  color: var(--muted);
-  margin-top: 4px;
-  max-width: 460px;
-}
-.presta-cta {
-  font-family: var(--font-body);
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--blue);
-  font-weight: 500;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity .35s ease, transform .35s ease;
-}
-
-.presta-row.is-active a { padding-left: 24px; }
-.presta-row.is-active .presta-name { color: var(--terracotta); }
-.presta-row.is-active .presta-num { color: var(--terracotta); }
-.presta-row.is-active .presta-cta { opacity: 1; transform: translateX(0); }
-
-/* Panneau d'aperçu sticky : les images se superposent et se fondent */
-.prestations-preview {
-  position: sticky;
-  top: calc(var(--header-h) + 30px);
-  height: 460px;
+.presta-cell {
+  position: relative;
+  min-height: 320px;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--cream);
-  box-shadow: var(--shadow);
+  background: var(--white);
+  border: 1px solid rgba(129,94,84,0.16);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: box-shadow .4s ease, transform .4s ease;
 }
-.preview-img {
+.presta-cell:hover { transform: translateY(-4px); }
+
+/* Image révélée au survol / tap */
+.presta-cell-img {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-color: var(--cream);
   opacity: 0;
-  transform: scale(1.06);
-  transition: opacity .6s ease, transform 1.2s ease;
+  transform: scale(1.1);
+  transition: opacity .55s ease, transform 1.3s ease;
 }
-.preview-img.is-active { opacity: 1; transform: scale(1); }
+/* Voile sombre pour la lisibilité du texte quand l'image est visible */
+.presta-cell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(58,47,43,0.15) 0%, rgba(58,47,43,0.78) 100%);
+  opacity: 0;
+  transition: opacity .5s ease;
+}
 
-@media (max-width: 860px) {
-  /* Mobile : on masque le panneau et on affiche une vignette par ligne */
-  .prestations-showcase { grid-template-columns: 1fr; gap: 0; }
-  .prestations-preview { display: none; }
-  .presta-thumb { display: block; }
-  .presta-row a { gap: 16px; padding: 20px 4px; }
-  .presta-row.is-active a { padding-left: 4px; }
-  .presta-cta { display: none; }
-  .presta-name { font-size: 1.5rem; }
-  .presta-desc { font-size: 0.88rem; }
+.presta-cell-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px 26px;
+}
+.presta-num {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  transition: color .4s ease;
+}
+.presta-cell-head { margin-top: auto; }
+.presta-name {
+  font-family: var(--font-title);
+  font-weight: 500;
+  color: var(--dark);
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  line-height: 1.08;
+  margin-bottom: 8px;
+  transition: color .4s ease;
+}
+.presta-desc {
+  font-size: 0.92rem;
+  color: var(--muted);
+  transition: color .4s ease;
+}
+/* Bouton Réserver : caché par défaut, apparaît quand le bloc est actif */
+.presta-reserve {
+  align-self: flex-start;
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border-radius: 999px;
+  background: var(--terracotta);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity .45s ease, transform .45s ease, background .25s ease;
+}
+.presta-reserve span { transition: transform .25s ease; }
+.presta-reserve:hover { background: var(--brown); }
+.presta-reserve:hover span { transform: translateX(4px); }
+
+/* --- État actif (survol desktop OU classe .is-open ajoutée au tap) --- */
+.presta-cell.is-open .presta-cell-img { opacity: 1; transform: scale(1); }
+.presta-cell.is-open::after { opacity: 1; }
+.presta-cell.is-open .presta-num { color: rgba(255,255,255,0.7); }
+.presta-cell.is-open .presta-name { color: #fff; }
+.presta-cell.is-open .presta-desc { color: rgba(255,255,255,0.88); }
+.presta-cell.is-open .presta-reserve { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+@media (max-width: 900px) {
+  .prestations-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .prestations-grid { grid-template-columns: 1fr; gap: 14px; }
+  .presta-cell, .presta-cell-inner { min-height: 240px; }
 }
 
 /* ============================================================
