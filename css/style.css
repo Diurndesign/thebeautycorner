@@ -116,6 +116,12 @@ section { padding: 100px 0; }
   height: var(--header-h);
   z-index: 100;
   background: transparent;
+  transition: background .3s ease, box-shadow .3s ease, height .3s ease;
+}
+.site-header.scrolled {
+  background: rgba(58, 47, 43, 0.94);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 26px rgba(58, 47, 43, 0.22);
 }
 .header-inner { height: 100%; display: flex; align-items: center; justify-content: flex-end; gap: 40px; }
 
