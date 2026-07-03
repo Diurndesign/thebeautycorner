@@ -390,7 +390,7 @@ section { padding: 100px 0; }
   gap: 8px;
   padding: 11px 22px;
   border-radius: 999px;
-  background: var(--terracotta);
+  background: var(--blue);
   color: #fff;
   font-family: var(--font-body);
   font-size: 0.8rem;
@@ -404,7 +404,7 @@ section { padding: 100px 0; }
   transition: opacity .45s ease, transform .45s ease, background .25s ease;
 }
 .presta-reserve span { transition: transform .25s ease; }
-.presta-reserve:hover { background: var(--brown); }
+.presta-reserve:hover { background: #46656f; }
 .presta-reserve:hover span { transform: translateX(4px); }
 
 /* --- État actif (survol desktop OU classe .is-open ajoutée au tap) --- */
