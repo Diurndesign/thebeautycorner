@@ -4,6 +4,15 @@
    #587D8D bleu · #815E54 brun · #CA9479 terracotta · #F6ECDA crème
    ============================================================ */
 
+/* Police principale de la cliente */
+@font-face {
+  font-family: 'Soria';
+  src: url('../assets/fonts/Soria.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --blue: #587D8D;
   --brown: #815E54;
@@ -16,7 +25,7 @@
   --white: #ffffff;
   --cream-soft: #fbf6ec;
 
-  --font-title: 'Cormorant Garamond', Georgia, serif;
+  --font-title: 'Soria', 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Jost', 'Segoe UI', sans-serif;
 
   --radius: 14px;
@@ -179,6 +188,12 @@ section { padding: 100px 0; }
   background: linear-gradient(120deg, rgba(58,47,43,0.72) 0%, rgba(129,94,84,0.55) 55%, rgba(88,125,141,0.45) 100%);
 }
 .hero-content { position: relative; text-align: center; margin: 0 auto; max-width: 780px; }
+.hero-logo {
+  width: 200px;
+  max-width: 55%;
+  margin: 0 auto 26px;
+  filter: drop-shadow(0 10px 30px rgba(58, 47, 43, 0.35));
+}
 .hero .eyebrow { color: var(--cream); }
 .hero h1 {
   color: var(--cream);
