@@ -24,6 +24,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Header : fond sombre au scroll (lisibilité) ---------- */
+  const header = document.getElementById('header');
+  function updateHeader() {
+    if (window.scrollY > 80) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  }
+  updateHeader();
+  window.addEventListener('scroll', updateHeader, { passive: true });
+
   /* ---------- Carrousel de témoignages ---------- */
   const testimonials = Array.from(document.querySelectorAll('.testimonial'));
   const dotsContainer = document.getElementById('testimonialDots');
