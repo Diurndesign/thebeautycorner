@@ -24,16 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Header : légère ombre au scroll ---------- */
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', function () {
-    if (window.scrollY > 20) {
-      header.style.boxShadow = '0 6px 20px rgba(88, 71, 60, 0.10)';
-    } else {
-      header.style.boxShadow = 'none';
-    }
-  });
-
   /* ---------- Carrousel de témoignages ---------- */
   const testimonials = Array.from(document.querySelectorAll('.testimonial'));
   const dotsContainer = document.getElementById('testimonialDots');
