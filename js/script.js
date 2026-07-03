@@ -36,6 +36,52 @@ document.addEventListener('DOMContentLoaded', function () {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
+  /* ---------- Prestations : image de référence au survol ---------- */
+  const prestaList = document.getElementById('prestationsList');
+  const hoverImg = document.getElementById('prestationHoverImg');
+  const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (prestaList && hoverImg && fine) {
+    const items = Array.from(prestaList.querySelectorAll('.prestation-item'));
+    let targetX = 0, targetY = 0, curX = 0, curY = 0, rafId = null, active = false;
+
+    function loop() {
+      // Suivi fluide du curseur (easing)
+      curX += (targetX - curX) * 0.14;
+      curY += (targetY - curY) * 0.14;
+      hoverImg.style.left = curX + 'px';
+      hoverImg.style.top = curY + 'px';
+      if (active || Math.abs(targetX - curX) > 0.5 || Math.abs(targetY - curY) > 0.5) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        rafId = null;
+      }
+    }
+    function start() {
+      if (rafId === null) { curX = targetX; curY = targetY; loop(); }
+    }
+
+    prestaList.addEventListener('pointermove', function (e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      start();
+    });
+
+    items.forEach(function (item) {
+      item.addEventListener('pointerenter', function () {
+        const src = item.getAttribute('data-img');
+        if (src) hoverImg.style.backgroundImage = "url('" + src + "')";
+        active = true;
+        hoverImg.classList.add('visible');
+        start();
+      });
+      item.addEventListener('pointerleave', function () {
+        active = false;
+        hoverImg.classList.remove('visible');
+      });
+    });
+  }
+
   /* ---------- Carrousel de témoignages ---------- */
   const testimonials = Array.from(document.querySelectorAll('.testimonial'));
   const dotsContainer = document.getElementById('testimonialDots');
