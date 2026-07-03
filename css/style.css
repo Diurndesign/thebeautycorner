@@ -307,32 +307,85 @@ section { padding: 100px 0; }
    PRESTATIONS
    ============================================================ */
 .prestations { background: var(--cream-soft); }
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-.service-card {
-  display: block;
+
+/* ---------- Liste éditoriale + image au survol ---------- */
+.prestations-list { position: relative; margin-top: 20px; border-top: 1px solid rgba(129,94,84,0.18); }
+
+.prestation-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 30px 10px;
   text-decoration: none;
   color: inherit;
-  background: var(--white);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  transition: transform .25s ease, box-shadow .25s ease;
+  border-bottom: 1px solid rgba(129,94,84,0.18);
+  transition: padding-left .35s ease, color .35s ease;
+  z-index: 2;
 }
-.service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
-.service-img { height: 220px; background-color: var(--cream); background-size: cover; background-position: center; }
-.service-body { padding: 26px 26px 30px; }
-.service-body h3 { font-size: 1.55rem; margin-bottom: 10px; }
-.service-body p { font-size: 0.95rem; color: var(--muted); margin-bottom: 16px; }
-.price {
-  display: inline-block;
+.prestation-index {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  min-width: 34px;
+  transition: color .35s ease;
+}
+.prestation-text { flex: 1; }
+.prestation-text h3 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+  margin-bottom: 6px;
+  transition: color .35s ease;
+}
+.prestation-text p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 520px;
+  transition: opacity .35s ease;
+}
+.prestation-cta {
   font-family: var(--font-body);
   font-size: 0.78rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--blue);
   font-weight: 500;
-  border-top: 1px solid rgba(88,125,141,0.25);
-  padding-top: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.prestation-item:hover { padding-left: 28px; }
+.prestation-item:hover .prestation-text h3 { color: var(--terracotta); }
+.prestation-item:hover .prestation-index { color: var(--terracotta); }
+.prestation-item:hover .prestation-cta { opacity: 1; transform: translateX(0); }
+
+/* Image flottante qui suit le curseur */
+.prestation-hover-img {
+  position: fixed;
+  top: 0; left: 0;
+  width: 300px;
+  height: 380px;
+  border-radius: var(--radius);
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: opacity .4s ease, transform .4s ease;
+  z-index: 60;
+  will-change: transform;
+}
+.prestation-hover-img.visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+@media (hover: none), (max-width: 760px) {
+  .prestation-hover-img { display: none; }
+  .prestation-item { flex-wrap: wrap; gap: 12px; padding: 22px 6px; }
+  .prestation-item:hover { padding-left: 6px; }
+  .prestation-cta { opacity: 1; transform: none; }
 }
 
 /* ============================================================
@@ -503,7 +556,6 @@ section { padding: 100px 0; }
   section { padding: 80px 0; }
   .intro-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .about-img { order: -1; }
-  .cards-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-inner { grid-template-columns: 1fr 1fr; }
 
   /* Hero : la carte avis passe sous le contenu, tout se centre */
@@ -538,8 +590,6 @@ section { padding: 100px 0; }
   .intro-cards { grid-template-columns: 1fr; }
   .intro-cards .mini-card:nth-child(1),
   .intro-cards .mini-card:nth-child(4) { transform: none; }
-
-  .cards-grid { grid-template-columns: 1fr; }
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
   .gallery-item.wide { grid-column: span 2; }
