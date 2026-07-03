@@ -36,44 +36,38 @@ document.addEventListener('DOMContentLoaded', function () {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
-  /* ---------- Prestations : aperçu image au survol ---------- */
-  const prestaMenu = document.getElementById('prestationsMenu');
-  const prestaPreview = document.getElementById('prestationsPreview');
+  /* ---------- Prestations : grille de blocs animés ---------- */
+  const prestaGrid = document.getElementById('prestationsGrid');
 
-  if (prestaMenu) {
-    const rows = Array.from(prestaMenu.querySelectorAll('.presta-row'));
-    const layers = [];
+  if (prestaGrid) {
+    const cells = Array.from(prestaGrid.querySelectorAll('.presta-cell'));
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-    rows.forEach(function (row, i) {
-      const src = row.getAttribute('data-img');
+    cells.forEach(function (cell) {
+      // Injecte l'image de la prestation dans la couche dédiée
+      const src = cell.getAttribute('data-img');
+      const imgEl = cell.querySelector('.presta-cell-img');
+      if (src && imgEl) imgEl.style.backgroundImage = "url('" + src + "')";
 
-      // Panneau d'aperçu (desktop) : une couche image par prestation, superposées
-      if (prestaPreview && src) {
-        const layer = document.createElement('div');
-        layer.className = 'preview-img';
-        layer.style.backgroundImage = "url('" + src + "')";
-        if (i === 0) layer.classList.add('is-active');
-        prestaPreview.appendChild(layer);
-        layers.push(layer);
+      if (canHover) {
+        // Desktop : ouverture au survol souris
+        cell.addEventListener('pointerenter', function () { cell.classList.add('is-open'); });
+        cell.addEventListener('pointerleave', function () { cell.classList.remove('is-open'); });
+        // Accessibilité clavier : ouverture quand le bouton reçoit le focus
+        const link = cell.querySelector('.presta-reserve');
+        if (link) {
+          link.addEventListener('focus', function () { cell.classList.add('is-open'); });
+          link.addEventListener('blur', function () { cell.classList.remove('is-open'); });
+        }
+      } else {
+        // Mobile / tablette : ouverture au tap (le bouton Réserver garde son lien)
+        cell.addEventListener('click', function (e) {
+          if (e.target.closest('.presta-reserve')) return; // laisse le lien fonctionner
+          const alreadyOpen = cell.classList.contains('is-open');
+          cells.forEach(function (c) { c.classList.remove('is-open'); });
+          if (!alreadyOpen) cell.classList.add('is-open');
+        });
       }
-
-      // Vignette (mobile) : même source d'image
-      const thumb = row.querySelector('.presta-thumb');
-      if (thumb && src) thumb.style.backgroundImage = "url('" + src + "')";
-    });
-
-    function activate(index) {
-      rows.forEach(function (row, i) {
-        row.classList.toggle('is-active', i === index);
-        if (layers[i]) layers[i].classList.toggle('is-active', i === index);
-      });
-    }
-
-    rows.forEach(function (row, i) {
-      // Survol souris et focus clavier (accessibilité)
-      row.addEventListener('pointerenter', function () { activate(i); });
-      const link = row.querySelector('a');
-      if (link) link.addEventListener('focus', function () { activate(i); });
     });
   }
 
