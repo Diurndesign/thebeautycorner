@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=20260704c" />
+  <link rel="stylesheet" href="css/style.css?v=20260704d" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -286,19 +286,47 @@
     </div>
   </section>
 
-  <!-- ================= GALERIE ================= -->
-  <section class="gallery">
+  <!-- ================= AVANT / APRÈS ================= -->
+  <section class="beforeafter" id="realisations">
     <div class="container">
       <div class="section-head center">
-        <p class="section-eyebrow">L'ambiance</p>
-        <h2>Un écrin pensé pour vous</h2>
+        <p class="section-eyebrow">Avant / Après</p>
+        <h2>Nos réalisations</h2>
+        <p class="section-lead">Choisissez une prestation, puis déplacez le curseur sur l'image pour révéler le résultat.</p>
       </div>
-      <div class="gallery-grid">
-        <div class="gallery-item tall" role="img" aria-label="Ambiance feutrée de l'institut de beauté The Beauty Corner à Nice" style="background-image:url('https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=700&q=80');"></div>
-        <div class="gallery-item" role="img" aria-label="Espace soin cosy et lumineux" style="background-image:url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=700&q=80');"></div>
-        <div class="gallery-item" role="img" aria-label="Détail de produits de soin naturels" style="background-image:url('https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=700&q=80');"></div>
-        <div class="gallery-item wide" role="img" aria-label="Cabine de soin de l'institut The Beauty Corner" style="background-image:url('https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=80');"></div>
-        <div class="gallery-item" role="img" aria-label="Moment de détente et de bien-être en institut" style="background-image:url('https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=700&q=80');"></div>
+
+      <!-- Sous-catégories : chaque onglet définit l'image avant (data-before) et après (data-after).
+           La cliente n'aura qu'à remplacer ces deux URLs par ses propres photos. -->
+      <div class="ba-tabs" id="baTabs" role="tablist" aria-label="Prestations">
+        <button class="ba-tab is-active" type="button" role="tab"
+          data-before="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&h=675&q=80"
+          data-after="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&h=675&q=80">Dermopigmentation</button>
+        <button class="ba-tab" type="button" role="tab"
+          data-before="https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=900&h=675&q=80"
+          data-after="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&h=675&q=80">Rehaussement de cils</button>
+        <button class="ba-tab" type="button" role="tab"
+          data-before="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&h=675&q=80"
+          data-after="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&h=675&q=80">Ongles</button>
+        <button class="ba-tab" type="button" role="tab"
+          data-before="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&h=675&q=80"
+          data-after="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&h=675&q=80">Soin de la peau</button>
+        <button class="ba-tab" type="button" role="tab"
+          data-before="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&h=675&q=80"
+          data-after="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=900&h=675&q=80">Détatouage</button>
+      </div>
+
+      <div class="ba-slider" id="baSlider">
+        <div class="ba-img ba-after">
+          <img id="baAfterImg" src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&h=675&q=80" alt="Après la prestation" />
+        </div>
+        <div class="ba-img ba-before" id="baBefore">
+          <img id="baBeforeImg" src="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&h=675&q=80" alt="Avant la prestation" />
+        </div>
+        <span class="ba-badge ba-badge-before">Avant</span>
+        <span class="ba-badge ba-badge-after">Après</span>
+        <div class="ba-handle" id="baHandle">
+          <span class="ba-handle-grip" aria-hidden="true">⟺</span>
+        </div>
       </div>
     </div>
   </section>
@@ -460,6 +488,6 @@
     </div>
   </footer>
 
-  <script src="js/script.js?v=20260704c"></script>
+  <script src="js/script.js?v=20260704d"></script>
 </body>
 </html>
