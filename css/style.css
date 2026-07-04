@@ -499,6 +499,53 @@ section { padding: 100px 0; }
 .testimonial-dots button.active { background: var(--cream); }
 
 /* ============================================================
+   INSTAGRAM
+   ============================================================ */
+.instagram { background: var(--cream-soft); }
+.ig-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.ig-followers strong { color: var(--terracotta); font-weight: 600; }
+
+.ig-feed { margin: 34px 0 36px; }
+.ig-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ig-post {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--cream) center/cover no-repeat;
+  box-shadow: var(--shadow-soft);
+}
+.ig-post-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: rgba(58, 47, 43, 0.42);
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+.ig-post:hover .ig-post-overlay { opacity: 1; }
+.ig-cta { margin-top: 4px; text-align: center; }
+
+@media (max-width: 620px) {
+  .ig-preview { gap: 10px; }
+}
+
+/* ============================================================
    CONTACT
    ============================================================ */
 .contact { background: var(--cream); }
