@@ -71,6 +71,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Avant / Après : comparateur + sous-catégories ---------- */
+  const baSlider = document.getElementById('baSlider');
+  if (baSlider) {
+    const baBefore = document.getElementById('baBefore');
+    const baBeforeImg = document.getElementById('baBeforeImg');
+    const baAfterImg = document.getElementById('baAfterImg');
+    const baHandle = document.getElementById('baHandle');
+    const baTabs = Array.from(document.querySelectorAll('.ba-tab'));
+    let dragging = false;
+
+    function setPos(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      baBefore.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+      baHandle.style.left = pct + '%';
+    }
+    function pctFromEvent(e) {
+      const rect = baSlider.getBoundingClientRect();
+      const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
+      return ((clientX - rect.left) / rect.width) * 100;
+    }
+
+    // Glisser pour déplacer la barre (souris + tactile via Pointer Events)
+    baSlider.addEventListener('pointerdown', function (e) { dragging = true; setPos(pctFromEvent(e)); });
+    window.addEventListener('pointermove', function (e) { if (dragging) setPos(pctFromEvent(e)); });
+    window.addEventListener('pointerup', function () { dragging = false; });
+
+    // Changement de sous-catégorie : on charge la paire avant/après
+    baTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        baTabs.forEach(function (t) { t.classList.remove('is-active'); });
+        tab.classList.add('is-active');
+        baBeforeImg.src = tab.getAttribute('data-before');
+        baAfterImg.src = tab.getAttribute('data-after');
+        setPos(50);
+      });
+    });
+
+    setPos(50);
+  }
+
   /* ---------- Carrousel de témoignages ---------- */
   const testimonials = Array.from(document.querySelectorAll('.testimonial'));
   const dotsContainer = document.getElementById('testimonialDots');
