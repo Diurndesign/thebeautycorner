@@ -2,10 +2,15 @@
    CONTENU ÉDITABLE — The Beauty Corner by Alex
    ------------------------------------------------------------
    👉 C'est ICI qu'on change facilement les photos / vidéos / textes.
-   Remplacez simplement les adresses d'images par vos propres photos :
-     - soit une URL externe : "https://…/ma-photo.jpg"
-     - soit un fichier déposé dans le dossier assets :
-       "assets/avant-apres/sourcils-avant.jpg"
+
+   POUR CHANGER UNE PHOTO :
+   - Déposez votre image dans le dossier assets/ (voir ci-dessous) en
+     GARDANT LE MÊME NOM DE FICHIER que l'exemple → rien d'autre à faire.
+   - OU changez l'adresse ci-dessous par la vôtre (fichier local ou URL).
+
+   Où déposer les photos :
+   - Avant / Après → dossier  assets/avant-apres/
+   - Instagram     → dossier  assets/instagram/
 
    (La future section Admin viendra écrire automatiquement dans ce
     même fichier — rien d'autre à modifier ailleurs.)
@@ -14,48 +19,49 @@ window.SITE_CONTENT = {
 
   /* ---------- Galerie AVANT / APRÈS ----------
      Une entrée = une sous-catégorie (onglet).
-     Ajoutez / retirez / réordonnez librement les blocs ci-dessous. */
+     Remplacez les fichiers dans assets/avant-apres/ (mêmes noms), ou
+     modifiez les chemins ci-dessous. Ajoutez/retirez des blocs librement. */
   avantApres: [
     {
       categorie: "Dermopigmentation",
-      avant: "https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&h=675&q=80",
-      apres: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&h=675&q=80"
+      avant: "assets/avant-apres/sourcils-avant.jpg",
+      apres: "assets/avant-apres/sourcils-apres.jpg"
     },
     {
       categorie: "Rehaussement de cils",
-      avant: "https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=900&h=675&q=80",
-      apres: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&h=675&q=80"
+      avant: "assets/avant-apres/cils-avant.jpg",
+      apres: "assets/avant-apres/cils-apres.jpg"
     },
     {
       categorie: "Ongles",
-      avant: "https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&h=675&q=80",
-      apres: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&h=675&q=80"
+      avant: "assets/avant-apres/ongles-avant.jpg",
+      apres: "assets/avant-apres/ongles-apres.jpg"
     },
     {
       categorie: "Soin de la peau",
-      avant: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&h=675&q=80",
-      apres: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&h=675&q=80"
+      avant: "assets/avant-apres/peau-avant.jpg",
+      apres: "assets/avant-apres/peau-apres.jpg"
     },
     {
       categorie: "Détatouage",
-      avant: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&h=675&q=80",
-      apres: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=900&h=675&q=80"
+      avant: "assets/avant-apres/detatouage-avant.jpg",
+      apres: "assets/avant-apres/detatouage-apres.jpg"
     }
   ],
 
   /* ---------- Section INSTAGRAM ----------
-     abonnes : texte affiché (sera automatique quand le widget live sera branché).
-     posts   : jusqu'à 3 aperçus. Chaque post peut être une image OU une vidéo :
-       { type: "image", src: "…" }
-       { type: "video", src: "…" }   (vidéo mp4, lecture en boucle silencieuse) */
+     abonnes : texte affiché (deviendra automatique avec le widget live).
+     posts   : jusqu'à 3 aperçus. Chaque post est une image OU une vidéo :
+       { type: "image", src: "assets/instagram/post-1.jpg" }
+       { type: "video", src: "assets/instagram/post-1.mp4" }  (vidéo en boucle, muette) */
   instagram: {
     handle: "@thebeautycorner.byalex",
     url: "https://www.instagram.com/thebeautycorner.byalex",
     abonnes: "1 200",
     posts: [
-      { type: "image", src: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80" },
-      { type: "image", src: "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80" },
-      { type: "image", src: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80" }
+      { type: "image", src: "assets/instagram/post-1.jpg" },
+      { type: "image", src: "assets/instagram/post-2.jpg" },
+      { type: "image", src: "assets/instagram/post-3.jpg" }
     ]
   }
 
