@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://diurndesign.github.io/thebeautycorner/sitemap.xml
