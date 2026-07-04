@@ -73,12 +73,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* ---------- Avant / Après : comparateur + sous-catégories ---------- */
   const baSlider = document.getElementById('baSlider');
-  if (baSlider) {
+  const baData = (window.SITE_CONTENT && window.SITE_CONTENT.avantApres) || [];
+  if (baSlider && baData.length) {
+    const baTabsEl = document.getElementById('baTabs');
     const baBefore = document.getElementById('baBefore');
     const baBeforeImg = document.getElementById('baBeforeImg');
     const baAfterImg = document.getElementById('baAfterImg');
     const baHandle = document.getElementById('baHandle');
-    const baTabs = Array.from(document.querySelectorAll('.ba-tab'));
     let dragging = false;
 
     function setPos(pct) {
@@ -91,24 +92,69 @@ document.addEventListener('DOMContentLoaded', function () {
       const clientX = (e.touches && e.touches[0]) ? e.touches[0].clientX : e.clientX;
       return ((clientX - rect.left) / rect.width) * 100;
     }
+    function loadPair(item) {
+      baBeforeImg.src = item.avant;
+      baAfterImg.src = item.apres;
+      setPos(50);
+    }
+
+    // Génère les onglets à partir de content.js
+    baData.forEach(function (item, i) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ba-tab' + (i === 0 ? ' is-active' : '');
+      btn.setAttribute('role', 'tab');
+      btn.textContent = item.categorie;
+      btn.addEventListener('click', function () {
+        baTabsEl.querySelectorAll('.ba-tab').forEach(function (t) { t.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        loadPair(item);
+      });
+      baTabsEl.appendChild(btn);
+    });
 
     // Glisser pour déplacer la barre (souris + tactile via Pointer Events)
     baSlider.addEventListener('pointerdown', function (e) { dragging = true; setPos(pctFromEvent(e)); });
     window.addEventListener('pointermove', function (e) { if (dragging) setPos(pctFromEvent(e)); });
     window.addEventListener('pointerup', function () { dragging = false; });
 
-    // Changement de sous-catégorie : on charge la paire avant/après
-    baTabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        baTabs.forEach(function (t) { t.classList.remove('is-active'); });
-        tab.classList.add('is-active');
-        baBeforeImg.src = tab.getAttribute('data-before');
-        baAfterImg.src = tab.getAttribute('data-after');
-        setPos(50);
-      });
-    });
+    loadPair(baData[0]);
+  }
 
-    setPos(50);
+  /* ---------- Instagram : aperçu depuis content.js ---------- */
+  const igPreview = document.getElementById('igPreview');
+  const igData = window.SITE_CONTENT && window.SITE_CONTENT.instagram;
+  if (igPreview && igData) {
+    // Nombre d'abonnés
+    document.querySelectorAll('[data-ig-count]').forEach(function (el) { el.textContent = igData.abonnes; });
+
+    function igOverlay() {
+      const s = document.createElement('span');
+      s.className = 'ig-post-overlay';
+      s.setAttribute('aria-hidden', 'true');
+      s.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>';
+      return s;
+    }
+
+    (igData.posts || []).slice(0, 3).forEach(function (post) {
+      const a = document.createElement('a');
+      a.className = 'ig-post';
+      a.href = igData.url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', 'Voir la publication sur Instagram');
+      if (post.type === 'video') {
+        const v = document.createElement('video');
+        v.src = post.src;
+        v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+        v.setAttribute('playsinline', '');
+        a.appendChild(v);
+      } else {
+        a.style.backgroundImage = "url('" + post.src + "')";
+      }
+      a.appendChild(igOverlay());
+      igPreview.appendChild(a);
+    });
   }
 
   /* ---------- Carrousel de témoignages ---------- */

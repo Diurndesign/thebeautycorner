@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=20260704d" />
+  <link rel="stylesheet" href="css/style.css?v=20260704e" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -295,32 +295,16 @@
         <p class="section-lead">Choisissez une prestation, puis déplacez le curseur sur l'image pour révéler le résultat.</p>
       </div>
 
-      <!-- Sous-catégories : chaque onglet définit l'image avant (data-before) et après (data-after).
-           La cliente n'aura qu'à remplacer ces deux URLs par ses propres photos. -->
-      <div class="ba-tabs" id="baTabs" role="tablist" aria-label="Prestations">
-        <button class="ba-tab is-active" type="button" role="tab"
-          data-before="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&h=675&q=80"
-          data-after="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&h=675&q=80">Dermopigmentation</button>
-        <button class="ba-tab" type="button" role="tab"
-          data-before="https://images.unsplash.com/photo-1620331311520-246422fd82f9?auto=format&fit=crop&w=900&h=675&q=80"
-          data-after="https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&h=675&q=80">Rehaussement de cils</button>
-        <button class="ba-tab" type="button" role="tab"
-          data-before="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&h=675&q=80"
-          data-after="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=900&h=675&q=80">Ongles</button>
-        <button class="ba-tab" type="button" role="tab"
-          data-before="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&h=675&q=80"
-          data-after="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=900&h=675&q=80">Soin de la peau</button>
-        <button class="ba-tab" type="button" role="tab"
-          data-before="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&h=675&q=80"
-          data-after="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=900&h=675&q=80">Détatouage</button>
-      </div>
+      <!-- Onglets + images générés depuis data/content.js (avantApres).
+           Pour modifier les photos : éditez ce fichier, rien à toucher ici. -->
+      <div class="ba-tabs" id="baTabs" role="tablist" aria-label="Prestations"></div>
 
       <div class="ba-slider" id="baSlider">
         <div class="ba-img ba-after">
-          <img id="baAfterImg" src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&h=675&q=80" alt="Après la prestation" />
+          <img id="baAfterImg" src="" alt="Après la prestation" />
         </div>
         <div class="ba-img ba-before" id="baBefore">
-          <img id="baBeforeImg" src="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&h=675&q=80" alt="Avant la prestation" />
+          <img id="baBeforeImg" src="" alt="Avant la prestation" />
         </div>
         <span class="ba-badge ba-badge-before">Avant</span>
         <span class="ba-badge ba-badge-after">Après</span>
@@ -380,26 +364,9 @@
            « ig-preview » ci-dessous.
            ========================================================= -->
       <div class="ig-feed" id="igFeed">
-        <div class="ig-preview" aria-label="Aperçu du feed Instagram">
-          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener"
-             style="background-image:url('https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80');" aria-label="Voir la publication sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>
-            </span>
-          </a>
-          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener"
-             style="background-image:url('https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80');" aria-label="Voir la publication sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>
-            </span>
-          </a>
-          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener"
-             style="background-image:url('https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=600&h=600&q=80');" aria-label="Voir la publication sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>
-            </span>
-          </a>
-        </div>
+        <!-- Aperçu généré depuis data/content.js (instagram.posts).
+             Sera remplacé par le vrai widget live quand il sera branché. -->
+        <div class="ig-preview" id="igPreview" aria-label="Aperçu du feed Instagram"></div>
       </div>
 
       <div class="center ig-cta">
@@ -488,6 +455,7 @@
     </div>
   </footer>
 
-  <script src="js/script.js?v=20260704d"></script>
+  <script src="data/content.js?v=20260704e"></script>
+  <script src="js/script.js?v=20260704e"></script>
 </body>
 </html>
