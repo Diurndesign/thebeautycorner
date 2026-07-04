@@ -182,6 +182,17 @@ section { padding: 100px 0; }
 .nav a:hover { color: var(--terracotta); }
 .nav a:hover::after { width: 100%; }
 
+.header-actions { display: flex; align-items: center; gap: 18px; }
+.header-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  filter: drop-shadow(0 1px 8px rgba(58, 47, 43, 0.35));
+  transition: color .25s ease, transform .25s ease;
+}
+.header-instagram:hover { color: var(--terracotta); transform: translateY(-1px); }
+
 .header-cta { padding: 11px 26px; background: var(--blue); color: var(--cream); }
 .header-cta:hover { background: #46656f; }
 
@@ -280,16 +291,9 @@ section { padding: 100px 0; }
 .hero-review p { font-family: var(--font-title); font-style: italic; font-size: 1.1rem; line-height: 1.45; margin-bottom: 14px; }
 .hero-review cite { font-style: normal; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,236,218,0.75); }
 
-/* Barre d'infos en bas du hero : réseaux (gauche) + stats (droite) */
+/* Barre d'infos en bas du hero : stats (droite) */
 .hero-bottom { position: relative; z-index: 2; padding-bottom: 34px; }
-.hero-bottom-inner { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; }
-.hero-socials { display: flex; gap: 26px; }
-.hero-socials a {
-  color: var(--cream); text-decoration: none;
-  font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase;
-  padding-bottom: 4px; border-bottom: 1px solid transparent;
-}
-.hero-socials a:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.hero-bottom-inner { display: flex; justify-content: flex-end; align-items: flex-end; gap: 30px; }
 
 .hero-stats { display: flex; gap: 46px; }
 .stat { text-align: center; }
@@ -520,13 +524,6 @@ section { padding: 100px 0; }
 .hours-grid .day { font-size: 0.95rem; color: var(--muted); }
 .hours-grid .time { font-size: 0.95rem; color: var(--text); text-align: right; }
 .hours-grid .time.closed { color: var(--terracotta); }
-
-.socials { display: flex; gap: 24px; }
-.socials a {
-  color: var(--brown); text-decoration: none; font-size: 0.82rem;
-  text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid transparent;
-}
-.socials a:hover { border-color: var(--terracotta); }
 
 .contact-form {
   background: var(--white);
