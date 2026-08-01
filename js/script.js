@@ -323,9 +323,10 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(function () { /* repli déjà affiché */ });
 
-  /* ---------- Formulaire de contact (maquette) ---------- */
+  /* ---------- Formulaire de contact (envoi par email via Web3Forms) ---------- */
   const form = document.getElementById('contactForm');
   const feedback = document.getElementById('formFeedback');
+  const RED = '#b45f4d', BLUE = '#587D8D';
 
   if (form) {
     form.addEventListener('submit', function (e) {
@@ -335,13 +336,62 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (!name.value.trim() || !email.value.trim()) {
         feedback.textContent = 'Merci de renseigner votre nom et votre email.';
-        feedback.style.color = '#b45f4d';
+        feedback.style.color = RED;
         return;
       }
 
-      feedback.textContent = 'Merci ' + name.value.trim() + ' ! Votre demande a bien été envoyée.';
-      feedback.style.color = '#587D8D';
-      form.reset();
+      // Anti-spam : si le champ piège est rempli, c'est un robot → on ignore.
+      const trap = form.querySelector('#_gotcha');
+      if (trap && trap.value) { form.reset(); return; }
+
+      const key = window.WEB3FORMS_KEY;
+      // Sans clé configurée : on reste sur un retour visuel (mode maquette).
+      if (!key) {
+        feedback.textContent = 'Merci ' + name.value.trim() + ' ! Votre demande a bien été envoyée.';
+        feedback.style.color = BLUE;
+        form.reset();
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const oldLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Envoi en cours…'; }
+      feedback.textContent = 'Envoi en cours…';
+      feedback.style.color = BLUE;
+
+      const payload = {
+        access_key: key,
+        subject: 'Nouvelle demande — The Beauty Corner (site)',
+        from_name: 'Site The Beauty Corner',
+        name: name.value.trim(),
+        email: email.value.trim(),
+        prestation: (form.querySelector('#service') || {}).value || '',
+        message: (form.querySelector('#message') || {}).value || ''
+      };
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data && data.success) {
+            feedback.textContent = 'Merci ' + name.value.trim() + ' ! Votre demande a bien été envoyée.';
+            feedback.style.color = BLUE;
+            form.reset();
+          } else {
+            feedback.textContent = "L'envoi a échoué. Réessayez ou appelez-nous au 06 01 82 37 73.";
+            feedback.style.color = RED;
+          }
+        })
+        .catch(function () {
+          feedback.textContent = "L'envoi a échoué. Réessayez ou appelez-nous au 06 01 82 37 73.";
+          feedback.style.color = RED;
+        })
+        .then(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = oldLabel; }
+        });
     });
   }
 
