@@ -567,7 +567,7 @@ section { padding: 100px 0; }
 .ig-post {
   position: relative;
   display: block;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--cream) center/cover no-repeat;
