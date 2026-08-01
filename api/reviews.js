@@ -1,10 +1,10 @@
 // ============================================================
 // Avis Google — fonction serverless Vercel
-// Récupère la note et les avis de la fiche Google, avec cache CDN.
+// Utilise la « Places API (New) » de Google, avec cache CDN.
 //
 // Variables d'environnement à définir dans Vercel (Settings → Environment
 // Variables) :
-//   GOOGLE_API_KEY   → clé API Google Cloud (Places API activée)
+//   GOOGLE_API_KEY   → clé API Google Cloud (Places API (New) activée)
 //   GOOGLE_PLACE_ID  → identifiant de la fiche Google (Place ID)
 //
 // Tant que ces variables ne sont pas définies, la fonction renvoie
@@ -20,32 +20,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url =
-      'https://maps.googleapis.com/maps/api/place/details/json' +
-      '?place_id=' + encodeURIComponent(placeId) +
-      '&fields=rating,user_ratings_total,reviews' +
-      '&reviews_sort=newest' +
-      '&language=fr' +
-      '&key=' + encodeURIComponent(key);
+    const url = 'https://places.googleapis.com/v1/places/' + encodeURIComponent(placeId) + '?languageCode=fr';
 
-    const r = await fetch(url);
+    const r = await fetch(url, {
+      headers: {
+        'X-Goog-Api-Key': key,
+        'X-Goog-FieldMask': 'rating,userRatingCount,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription'
+      }
+    });
     const data = await r.json();
 
-    if (data.status !== 'OK') {
+    if (!r.ok) {
       res.setHeader('Cache-Control', 'no-store');
-      return res.status(200).json({ configured: true, ok: false, error: data.status });
+      return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
     }
 
-    const result = data.result || {};
-    const avis = (result.reviews || [])
-      .filter(function (rv) { return rv && rv.text && rv.rating >= 4; })
+    const avis = (data.reviews || [])
+      .filter(function (rv) { return rv && rv.text && rv.text.text && (rv.rating || 5) >= 4; })
       .map(function (rv) {
         return {
-          texte: rv.text,
-          auteur: rv.author_name,
-          note: rv.rating,
+          texte: rv.text.text,
+          auteur: (rv.authorAttribution && rv.authorAttribution.displayName) || 'Client',
+          note: rv.rating || 5,
           source: 'Google',
-          date: rv.relative_time_description || ''
+          date: rv.relativePublishTimeDescription || ''
         };
       });
 
@@ -56,8 +54,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       configured: true,
       ok: true,
-      note: typeof result.rating === 'number' ? result.rating : null,
-      total: result.user_ratings_total || 0,
+      note: typeof data.rating === 'number' ? data.rating : null,
+      total: data.userRatingCount || 0,
       avis: avis
     });
   } catch (e) {
