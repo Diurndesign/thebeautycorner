@@ -186,10 +186,30 @@ document.addEventListener('DOMContentLoaded', function () {
       .catch(function () { /* repli statique conservé */ });
   })();
 
-  fetch('data/content.json', { cache: 'no-cache' })
-    .then(function (r) { return r.json(); })
+  // Contenu du site : d'abord Supabase (base de données éditable via l'admin),
+  // repli sur data/content.json si Supabase est indisponible.
+  function loadContent() {
+    const url = window.SB_URL, key = window.SB_KEY;
+    const fromFile = function () {
+      return fetch('data/content.json', { cache: 'no-cache' }).then(function (r) { return r.json(); });
+    };
+    if (url && key) {
+      return fetch(url + '/rest/v1/site_content?select=data&id=eq.1', {
+        headers: { apikey: key, Authorization: 'Bearer ' + key },
+        cache: 'no-cache'
+      })
+        .then(function (r) { if (!r.ok) throw new Error('supabase'); return r.json(); })
+        .then(function (rows) {
+          if (rows && rows[0] && rows[0].data) return rows[0].data;
+          throw new Error('vide');
+        })
+        .catch(fromFile);
+    }
+    return fromFile();
+  }
+
+  loadContent()
     .then(function (content) {
-      // Lien de réservation Planity : applique l'URL du CMS à tous les boutons
       const planity = content.planity || 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
       document.querySelectorAll('[data-planity]').forEach(function (a) { a.href = planity; });
 
