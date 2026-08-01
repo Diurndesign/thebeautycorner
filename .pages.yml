@@ -15,6 +15,12 @@ content:
     type: file
     path: data/content.json
     fields:
+      - name: planity
+        label: Lien de réservation Planity
+        description: L'adresse de la page Planity (utilisée par tous les boutons « Prendre rendez-vous » / « Réserver »).
+        type: string
+        pattern: "url"
+
       - name: prestations
         label: Prestations (cartes)
         description: Cartes de la section Prestations. Image, titre et texte modifiables.
@@ -36,25 +42,5 @@ content:
           - { name: avant, label: Photo AVANT, type: image }
           - { name: apres, label: Photo APRÈS, type: image }
 
-      - name: instagram
-        label: Section Instagram
-        type: object
-        fields:
-          - { name: handle, label: "Identifiant (@…)", type: string }
-          - { name: url, label: Lien du profil Instagram, type: string, pattern: "url" }
-          - { name: abonnes, label: "Nombre d'abonnés (texte affiché)", type: string }
-          - name: posts
-            label: Publications (3 max)
-            description: Photo ou vidéo. Choisissez le type puis déposez le fichier.
-            type: object
-            list:
-              max: 3
-            fields:
-              - name: type
-                label: Type de média
-                type: select
-                options:
-                  values:
-                    - image
-                    - video
-              - { name: src, label: Fichier (photo ou vidéo), type: image }
+# Note : la section Instagram est gérée par Behold (feed live), donc elle
+# n'apparaît pas ici — rien à modifier côté CMS pour Instagram.
