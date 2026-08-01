@@ -15,6 +15,16 @@ content:
     type: file
     path: data/content.json
     fields:
+      - name: prestations
+        label: Prestations (cartes)
+        description: Cartes de la section Prestations. Image, titre et texte modifiables.
+        type: object
+        list: true
+        fields:
+          - { name: nom, label: Titre, type: string }
+          - { name: description, label: Description, type: text }
+          - { name: image, label: Image de la carte, type: image }
+
       - name: avantApres
         label: Galerie Avant / Après
         description: Une ligne par prestation. Glissez vos photos avant et après.

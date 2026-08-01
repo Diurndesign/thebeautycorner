@@ -1,4 +1,36 @@
 {
+  "prestations": [
+    {
+      "nom": "Dermopigmentation",
+      "description": "Sourcils poil à poil ou powder brows : un maquillage semi-permanent naturel et sur-mesure.",
+      "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    },
+    {
+      "nom": "Ongles",
+      "description": "Manucure, pose et sublimation de vos ongles, du soin naturel au semi-permanent.",
+      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    },
+    {
+      "nom": "Rehaussement de cils",
+      "description": "Un regard intensifié et un effet longue tenue, tout en naturel.",
+      "image": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    },
+    {
+      "nom": "Soin de la peau",
+      "description": "Des soins du visage sur-mesure pour une peau nette, hydratée et éclatante.",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    },
+    {
+      "nom": "Épilation laser permanente",
+      "description": "Une solution durable et confortable pour une peau lisse au quotidien.",
+      "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    },
+    {
+      "nom": "Détatouage",
+      "description": "Effacement progressif de vos tatouages, en toute sécurité et en douceur.",
+      "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+    }
+  ],
   "avantApres": [
     {
       "categorie": "Dermopigmentation",

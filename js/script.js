@@ -36,33 +36,48 @@ document.addEventListener('DOMContentLoaded', function () {
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
 
-  /* ---------- Prestations : grille de blocs animés ---------- */
-  const prestaGrid = document.getElementById('prestationsGrid');
+  /* ---------- Contenu dynamique chargé depuis data/content.json ----------
+     (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
+     fichier, puis le site se redéploie et affiche les nouvelles images.) */
+  function renderPrestations(data) {
+    const prestaGrid = document.getElementById('prestationsGrid');
+    if (!prestaGrid || !data || !data.length) return;
+    const planity = 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
 
-  if (prestaGrid) {
+    data.forEach(function (item, i) {
+      const art = document.createElement('article');
+      art.className = 'presta-cell';
+      art.innerHTML =
+        '<div class="presta-cell-img" aria-hidden="true"></div>' +
+        '<div class="presta-cell-inner">' +
+          '<span class="presta-num">' + ('0' + (i + 1)).slice(-2) + '</span>' +
+          '<div class="presta-cell-head">' +
+            '<h3 class="presta-name"></h3>' +
+            '<p class="presta-desc"></p>' +
+          '</div>' +
+          '<a class="presta-reserve" href="' + planity + '" target="_blank" rel="noopener">Réserver <span aria-hidden="true">→</span></a>' +
+        '</div>';
+      art.querySelector('.presta-name').textContent = item.nom || '';
+      art.querySelector('.presta-desc').textContent = item.description || '';
+      if (item.image) art.querySelector('.presta-cell-img').style.backgroundImage = "url('" + item.image + "')";
+      prestaGrid.appendChild(art);
+    });
+
+    // Interactions : survol (desktop) / tap (mobile) + focus clavier
     const cells = Array.from(prestaGrid.querySelectorAll('.presta-cell'));
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
     cells.forEach(function (cell) {
-      // Injecte l'image de la prestation dans la couche dédiée
-      const src = cell.getAttribute('data-img');
-      const imgEl = cell.querySelector('.presta-cell-img');
-      if (src && imgEl) imgEl.style.backgroundImage = "url('" + src + "')";
-
       if (canHover) {
-        // Desktop : ouverture au survol souris
         cell.addEventListener('pointerenter', function () { cell.classList.add('is-open'); });
         cell.addEventListener('pointerleave', function () { cell.classList.remove('is-open'); });
-        // Accessibilité clavier : ouverture quand le bouton reçoit le focus
         const link = cell.querySelector('.presta-reserve');
         if (link) {
           link.addEventListener('focus', function () { cell.classList.add('is-open'); });
           link.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
       } else {
-        // Mobile / tablette : ouverture au tap (le bouton Réserver garde son lien)
         cell.addEventListener('click', function (e) {
-          if (e.target.closest('.presta-reserve')) return; // laisse le lien fonctionner
+          if (e.target.closest('.presta-reserve')) return;
           const alreadyOpen = cell.classList.contains('is-open');
           cells.forEach(function (c) { c.classList.remove('is-open'); });
           if (!alreadyOpen) cell.classList.add('is-open');
@@ -71,9 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Contenu dynamique chargé depuis data/content.json ----------
-     (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
-     fichier, puis le site se redéploie et affiche les nouvelles images.) */
   function renderBeforeAfter(baData) {
     const baSlider = document.getElementById('baSlider');
     if (!baSlider || !baData || !baData.length) return;
@@ -158,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
   fetch('data/content.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
     .then(function (content) {
+      renderPrestations(content.prestations || []);
       renderBeforeAfter(content.avantApres || []);
       renderInstagram(content.instagram);
     })
