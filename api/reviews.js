@@ -2,40 +2,71 @@
 // Avis Google — fonction serverless Vercel
 // Utilise la « Places API (New) » de Google, avec cache CDN.
 //
-// Variables d'environnement à définir dans Vercel (Settings → Environment
-// Variables) :
-//   GOOGLE_API_KEY   → clé API Google Cloud (Places API (New) activée)
-//   GOOGLE_PLACE_ID  → identifiant de la fiche Google (Place ID)
+// Variables d'environnement (Vercel → Settings → Environment Variables) :
+//   GOOGLE_API_KEY     → clé API Google Cloud (Places API (New) activée) [REQUISE]
+//   GOOGLE_PLACE_ID    → identifiant de la fiche Google (optionnel)
+//   GOOGLE_PLACE_QUERY → recherche texte de la fiche (optionnel)
 //
-// Tant que ces variables ne sont pas définies, la fonction renvoie
-// { configured: false } et le site garde ses avis par défaut (aucun bug).
+// Fonctionnement :
+//   - Si GOOGLE_PLACE_ID est défini → lecture directe de la fiche.
+//   - Sinon → recherche texte automatique (nom + adresse du salon), donc
+//     seule la clé API est indispensable.
+//   - Sans clé → { configured: false } et le site garde ses avis par
+//     défaut (aucun bug).
 // ============================================================
+
+const DEFAULT_QUERY = 'The Beauty Corner by Alex, 42 rue Arson, 06300 Nice';
+const FIELDS = 'rating,userRatingCount,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription';
+
 export default async function handler(req, res) {
   const key = process.env.GOOGLE_API_KEY;
   const placeId = process.env.GOOGLE_PLACE_ID;
+  const query = process.env.GOOGLE_PLACE_QUERY || DEFAULT_QUERY;
 
-  if (!key || !placeId) {
+  if (!key) {
     res.setHeader('Cache-Control', 'no-store');
     return res.status(200).json({ configured: false });
   }
 
   try {
-    const url = 'https://places.googleapis.com/v1/places/' + encodeURIComponent(placeId) + '?languageCode=fr';
+    let place;
 
-    const r = await fetch(url, {
-      headers: {
-        'X-Goog-Api-Key': key,
-        'X-Goog-FieldMask': 'rating,userRatingCount,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription'
+    if (placeId) {
+      // Lecture directe de la fiche par Place ID.
+      const url = 'https://places.googleapis.com/v1/places/' + encodeURIComponent(placeId) + '?languageCode=fr';
+      const r = await fetch(url, {
+        headers: { 'X-Goog-Api-Key': key, 'X-Goog-FieldMask': FIELDS }
+      });
+      const data = await r.json();
+      if (!r.ok) {
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
       }
-    });
-    const data = await r.json();
-
-    if (!r.ok) {
-      res.setHeader('Cache-Control', 'no-store');
-      return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
+      place = data;
+    } else {
+      // Recherche texte : seule la clé API est nécessaire.
+      const r = await fetch('https://places.googleapis.com/v1/places:searchText', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-Api-Key': key,
+          'X-Goog-FieldMask': 'places.' + FIELDS.split(',').join(',places.')
+        },
+        body: JSON.stringify({ textQuery: query, languageCode: 'fr', maxResultCount: 1 })
+      });
+      const data = await r.json();
+      if (!r.ok) {
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
+      }
+      place = (data.places && data.places[0]) || null;
+      if (!place) {
+        res.setHeader('Cache-Control', 'no-store');
+        return res.status(200).json({ configured: true, ok: false, error: 'NOT_FOUND' });
+      }
     }
 
-    const avis = (data.reviews || [])
+    const avis = (place.reviews || [])
       .filter(function (rv) { return rv && rv.text && rv.text.text && (rv.rating || 5) >= 4; })
       .map(function (rv) {
         return {
@@ -54,8 +85,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       configured: true,
       ok: true,
-      note: typeof data.rating === 'number' ? data.rating : null,
-      total: data.userRatingCount || 0,
+      note: typeof place.rating === 'number' ? place.rating : null,
+      total: place.userRatingCount || 0,
       avis: avis
     });
   } catch (e) {
