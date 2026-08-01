@@ -254,27 +254,6 @@ section { padding: 100px 0; }
 .btn-blue { background: var(--blue); color: var(--cream); }
 .btn-blue:hover { background: #46656f; transform: translateY(-2px); }
 
-.hero-play {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  color: var(--cream);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.78rem;
-  font-weight: 500;
-}
-.hero-play .play-icon {
-  width: 46px; height: 46px;
-  border: 1px solid rgba(246,236,218,0.55);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.7rem; padding-left: 3px;
-  transition: background .2s ease, color .2s ease;
-}
-.hero-play:hover .play-icon { background: var(--cream); color: var(--dark); }
-
 /* Carte avis (bas-droite du hero) */
 .hero-review {
   align-self: flex-end;
@@ -748,6 +727,7 @@ section { padding: 100px 0; }
   .hero-logo { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
   .hero-review { align-self: center; margin-bottom: 0; max-width: 420px; }
+  .hero-bottom { margin-top: 52px; }
   .hero-bottom-inner { flex-direction: column; align-items: center; gap: 26px; }
   .hero-stats { gap: 32px; }
 }
@@ -781,7 +761,6 @@ section { padding: 100px 0; }
   .brand-name { font-size: 1.15rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; text-align: center; }
-  .hero-play { justify-content: center; }
   .hero-stats { gap: 20px; }
   .stat .num { font-size: 1.7rem; }
 }
