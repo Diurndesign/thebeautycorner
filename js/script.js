@@ -146,36 +146,101 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(function (err) { console.error('Chargement du contenu impossible :', err); });
 
-  /* ---------- Carrousel de témoignages ---------- */
-  const testimonials = Array.from(document.querySelectorAll('.testimonial'));
-  const dotsContainer = document.getElementById('testimonialDots');
-  let current = 0;
+  /* ---------- Avis clients (Google via api/reviews, avec repli) ---------- */
+  const FALLBACK_REVIEWS = [
+    { texte: "Des ongles impeccables et des sourcils parfaitement dessinés. Un travail précis et un accueil au top !", auteur: "Cliente vérifiée", source: "Google" },
+    { texte: "Alexandra est une vraie professionnelle. Résultat naturel, ambiance douce et créative. Je recommande à 100 %.", auteur: "Cliente vérifiée", source: "Google" },
+    { texte: "20 ans d'expertise, ça se voit. Minutie, écoute et un rendu magnifique en dermopigmentation.", auteur: "Cliente vérifiée", source: "Planity" }
+  ];
+  let heroInterval = null, sectionInterval = null;
 
-  if (testimonials.length && dotsContainer) {
-    // Génération des puces
-    testimonials.forEach(function (_, i) {
-      const dot = document.createElement('button');
-      dot.setAttribute('aria-label', 'Témoignage ' + (i + 1));
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', function () { goTo(i); });
-      dotsContainer.appendChild(dot);
-    });
+  function citeText(rv) {
+    return '— ' + (rv.auteur || 'Client') + (rv.source ? ' · ' + rv.source : '');
+  }
+  function truncate(t, n) { return (t && t.length > n) ? t.slice(0, n - 1).trim() + '…' : t; }
 
-    const dots = Array.from(dotsContainer.children);
+  function renderReviews(reviews, rating, total) {
+    if (!reviews || !reviews.length) return;
 
-    function goTo(index) {
-      testimonials[current].classList.remove('active');
-      dots[current].classList.remove('active');
-      current = index;
-      testimonials[current].classList.add('active');
-      dots[current].classList.add('active');
+    // Note (hero + bandeau de la section)
+    const ratingStr = (typeof rating === 'number') ? rating.toFixed(1).replace('.', ',') : null;
+    if (ratingStr) {
+      const hr = document.getElementById('heroRating');
+      if (hr) hr.textContent = ratingStr;
+      const note = document.getElementById('reviewsNote');
+      if (note) note.textContent = 'Note ' + ratingStr + ' sur Google' + (total ? ' · ' + total + ' avis' : '');
+
+      // SEO : synchronise aggregateRating (étoiles dans Google)
+      try {
+        const ld = document.querySelector('script[type="application/ld+json"]');
+        if (ld) {
+          const j = JSON.parse(ld.textContent);
+          if (j.aggregateRating) {
+            j.aggregateRating.ratingValue = String(rating);
+            if (total) j.aggregateRating.reviewCount = String(total);
+            ld.textContent = JSON.stringify(j);
+          }
+        }
+      } catch (e) { /* ignore */ }
     }
 
-    // Rotation automatique
-    setInterval(function () {
-      goTo((current + 1) % testimonials.length);
-    }, 6000);
+    // Section Avis : reconstruit le carrousel
+    const track = document.getElementById('testimonialTrack');
+    const dotsC = document.getElementById('testimonialDots');
+    if (track && dotsC) {
+      track.innerHTML = ''; dotsC.innerHTML = '';
+      reviews.forEach(function (rv, i) {
+        const bq = document.createElement('blockquote');
+        bq.className = 'testimonial' + (i === 0 ? ' active' : '');
+        const p = document.createElement('p'); p.textContent = '« ' + rv.texte + ' »';
+        const c = document.createElement('cite'); c.textContent = citeText(rv);
+        bq.appendChild(p); bq.appendChild(c); track.appendChild(bq);
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', 'Avis ' + (i + 1));
+        if (i === 0) dot.classList.add('active');
+        dotsC.appendChild(dot);
+      });
+      const items = Array.from(track.children), dots = Array.from(dotsC.children);
+      let curS = 0;
+      function goToS(idx) {
+        items[curS].classList.remove('active'); dots[curS].classList.remove('active');
+        curS = idx;
+        items[curS].classList.add('active'); dots[curS].classList.add('active');
+      }
+      dots.forEach(function (d, i) { d.addEventListener('click', function () { goToS(i); }); });
+      if (sectionInterval) clearInterval(sectionInterval);
+      if (items.length > 1) sectionInterval = setInterval(function () { goToS((curS + 1) % items.length); }, 6000);
+    }
+
+    // Hero : l'avis qui défile
+    const heroReview = document.getElementById('heroReview');
+    if (heroReview) {
+      const hp = heroReview.querySelector('p'), hc = heroReview.querySelector('cite');
+      let curH = 0;
+      function showHero(i) {
+        if (hp) hp.textContent = '« ' + truncate(reviews[i].texte, 150) + ' »';
+        if (hc) hc.textContent = citeText(reviews[i]);
+      }
+      showHero(0);
+      if (heroInterval) clearInterval(heroInterval);
+      if (reviews.length > 1) {
+        heroInterval = setInterval(function () {
+          curH = (curH + 1) % reviews.length;
+          heroReview.classList.add('is-fading');
+          setTimeout(function () { showHero(curH); heroReview.classList.remove('is-fading'); }, 250);
+        }, 5000);
+      }
+    }
   }
+
+  // Affiche d'abord les avis de repli, puis tente les avis Google live
+  renderReviews(FALLBACK_REVIEWS, null, null);
+  fetch('/api/reviews', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (d && d.ok && d.avis && d.avis.length) renderReviews(d.avis, d.note, d.total);
+    })
+    .catch(function () { /* repli déjà affiché */ });
 
   /* ---------- Formulaire de contact (maquette) ---------- */
   const form = document.getElementById('contactForm');
