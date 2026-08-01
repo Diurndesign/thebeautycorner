@@ -27,6 +27,8 @@ aucun GitHub).
 1. Aller sur **`/admin`**, se connecter (email + mot de passe).
 2. Modifier :
    - **Réservation** : le lien Planity.
+   - **Photos du site** : la grande photo d'accueil (Hero) et la photo
+     de la section « À propos ».
    - **Prestations** : titre, description, image de chaque carte (+ / −).
    - **Galerie Avant / Après** : nom + photo avant + photo après (+ / −).
    - Les images se déposent via « Choisir un fichier » (envoi automatique).

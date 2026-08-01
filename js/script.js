@@ -213,6 +213,15 @@ document.addEventListener('DOMContentLoaded', function () {
       const planity = content.planity || 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
       document.querySelectorAll('[data-planity]').forEach(function (a) { a.href = planity; });
 
+      if (content.heroImage) {
+        const hero = document.getElementById('accueil');
+        if (hero) hero.style.backgroundImage = "url('" + content.heroImage + "')";
+      }
+      if (content.aboutImage) {
+        const aboutImg = document.getElementById('aboutImg');
+        if (aboutImg) aboutImg.src = content.aboutImage;
+      }
+
       renderPrestations(content.prestations || [], planity);
       renderBeforeAfter(content.avantApres || []);
     })

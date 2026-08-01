@@ -1,5 +1,7 @@
 {
   "planity": "https://www.planity.com/the-beauty-corner-by-alex--06300-nice",
+  "heroImage": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80",
+  "aboutImage": "https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&q=80",
   "prestations": [
     {
       "nom": "Dermopigmentation",

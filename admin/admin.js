@@ -63,6 +63,7 @@
     if (error) { saveMsg.className = 'msg err'; saveMsg.textContent = 'Erreur de chargement : ' + error.message; return; }
     const c = (data && data.data) || {};
     document.getElementById('planity').value = c.planity || '';
+    renderSiteImages(c);
     renderPrestations(c.prestations || []);
     renderBa(c.avantApres || []);
   }
@@ -70,10 +71,19 @@
   /* ---------- Rendu des champs ---------- */
   const prestaWrap = document.getElementById('prestations');
   const baWrap = document.getElementById('avantApres');
+  const siteImagesWrap = document.getElementById('siteImages');
 
-  function imgField(fieldName, url) {
+  function renderSiteImages(c) {
+    siteImagesWrap.innerHTML =
+      '<div data-siteimg="heroImage">' + imgField('heroImage', c.heroImage, 'Photo du Hero (grande image d\'accueil, en fond)') + '</div>' +
+      '<div data-siteimg="aboutImage" style="margin-top:14px;">' + imgField('aboutImage', c.aboutImage, 'Photo de la section « À propos »') + '</div>';
+  }
+
+  function imgField(fieldName, url, customLabel) {
+    const label = customLabel ||
+      (fieldName === 'image' ? 'Image de la carte' : (fieldName === 'avant' ? 'Photo AVANT' : 'Photo APRÈS'));
     return '' +
-      '<label>' + (fieldName === 'image' ? 'Image de la carte' : (fieldName === 'avant' ? 'Photo AVANT' : 'Photo APRÈS')) + '</label>' +
+      '<label>' + label + '</label>' +
       '<div class="imgfield">' +
         '<span class="thumb" data-thumb style="background-image:url(\'' + (url || '') + '\')"></span>' +
         '<div class="up">' +
@@ -161,6 +171,8 @@
 
     const content = {
       planity: document.getElementById('planity').value.trim(),
+      heroImage: val(siteImagesWrap, 'heroImage'),
+      aboutImage: val(siteImagesWrap, 'aboutImage'),
       prestations: [],
       avantApres: []
     };
