@@ -1,61 +1,43 @@
-# Espace d'administration — changer les photos/textes soi-même
+# Espace d'administration (backend Supabase)
 
-Le site est relié à un petit outil d'administration (**Pages CMS**) qui
-permet à Alex de **changer les photos et textes elle-même**, sans toucher
-au code. Chaque modification est **enregistrée** et mise en ligne
-automatiquement.
+Le contenu du site (lien Planity, prestations, galerie Avant/Après) est
+stocké dans **Supabase** (base de données + stockage d'images). Alex le
+modifie depuis un espace d'admin protégé par mot de passe, et les
+changements sont **visibles en ligne immédiatement** (aucun redéploiement,
+aucun GitHub).
 
-## Comment ça marche (le principe)
+- **Page d'admin** : `https://<le-site>/admin/`
+- **Projet Supabase** : `thebeautycorner` (organisation Diurndesign)
+- **Table** : `site_content` (une ligne, colonne `data` en JSON)
+- **Stockage images** : bucket `media` (public en lecture)
 
-```
-Alex se connecte  →  change une photo / un texte  →  clique « Save »
-        →  la modif est enregistrée dans le projet (GitHub)
-        →  le site se redéploie tout seul (Vercel)
-        →  ~1 minute après, la nouvelle image est en ligne pour tout le monde ✅
-```
+## Créer le compte de connexion d'Alex (à faire UNE fois)
 
-## Mise en place (à faire UNE fois)
+1. Ouvrir le **dashboard Supabase** → projet **thebeautycorner**.
+2. Menu **Authentication → Users → Add user**.
+3. Renseigner **email + mot de passe**, cocher **Auto Confirm User**.
+4. Communiquer ces identifiants à Alex.
 
-**Pré-requis** : le site doit être déployé sur **Vercel** et relié au dépôt
-GitHub `Diurndesign/thebeautycorner` (redéploiement automatique activé).
+> Par défaut, l'inscription libre est désactivée : seuls les comptes créés
+> ici peuvent se connecter. La page `/admin` est publique mais inutile sans
+> identifiants (et toute écriture est bloquée par les règles de sécurité RLS).
 
-1. Aller sur **https://app.pagescms.org**
-2. Cliquer **« Sign in with GitHub »** et se connecter.
-3. Autoriser Pages CMS puis **installer son application** sur le dépôt
-   `Diurndesign/thebeautycorner` (bouton « Configure » → cocher le dépôt).
-4. De retour dans Pages CMS, ouvrir le dépôt : il lit le fichier
-   `.pages.yml` et affiche automatiquement l'éditeur **« Contenu du site »**.
+## Utilisation au quotidien (pour Alex)
 
-C'est prêt. Rien à coder : toute la configuration est déjà dans le dépôt
-(`.pages.yml`).
+1. Aller sur **`/admin`**, se connecter (email + mot de passe).
+2. Modifier :
+   - **Réservation** : le lien Planity.
+   - **Prestations** : titre, description, image de chaque carte (+ / −).
+   - **Galerie Avant / Après** : nom + photo avant + photo après (+ / −).
+   - Les images se déposent via « Choisir un fichier » (envoi automatique).
+3. Cliquer **« Enregistrer »**. Les changements apparaissent en ligne en
+   quelques secondes.
 
-## Donner l'accès à Alex
+## Notes techniques
 
-Deux possibilités :
-- **Simple** : Alex utilise le compte GitHub propriétaire du dépôt.
-- **Propre** : ajouter Alex comme *collaboratrice* du dépôt GitHub
-  (Settings → Collaborators), puis elle se connecte à app.pagescms.org
-  avec **son** compte GitHub.
-
-## Utilisation au quotidien
-
-1. Aller sur **https://app.pagescms.org** et ouvrir le projet.
-2. Menu **« Contenu du site »**. Trois réglages :
-   - **Lien Planity** : l'adresse de réservation (rarement à changer).
-   - **Prestations (cartes)** : image, titre et description de chaque carte.
-   - **Galerie Avant / Après** : la photo *Avant* et la photo *Après* de
-     chaque prestation. Boutons + / − pour ajouter/retirer des entrées.
-3. Cliquer **« Save »** en haut à droite.
-4. Attendre ~1 minute : le site affiche les nouvelles images.
-
-> 📱 **Instagram** n'est PAS ici : le feed est géré par **Behold**
-> (behold.so) et se met à jour tout seul à chaque publication.
-
-> 💡 On pourra aussi, plus tard, ajouter à cet éditeur les **textes** des
-> sections et les **couleurs** du site — tout passe par le même fichier
-> `data/content.json`.
-
-## Sans le CMS (méthode manuelle, toujours possible)
-
-Voir `assets/LISEZ-MOI.md` : il suffit de remplacer les fichiers images
-dans `assets/avant-apres/` et `assets/instagram/` en gardant les mêmes noms.
+- Le site lit le contenu depuis Supabase ; en cas d'indisponibilité, il
+  se rabat automatiquement sur `data/content.json` (aucun bug).
+- Clés dans `js/config.js` : ce sont les clés **publiques** (anon),
+  volontairement exposables — l'écriture est protégée par RLS + connexion.
+- Instagram = géré par Behold. Avis = Google (Places API). Ces deux-là ne
+  passent pas par l'admin.
