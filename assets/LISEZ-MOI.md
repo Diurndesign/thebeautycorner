@@ -24,13 +24,15 @@ correspondant **en gardant exactement le même nom**. Rien d'autre à faire.
 
 ## 📱 Instagram
 
-Les aperçus sont dans **`assets/instagram/`** : `post-1.jpg`, `post-2.jpg`,
-`post-3.jpg` (format carré, env. 600×600 px).
+Le feed Instagram est **géré par Behold** (behold.so) : il se met à jour
+tout seul à chaque publication. Il n'y a donc **rien à faire ici** pour
+Instagram (ni dans les fichiers, ni dans le CMS).
 
-- Vous pouvez mettre une **vidéo** à la place : déposez `post-1.mp4` et
-  dans `data/content.json`, remplacez la ligne par
-  `{ type: "video", src: "assets/instagram/post-1.mp4" }`.
-- Le **nombre d'abonnés** se change à la ligne `abonnes:` du même fichier.
+## 🗓️ Lien de réservation Planity
 
-> ℹ️ Plus tard, une interface d'administration permettra de faire tout ça
-> sans toucher aux fichiers.
+L'adresse Planity utilisée par tous les boutons « Prendre rendez-vous » /
+« Réserver » est à la ligne `planity` de `data/content.json` (modifiable
+aussi dans le CMS). À changer uniquement si l'URL Planity évolue.
+
+> ℹ️ Le CMS (Pages CMS) permet de faire tout ça depuis une interface, sans
+> toucher aux fichiers.

@@ -39,10 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Contenu dynamique chargé depuis data/content.json ----------
      (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
      fichier, puis le site se redéploie et affiche les nouvelles images.) */
-  function renderPrestations(data) {
+  function renderPrestations(data, planity) {
     const prestaGrid = document.getElementById('prestationsGrid');
     if (!prestaGrid || !data || !data.length) return;
-    const planity = 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
 
     data.forEach(function (item, i) {
       const art = document.createElement('article');
@@ -133,46 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
     loadPair(baData[0]);
   }
 
-  function renderInstagram(igData) {
-    const igPreview = document.getElementById('igPreview');
-    if (!igPreview || !igData) return;
-    document.querySelectorAll('[data-ig-count]').forEach(function (el) { el.textContent = igData.abonnes; });
-
-    function igOverlay() {
-      const s = document.createElement('span');
-      s.className = 'ig-post-overlay';
-      s.setAttribute('aria-hidden', 'true');
-      s.innerHTML = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>';
-      return s;
-    }
-
-    (igData.posts || []).slice(0, 3).forEach(function (post) {
-      const a = document.createElement('a');
-      a.className = 'ig-post';
-      a.href = igData.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.setAttribute('aria-label', 'Voir la publication sur Instagram');
-      if (post.type === 'video') {
-        const v = document.createElement('video');
-        v.src = post.src;
-        v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
-        v.setAttribute('playsinline', '');
-        a.appendChild(v);
-      } else {
-        a.style.backgroundImage = "url('" + post.src + "')";
-      }
-      a.appendChild(igOverlay());
-      igPreview.appendChild(a);
-    });
-  }
+  // (La section Instagram est gérée par Behold — pas de rendu JS ici.)
 
   fetch('data/content.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
     .then(function (content) {
-      renderPrestations(content.prestations || []);
+      // Lien de réservation Planity : applique l'URL du CMS à tous les boutons
+      const planity = content.planity || 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
+      document.querySelectorAll('[data-planity]').forEach(function (a) { a.href = planity; });
+
+      renderPrestations(content.prestations || [], planity);
       renderBeforeAfter(content.avantApres || []);
-      renderInstagram(content.instagram);
     })
     .catch(function (err) { console.error('Chargement du contenu impossible :', err); });
 

@@ -40,16 +40,18 @@ Deux possibilités :
 ## Utilisation au quotidien
 
 1. Aller sur **https://app.pagescms.org** et ouvrir le projet.
-2. Menu **« Contenu du site »**.
-3. Section **Galerie Avant / Après** : pour chaque prestation, déposer la
-   photo *Avant* et la photo *Après*. On peut ajouter/retirer des
-   prestations avec les boutons + / −.
-4. Section **Instagram** : changer le nombre d'abonnés, et déposer jusqu'à
-   3 photos **ou vidéos** (choisir le type « image » ou « video »).
-5. Cliquer **« Save »** en haut à droite.
-6. Attendre ~1 minute : le site affiche les nouvelles images.
+2. Menu **« Contenu du site »**. Trois réglages :
+   - **Lien Planity** : l'adresse de réservation (rarement à changer).
+   - **Prestations (cartes)** : image, titre et description de chaque carte.
+   - **Galerie Avant / Après** : la photo *Avant* et la photo *Après* de
+     chaque prestation. Boutons + / − pour ajouter/retirer des entrées.
+3. Cliquer **« Save »** en haut à droite.
+4. Attendre ~1 minute : le site affiche les nouvelles images.
 
-> 💡 On peut aussi, plus tard, ajouter à cet éditeur les **textes** des
+> 📱 **Instagram** n'est PAS ici : le feed est géré par **Behold**
+> (behold.so) et se met à jour tout seul à chaque publication.
+
+> 💡 On pourra aussi, plus tard, ajouter à cet éditeur les **textes** des
 > sections et les **couleurs** du site — tout passe par le même fichier
 > `data/content.json`.
 

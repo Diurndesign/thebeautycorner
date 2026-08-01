@@ -112,7 +112,7 @@
       </nav>
 
       <div class="header-actions">
-        <a href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue header-cta">Prendre rendez-vous</a>
+        <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue header-cta">Prendre rendez-vous</a>
         <a href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" class="header-instagram" aria-label="Suivez-nous sur Instagram">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
             <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
@@ -139,7 +139,7 @@
         <h1>Sublimez votre<br />beauté naturelle</h1>
         <p class="hero-tagline">Un cocon de douceur où chaque soin devient un moment d'exception.</p>
         <div class="hero-actions">
-          <a href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
+          <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
           <a href="#prestations" class="hero-play">
             <span class="play-icon" aria-hidden="true">▶</span>
             <span>Découvrir nos soins</span>
@@ -189,7 +189,7 @@
           <li>Spécialiste dermopigmentation (sourcils poil à poil &amp; powder brows)</li>
           <li>Accueil chaleureux &amp; travail minutieux</li>
         </ul>
-        <a href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
+        <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
       </div>
     </div>
   </section>
@@ -274,24 +274,29 @@
         <p class="section-eyebrow">@thebeautycorner.byalex</p>
         <h2>Suivez-nous sur Instagram</h2>
         <p class="ig-subtitle">
-          <span class="ig-followers"><strong data-ig-count>1&nbsp;200</strong> abonnés</span>
-          <span aria-hidden="true">·</span>
           <span>Nos dernières réalisations</span>
         </p>
       </div>
 
       <!-- =========================================================
-           ZONE WIDGET INSTAGRAM
-           Pour rendre le feed « live » (3 derniers posts + abonnés
-           mis à jour automatiquement) : créez un widget sur Behold.so
-           ou LightWidget en connectant le compte @thebeautycorner.byalex,
-           puis COLLEZ le code d'intégration à la place du bloc
-           « ig-preview » ci-dessous.
+           ZONE WIDGET INSTAGRAM (géré par Behold — behold.so)
+           Dès que le code d'intégration Behold est prêt, on remplace le
+           bloc « ig-preview » ci-dessous par le widget Behold (le nombre
+           d'abonnés et les derniers posts seront alors automatiques).
+           En attendant : aperçu statique.
            ========================================================= -->
       <div class="ig-feed" id="igFeed">
-        <!-- Aperçu généré depuis data/content.js (instagram.posts).
-             Sera remplacé par le vrai widget live quand il sera branché. -->
-        <div class="ig-preview" id="igPreview" aria-label="Aperçu du feed Instagram"></div>
+        <div class="ig-preview" aria-label="Aperçu Instagram">
+          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" style="background-image:url('assets/instagram/post-1.jpg');" aria-label="Voir sur Instagram">
+            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+          </a>
+          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" style="background-image:url('assets/instagram/post-2.jpg');" aria-label="Voir sur Instagram">
+            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+          </a>
+          <a class="ig-post" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" style="background-image:url('assets/instagram/post-3.jpg');" aria-label="Voir sur Instagram">
+            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+          </a>
+        </div>
       </div>
 
       <div class="center ig-cta">
@@ -310,7 +315,7 @@
           La prise de rendez-vous se fait en ligne, simplement, via Planity. Une question ? Laissez-nous un message.
         </p>
 
-        <a href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue contact-planity">Prendre rendez-vous sur Planity</a>
+        <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue contact-planity">Prendre rendez-vous sur Planity</a>
 
         <ul class="contact-list">
           <li><strong>Adresse</strong><span>Salon Frères d'encre<br />42 rue Arson, 06300 Nice</span></li>
@@ -374,13 +379,13 @@
       </nav>
 
       <div class="footer-links">
-        <a href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener">Réserver sur Planity</a>
+        <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener">Réserver sur Planity</a>
       </div>
 
       <p class="footer-copy">© 2026 The Beauty Corner by Alex — Nice</p>
     </div>
   </footer>
 
-  <script src="js/script.js?v=20260705b"></script>
+  <script src="js/script.js?v=20260705c"></script>
 </body>
 </html>
