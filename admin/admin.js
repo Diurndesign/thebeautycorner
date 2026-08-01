@@ -30,11 +30,22 @@
 
   document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    loginMsg.textContent = '';
+    loginMsg.textContent = 'Connexion…';
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
-    const { error } = await sb.auth.signInWithPassword({ email, password });
-    if (error) loginMsg.textContent = 'Connexion impossible : ' + error.message;
+    try {
+      const { error } = await sb.auth.signInWithPassword({ email, password });
+      if (error) {
+        console.error('Auth error:', error);
+        const detail = error.message || error.name || ('erreur ' + (error.status || '?'));
+        loginMsg.textContent = 'Connexion impossible : ' + detail;
+      } else {
+        loginMsg.textContent = '';
+      }
+    } catch (err) {
+      console.error('Auth exception:', err);
+      loginMsg.textContent = 'Erreur : ' + ((err && err.message) ? err.message : 'réseau');
+    }
   });
 
   document.getElementById('logout').addEventListener('click', async function () {
