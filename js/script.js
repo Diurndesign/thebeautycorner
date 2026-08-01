@@ -71,10 +71,12 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Avant / Après : comparateur + sous-catégories ---------- */
-  const baSlider = document.getElementById('baSlider');
-  const baData = (window.SITE_CONTENT && window.SITE_CONTENT.avantApres) || [];
-  if (baSlider && baData.length) {
+  /* ---------- Contenu dynamique chargé depuis data/content.json ----------
+     (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
+     fichier, puis le site se redéploie et affiche les nouvelles images.) */
+  function renderBeforeAfter(baData) {
+    const baSlider = document.getElementById('baSlider');
+    if (!baSlider || !baData || !baData.length) return;
     const baTabsEl = document.getElementById('baTabs');
     const baBefore = document.getElementById('baBefore');
     const baBeforeImg = document.getElementById('baBeforeImg');
@@ -98,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
       setPos(50);
     }
 
-    // Génère les onglets à partir de content.js
     baData.forEach(function (item, i) {
       const btn = document.createElement('button');
       btn.type = 'button';
@@ -113,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
       baTabsEl.appendChild(btn);
     });
 
-    // Glisser pour déplacer la barre (souris + tactile via Pointer Events)
     baSlider.addEventListener('pointerdown', function (e) { dragging = true; setPos(pctFromEvent(e)); });
     window.addEventListener('pointermove', function (e) { if (dragging) setPos(pctFromEvent(e)); });
     window.addEventListener('pointerup', function () { dragging = false; });
@@ -121,11 +121,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loadPair(baData[0]);
   }
 
-  /* ---------- Instagram : aperçu depuis content.js ---------- */
-  const igPreview = document.getElementById('igPreview');
-  const igData = window.SITE_CONTENT && window.SITE_CONTENT.instagram;
-  if (igPreview && igData) {
-    // Nombre d'abonnés
+  function renderInstagram(igData) {
+    const igPreview = document.getElementById('igPreview');
+    if (!igPreview || !igData) return;
     document.querySelectorAll('[data-ig-count]').forEach(function (el) { el.textContent = igData.abonnes; });
 
     function igOverlay() {
@@ -156,6 +154,14 @@ document.addEventListener('DOMContentLoaded', function () {
       igPreview.appendChild(a);
     });
   }
+
+  fetch('data/content.json', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (content) {
+      renderBeforeAfter(content.avantApres || []);
+      renderInstagram(content.instagram);
+    })
+    .catch(function (err) { console.error('Chargement du contenu impossible :', err); });
 
   /* ---------- Carrousel de témoignages ---------- */
   const testimonials = Array.from(document.querySelectorAll('.testimonial'));

@@ -1,6 +1,6 @@
 # Comment changer les photos et vidéos du site
 
-Tout se règle dans **un seul fichier** : `data/content.js`
+Tout se règle dans **un seul fichier** : `data/content.json`
 (ouvrez-le, il est entièrement commenté en français).
 
 ## 📸 Photos « Avant / Après »
@@ -20,7 +20,7 @@ correspondant **en gardant exactement le même nom**. Rien d'autre à faire.
 
 - Format conseillé : **JPG**, orientation paysage (4:3), env. 900×675 px.
 - Pour ajouter/enlever une prestation : modifiez la liste `avantApres`
-  dans `data/content.js`.
+  dans `data/content.json`.
 
 ## 📱 Instagram
 
@@ -28,7 +28,7 @@ Les aperçus sont dans **`assets/instagram/`** : `post-1.jpg`, `post-2.jpg`,
 `post-3.jpg` (format carré, env. 600×600 px).
 
 - Vous pouvez mettre une **vidéo** à la place : déposez `post-1.mp4` et
-  dans `data/content.js`, remplacez la ligne par
+  dans `data/content.json`, remplacez la ligne par
   `{ type: "video", src: "assets/instagram/post-1.mp4" }`.
 - Le **nombre d'abonnés** se change à la ligne `abonnes:` du même fichier.
 
