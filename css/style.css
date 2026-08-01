@@ -614,6 +614,16 @@ section { padding: 100px 0; }
   transition: opacity .35s ease;
 }
 .ig-post:hover .ig-post-overlay { opacity: 1; }
+.ig-post-video {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: rgba(58, 47, 43, 0.55);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
 .ig-cta { margin-top: 4px; text-align: center; }
 
 @media (max-width: 620px) {

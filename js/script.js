@@ -132,7 +132,59 @@ document.addEventListener('DOMContentLoaded', function () {
     loadPair(baData[0]);
   }
 
-  // (La section Instagram est gérée par Behold — pas de rendu JS ici.)
+  /* ---------- Instagram : feed live via Behold (JSON) ---------- */
+  const BEHOLD_FEED = 'https://feeds.behold.so/yBvbxQrqJpDImoPKDLvR';
+  (function () {
+    const igPreview = document.getElementById('igPreview');
+    if (!igPreview) return;
+
+    const IG_SVG = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>';
+    const PLAY_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+    fetch(BEHOLD_FEED, { cache: 'no-cache' })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (!data) return;
+
+        // Nombre d'abonnés
+        if (typeof data.followersCount === 'number') {
+          const f = document.getElementById('igFollowers');
+          if (f) f.textContent = data.followersCount.toLocaleString('fr-FR');
+        }
+
+        const posts = (data.posts || []).slice(0, 3);
+        if (!posts.length) return;
+
+        // Remplace les vignettes de repli par les vrais posts
+        igPreview.innerHTML = '';
+        posts.forEach(function (post) {
+          const img = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl) || post.thumbnailUrl || post.mediaUrl;
+          const a = document.createElement('a');
+          a.className = 'ig-post';
+          a.href = post.permalink || 'https://www.instagram.com/thebeautycorner.byalex';
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.setAttribute('aria-label', 'Voir la publication sur Instagram');
+          if (img) a.style.backgroundImage = "url('" + img + "')";
+
+          const ov = document.createElement('span');
+          ov.className = 'ig-post-overlay';
+          ov.setAttribute('aria-hidden', 'true');
+          ov.innerHTML = IG_SVG;
+          a.appendChild(ov);
+
+          if (post.mediaType === 'VIDEO' || post.isReel) {
+            const badge = document.createElement('span');
+            badge.className = 'ig-post-video';
+            badge.setAttribute('aria-hidden', 'true');
+            badge.innerHTML = PLAY_SVG;
+            a.appendChild(badge);
+          }
+          igPreview.appendChild(a);
+        });
+      })
+      .catch(function () { /* repli statique conservé */ });
+  })();
 
   fetch('data/content.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
