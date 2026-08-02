@@ -2,6 +2,121 @@
   "planity": "https://www.planity.com/the-beauty-corner-by-alex--06300-nice",
   "heroImage": "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80",
   "aboutImage": "https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&q=80",
+  "texts": {
+    "hero.eyebrow": "Institut de beauté · Nice",
+    "hero.title": "Sublimez votre\nbeauté naturelle",
+    "hero.tagline": "Un cocon de douceur où chaque soin devient un moment d'exception.",
+    "hero.stat1label": "Note clients",
+    "hero.stat2num": "20 ans",
+    "hero.stat2label": "D'expérience",
+    "hero.stat3num": "6",
+    "hero.stat3label": "Prestations expertes",
+    "about.eyebrow": "by Alex",
+    "about.title": "Une passion,\nun savoir-faire",
+    "about.p1": "Derrière The Beauty Corner, il y a Alexandra — esthéticienne depuis 20 ans et spécialiste de la dermopigmentation, animée par l'envie de faire rayonner chaque personne qui pousse sa porte.",
+    "about.p2": "Un lieu où l'art, la personnalité et la beauté se rencontrent, au sein du studio de tatouage Frères d'encre, à Nice. Une atmosphère professionnelle et créative, pour des résultats naturels et sur-mesure.",
+    "about.li1": "20 ans d'expérience",
+    "about.li2": "Spécialiste dermopigmentation (sourcils poil à poil & powder brows)",
+    "about.li3": "Accueil chaleureux & travail minutieux",
+    "prestations.eyebrow": "Nos prestations",
+    "prestations.title": "L'art de vous sublimer",
+    "prestations.lead": "De la dermopigmentation au soin des ongles, chaque geste allie précision, esthétique et bien-être. Réservation en ligne sur Planity.",
+    "realisations.eyebrow": "Avant / Après",
+    "realisations.title": "Nos réalisations",
+    "realisations.lead": "Choisissez une prestation, puis déplacez le curseur sur l'image pour révéler le résultat.",
+    "avis.title": "Ce que disent nos clientes",
+    "instagram.handle": "@thebeautycorner.byalex",
+    "instagram.title": "Suivez-nous sur Instagram",
+    "instagram.followers": "450",
+    "instagram.subtitle": "Nos dernières réalisations",
+    "contact.eyebrow": "Contact",
+    "contact.title": "Offrez-vous\nune parenthèse beauté",
+    "contact.lead": "La prise de rendez-vous se fait en ligne, simplement, via Planity. Une question ? Laissez-nous un message.",
+    "contact.address": "Salon Frères d'encre\n42 rue Arson, 06300 Nice",
+    "contact.phone": "06 01 82 37 73",
+    "contact.phoneTel": "+33601823773",
+    "contact.hoursMon": "11h00 – 19h00",
+    "contact.hoursTue": "10h00 – 18h00",
+    "contact.hoursWed": "08h00 – 13h00",
+    "contact.hoursThu": "11h00 – 18h00",
+    "contact.hoursFri": "10h00 – 19h00",
+    "contact.hoursSat": "Fermé",
+    "contact.hoursSun": "Fermé",
+    "experience.badge": "Expérience privée · entre amies",
+    "experience.cardEyebrow": "Frères d'Encre Experiences · by Alex",
+    "experience.cardTitle": "La soirée beauté entre amies",
+    "experience.cardLead": "EVJF, anniversaire ou simple moment complice : un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.",
+    "experience.cardPrice": "À partir de 55 € / pers",
+    "experience.modalEyebrow": "Frères d'Encre Experiences · by Alex",
+    "experience.modalTitle": "Une soirée entre amies, pensée pour créer des souvenirs",
+    "experience.modalSub": "Groupe privé de 6 à 10 participantes · au studio Frères d'Encre, 42 rue Arson, Nice"
+  },
+  "experience": {
+    "tiers": [
+      {
+        "name": "Girls Night",
+        "price": "55 €",
+        "unit": "/ pers",
+        "flag": "",
+        "tag": "La soirée entre amies par excellence",
+        "items": [
+          "Accueil personnalisé, ambiance musicale & espace photo",
+          "Softs à volonté + sélection vin blanc, rosé & Martini (2 conso/pers)",
+          "Pause gourmande : chips, olives, biscuits apéritifs, tomates cerises, petites douceurs",
+          "Parenthèse beauté personnalisée : chaque participante choisit un soin"
+        ]
+      },
+      {
+        "name": "Glam Night",
+        "price": "70 €",
+        "unit": "/ pers",
+        "flag": "Le plus festif",
+        "tag": "Une soirée plus festive, avec des souvenirs à partager",
+        "items": [
+          "Tout de la Girls Night, et :",
+          "Souvenirs : polaroïds pour immortaliser la soirée",
+          "Pause gourmande enrichie : mini pizzas, mini quiches, bouchées salées, douceurs sucrées",
+          "Possibilité d'apporter votre propre gâteau personnalisé"
+        ]
+      },
+      {
+        "name": "Signature",
+        "price": "85 €",
+        "unit": "/ pers",
+        "flag": "",
+        "tag": "Une expérience unique pensée autour de votre événement",
+        "items": [
+          "Tout de la Glam Night, et :",
+          "Cadeau personnalisé pour la future mariée",
+          "Goodies pour chaque participante",
+          "Petites attentions surprises"
+        ]
+      }
+    ],
+    "beautyTitle": "La parenthèse beauté personnalisée",
+    "beautyLead": "Chaque participante choisit l'un de ces soins :",
+    "choices": [
+      { "name": "Rituel Éclat", "desc": "Nettoyage de peau & massage du visage" },
+      { "name": "Pause Douceur", "desc": "Manucure & massage des mains" },
+      { "name": "Regard Sublimé", "desc": "Épilation & teinture des sourcils" }
+    ],
+    "tattoo": "Option tatouage souvenir (facultative) : avec les artistes Frères d'Encre — tatouage flash ou projet personnalisé, réalisé et réglé directement auprès du tatoueur.",
+    "conditionsTitle": "Conditions de réservation",
+    "conditions": [
+      "Réservation au minimum 1 mois avant la date souhaitée",
+      "Groupes de 6 à 10 participantes",
+      "Acompte de 30 % pour confirmer la réservation",
+      "Solde réglé selon les modalités convenues",
+      "Nombre définitif confirmé avant l'événement",
+      "Toute demande particulière signalée à la réservation"
+    ],
+    "notesTitle": "Bon à savoir",
+    "notes": [
+      "Boissons alcoolisées réservées aux personnes majeures, limitées à 2 consommations par participante",
+      "L'abus d'alcool est dangereux pour la santé — à consommer avec modération",
+      "Chaque participante est responsable de ses effets personnels ; les éventuelles dégradations pourront être facturées"
+    ]
+  },
   "prestations": [
     {
       "nom": "Dermopigmentation",
