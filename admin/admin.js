@@ -64,6 +64,8 @@
     const c = (data && data.data) || {};
     document.getElementById('planity').value = c.planity || '';
     renderSiteImages(c);
+    renderTexts(c.texts || {});
+    renderExp(c.experience || {}, c.texts || {});
     renderPrestations(c.prestations || []);
     renderBa(c.avantApres || []);
   }
@@ -129,12 +131,187 @@
     (list.length ? list : [{}]).forEach(function (b) { baWrap.appendChild(baCard(b)); });
   }
 
+  /* ---------- Textes du site ---------- */
+  const textsWrap = document.getElementById('textsEditor');
+  const expWrap = document.getElementById('expEditor');
+
+  function field(attr, key, label, type, value) {
+    value = value == null ? '' : value;
+    const a = attr + '="' + key + '"';
+    const input = type === 'area'
+      ? '<textarea ' + a + '>' + escHtml(value) + '</textarea>'
+      : '<input type="text" ' + a + ' value="' + escAttr(value) + '" />';
+    return '<label>' + label + '</label>' + input;
+  }
+
+  const TEXT_GROUPS = [
+    { title: 'Accueil (Hero)', fields: [
+      ['hero.eyebrow', 'Sur-titre', 'input'],
+      ['hero.title', 'Titre principal', 'area'],
+      ['hero.tagline', 'Accroche', 'area'],
+      ['hero.stat1label', 'Statistique 1 — libellé', 'input'],
+      ['hero.stat2num', 'Statistique 2 — valeur', 'input'],
+      ['hero.stat2label', 'Statistique 2 — libellé', 'input'],
+      ['hero.stat3num', 'Statistique 3 — valeur', 'input'],
+      ['hero.stat3label', 'Statistique 3 — libellé', 'input']
+    ] },
+    { title: 'À propos', fields: [
+      ['about.eyebrow', 'Sur-titre', 'input'],
+      ['about.title', 'Titre', 'area'],
+      ['about.p1', 'Paragraphe 1', 'area'],
+      ['about.p2', 'Paragraphe 2', 'area'],
+      ['about.li1', 'Point 1', 'input'],
+      ['about.li2', 'Point 2', 'input'],
+      ['about.li3', 'Point 3', 'input']
+    ] },
+    { title: 'Prestations (en-tête)', fields: [
+      ['prestations.eyebrow', 'Sur-titre', 'input'],
+      ['prestations.title', 'Titre', 'input'],
+      ['prestations.lead', 'Texte', 'area']
+    ] },
+    { title: 'Réalisations (en-tête)', fields: [
+      ['realisations.eyebrow', 'Sur-titre', 'input'],
+      ['realisations.title', 'Titre', 'input'],
+      ['realisations.lead', 'Texte', 'area']
+    ] },
+    { title: 'Avis', fields: [
+      ['avis.title', 'Titre', 'input']
+    ] },
+    { title: 'Instagram', fields: [
+      ['instagram.handle', 'Identifiant (@…)', 'input'],
+      ['instagram.title', 'Titre', 'input'],
+      ['instagram.followers', "Nombre d'abonnés (repli si non connecté)", 'input'],
+      ['instagram.subtitle', 'Sous-titre', 'input']
+    ] },
+    { title: 'Contact', fields: [
+      ['contact.eyebrow', 'Sur-titre', 'input'],
+      ['contact.title', 'Titre', 'area'],
+      ['contact.lead', 'Texte', 'area'],
+      ['contact.address', 'Adresse', 'area'],
+      ['contact.phone', 'Téléphone (affiché)', 'input'],
+      ['contact.phoneTel', 'Téléphone (lien — format +33…)', 'input'],
+      ['contact.hoursMon', 'Horaires — Lundi', 'input'],
+      ['contact.hoursTue', 'Horaires — Mardi', 'input'],
+      ['contact.hoursWed', 'Horaires — Mercredi', 'input'],
+      ['contact.hoursThu', 'Horaires — Jeudi', 'input'],
+      ['contact.hoursFri', 'Horaires — Vendredi', 'input'],
+      ['contact.hoursSat', 'Horaires — Samedi', 'input'],
+      ['contact.hoursSun', 'Horaires — Dimanche', 'input']
+    ] }
+  ];
+
+  const EXP_TEXT_FIELDS = [
+    ['experience.badge', 'Badge de la carte', 'input'],
+    ['experience.cardEyebrow', 'Carte — sur-titre', 'input'],
+    ['experience.cardTitle', 'Carte — titre', 'input'],
+    ['experience.cardLead', 'Carte — texte', 'area'],
+    ['experience.cardPrice', 'Carte — prix affiché', 'input'],
+    ['experience.modalEyebrow', 'Fenêtre — sur-titre', 'input'],
+    ['experience.modalTitle', 'Fenêtre — titre', 'area'],
+    ['experience.modalSub', 'Fenêtre — sous-titre', 'area']
+  ];
+
+  function renderTexts(texts) {
+    textsWrap.innerHTML = TEXT_GROUPS.map(function (g) {
+      return '<div class="card"><div class="row-head"><strong>' + g.title + '</strong></div>' +
+        g.fields.map(function (f) { return field('data-tkey', f[0], f[1], f[2], texts[f[0]]); }).join('') +
+        '</div>';
+    }).join('');
+  }
+
+  function tierCard(t) {
+    t = t || {};
+    const el = document.createElement('div');
+    el.className = 'card'; el.setAttribute('data-tier', ''); el.style.background = '#fbf6ec';
+    el.innerHTML =
+      '<div class="row-head"><strong>Formule</strong><button class="btn-danger" data-remove type="button">Supprimer</button></div>' +
+      '<div class="col2"><div>' + field('data-t', 'name', 'Nom', 'input', t.name) + '</div>' +
+        '<div>' + field('data-t', 'price', 'Prix (ex : 55 €)', 'input', t.price) + '</div></div>' +
+      '<div class="col2"><div>' + field('data-t', 'unit', 'Unité (ex : / pers)', 'input', t.unit) + '</div>' +
+        '<div>' + field('data-t', 'flag', 'Badge (ex : Le plus festif — vide sinon)', 'input', t.flag) + '</div></div>' +
+      field('data-t', 'tag', 'Sous-titre', 'input', t.tag) +
+      '<label>Ce qui est inclus (une ligne par point)</label>' +
+      '<textarea data-t="items" style="min-height:120px;">' + escHtml((t.items || []).join('\n')) + '</textarea>';
+    return el;
+  }
+
+  function choiceRow(c) {
+    c = c || {};
+    const el = document.createElement('div');
+    el.className = 'card'; el.setAttribute('data-choice', ''); el.style.padding = '14px'; el.style.background = '#fbf6ec';
+    el.innerHTML =
+      '<div class="row-head"><strong>Soin</strong><button class="btn-danger" data-remove type="button">Supprimer</button></div>' +
+      '<div class="col2"><div>' + field('data-c', 'name', 'Nom', 'input', c.name) + '</div>' +
+        '<div>' + field('data-c', 'desc', 'Description', 'input', c.desc) + '</div></div>';
+    return el;
+  }
+
+  function renderExp(exp, texts) {
+    exp = exp || {};
+    let html = '';
+    html += '<div class="card"><div class="row-head"><strong>Textes de l\'expérience</strong></div>' +
+      EXP_TEXT_FIELDS.map(function (f) { return field('data-tkey', f[0], f[1], f[2], texts[f[0]]); }).join('') + '</div>';
+    html += '<div class="card"><div class="row-head"><strong>Formules</strong></div><div id="expTiers"></div>' +
+      '<button class="btn btn-ghost btn-sm" type="button" data-add="tier">+ Ajouter une formule</button></div>';
+    html += '<div class="card"><div class="row-head"><strong>Parenthèse beauté</strong></div>' +
+      field('data-exp', 'beautyTitle', 'Titre', 'input', exp.beautyTitle) +
+      field('data-exp', 'beautyLead', "Texte d'introduction", 'input', exp.beautyLead) +
+      '<label style="margin-top:8px;">Soins au choix</label><div id="expChoices"></div>' +
+      '<button class="btn btn-ghost btn-sm" type="button" data-add="choice">+ Ajouter un soin</button>' +
+      '<label style="margin-top:14px;">Option tatouage</label>' +
+      '<textarea data-exp="tattoo">' + escHtml(exp.tattoo || '') + '</textarea></div>';
+    html += '<div class="card"><div class="row-head"><strong>Conditions de réservation</strong></div>' +
+      field('data-exp', 'conditionsTitle', 'Titre', 'input', exp.conditionsTitle) +
+      '<label>Une condition par ligne</label>' +
+      '<textarea data-exp="conditions" style="min-height:130px;">' + escHtml((exp.conditions || []).join('\n')) + '</textarea></div>';
+    html += '<div class="card"><div class="row-head"><strong>Bon à savoir</strong></div>' +
+      field('data-exp', 'notesTitle', 'Titre', 'input', exp.notesTitle) +
+      '<label>Une information par ligne</label>' +
+      '<textarea data-exp="notes" style="min-height:110px;">' + escHtml((exp.notes || []).join('\n')) + '</textarea></div>';
+    expWrap.innerHTML = html;
+
+    const tiersWrap = document.getElementById('expTiers');
+    (exp.tiers && exp.tiers.length ? exp.tiers : [{}]).forEach(function (t) { tiersWrap.appendChild(tierCard(t)); });
+    const choicesWrap = document.getElementById('expChoices');
+    (exp.choices && exp.choices.length ? exp.choices : [{}]).forEach(function (c) { choicesWrap.appendChild(choiceRow(c)); });
+  }
+
+  function collectExp() {
+    const exp = {};
+    expWrap.querySelectorAll('[data-exp]').forEach(function (el) {
+      const k = el.getAttribute('data-exp');
+      if (k === 'conditions' || k === 'notes') {
+        exp[k] = el.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+      } else { exp[k] = el.value.trim(); }
+    });
+    exp.tiers = [];
+    expWrap.querySelectorAll('[data-tier]').forEach(function (card) {
+      const t = {};
+      card.querySelectorAll('[data-t]').forEach(function (el) {
+        const k = el.getAttribute('data-t');
+        if (k === 'items') t.items = el.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+        else t[k] = el.value.trim();
+      });
+      if (t.name || t.price || (t.items && t.items.length)) exp.tiers.push(t);
+    });
+    exp.choices = [];
+    expWrap.querySelectorAll('[data-choice]').forEach(function (row) {
+      const c = {};
+      row.querySelectorAll('[data-c]').forEach(function (el) { c[el.getAttribute('data-c')] = el.value.trim(); });
+      if (c.name || c.desc) exp.choices.push(c);
+    });
+    return exp;
+  }
+
   /* ---------- Ajout / suppression ---------- */
   document.addEventListener('click', function (e) {
     const add = e.target.closest('[data-add]');
     if (add) {
-      if (add.getAttribute('data-add') === 'prestation') prestaWrap.appendChild(prestaCard({}));
-      else baWrap.appendChild(baCard({}));
+      const kind = add.getAttribute('data-add');
+      if (kind === 'prestation') prestaWrap.appendChild(prestaCard({}));
+      else if (kind === 'ba') baWrap.appendChild(baCard({}));
+      else if (kind === 'tier') document.getElementById('expTiers').appendChild(tierCard({}));
+      else if (kind === 'choice') document.getElementById('expChoices').appendChild(choiceRow({}));
       return;
     }
     const rem = e.target.closest('[data-remove]');
@@ -230,9 +407,14 @@
       planity: document.getElementById('planity').value.trim(),
       heroImage: val(siteImagesWrap, 'heroImage'),
       aboutImage: val(siteImagesWrap, 'aboutImage'),
+      texts: {},
+      experience: collectExp(),
       prestations: [],
       avantApres: []
     };
+    document.querySelectorAll('[data-tkey]').forEach(function (el) {
+      content.texts[el.getAttribute('data-tkey')] = el.value;
+    });
     prestaWrap.querySelectorAll('[data-presta]').forEach(function (card) {
       const nom = val(card, 'nom'), description = val(card, 'description'), image = val(card, 'image');
       if (nom || description || image) content.prestations.push({ nom: nom, description: description, image: image });

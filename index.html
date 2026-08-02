@@ -135,9 +135,9 @@
     <div class="container hero-content">
       <div class="hero-main">
         <img src="assets/thebeautycorner.png" alt="Logo The Beauty Corner by Alex, institut de beauté à Nice" class="hero-logo" width="220" height="120" fetchpriority="high" onerror="this.style.display='none'" />
-        <p class="eyebrow">Institut de beauté &nbsp;·&nbsp; Nice</p>
-        <h1>Sublimez votre<br />beauté naturelle</h1>
-        <p class="hero-tagline">Un cocon de douceur où chaque soin devient un moment d'exception.</p>
+        <p class="eyebrow" data-txt="hero.eyebrow">Institut de beauté &nbsp;·&nbsp; Nice</p>
+        <h1 data-txt="hero.title">Sublimez votre<br />beauté naturelle</h1>
+        <p class="hero-tagline" data-txt="hero.tagline">Un cocon de douceur où chaque soin devient un moment d'exception.</p>
         <div class="hero-actions">
           <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
         </div>
@@ -153,9 +153,9 @@
     <div class="hero-bottom">
       <div class="container hero-bottom-inner">
         <div class="hero-stats">
-          <div class="stat"><span class="num" id="heroRating">5,0</span><span class="label">Note clients</span></div>
-          <div class="stat"><span class="num">20 ans</span><span class="label">D'expérience</span></div>
-          <div class="stat"><span class="num">6</span><span class="label">Prestations expertes</span></div>
+          <div class="stat"><span class="num" id="heroRating">5,0</span><span class="label" data-txt="hero.stat1label">Note clients</span></div>
+          <div class="stat"><span class="num" data-txt="hero.stat2num">20 ans</span><span class="label" data-txt="hero.stat2label">D'expérience</span></div>
+          <div class="stat"><span class="num" data-txt="hero.stat3num">6</span><span class="label" data-txt="hero.stat3label">Prestations expertes</span></div>
         </div>
       </div>
     </div>
@@ -168,22 +168,22 @@
         <img id="aboutImg" src="https://images.unsplash.com/photo-1573461160327-b450ce3d8e7f?auto=format&fit=crop&w=900&q=80" alt="Alexandra, esthéticienne fondatrice de The Beauty Corner à Nice" width="900" height="600" loading="lazy" />
       </div>
       <div class="about-text">
-        <p class="section-eyebrow">by Alex</p>
-        <h2>Une passion,<br />un savoir-faire</h2>
-        <p>
+        <p class="section-eyebrow" data-txt="about.eyebrow">by Alex</p>
+        <h2 data-txt="about.title">Une passion,<br />un savoir-faire</h2>
+        <p data-txt="about.p1">
           Derrière The Beauty Corner, il y a Alexandra — esthéticienne depuis
           20 ans et spécialiste de la dermopigmentation, animée par l'envie de
           faire rayonner chaque personne qui pousse sa porte.
         </p>
-        <p>
+        <p data-txt="about.p2">
           Un lieu où l'art, la personnalité et la beauté se rencontrent, au sein
-          du studio de tatouage <em>Frères d'encre</em>, à Nice. Une atmosphère
+          du studio de tatouage Frères d'encre, à Nice. Une atmosphère
           professionnelle et créative, pour des résultats naturels et sur-mesure.
         </p>
         <ul class="about-list">
-          <li>20 ans d'expérience</li>
-          <li>Spécialiste dermopigmentation (sourcils poil à poil &amp; powder brows)</li>
-          <li>Accueil chaleureux &amp; travail minutieux</li>
+          <li data-txt="about.li1">20 ans d'expérience</li>
+          <li data-txt="about.li2">Spécialiste dermopigmentation (sourcils poil à poil &amp; powder brows)</li>
+          <li data-txt="about.li3">Accueil chaleureux &amp; travail minutieux</li>
         </ul>
         <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue">Prendre rendez-vous</a>
       </div>
@@ -194,9 +194,9 @@
   <section class="prestations" id="prestations">
     <div class="container">
       <div class="section-head center">
-        <p class="section-eyebrow">Nos prestations</p>
-        <h2>L'art de vous sublimer</h2>
-        <p class="section-lead">
+        <p class="section-eyebrow" data-txt="prestations.eyebrow">Nos prestations</p>
+        <h2 data-txt="prestations.title">L'art de vous sublimer</h2>
+        <p class="section-lead" data-txt="prestations.lead">
           De la dermopigmentation au soin des ongles, chaque geste allie précision, esthétique et bien-être. Réservation en ligne sur Planity.
         </p>
       </div>
@@ -207,13 +207,13 @@
 
       <!-- ===== Carte Expérience privée (ouvre un modal) ===== -->
       <button type="button" class="experience-card" id="experienceCard" aria-haspopup="dialog" aria-controls="expModal">
-        <span class="experience-badge">Expérience privée · entre amies</span>
+        <span class="experience-badge" data-txt="experience.badge">Expérience privée · entre amies</span>
         <span class="experience-card-body">
-          <span class="experience-eyebrow">Frères d'Encre Experiences · by Alex</span>
-          <span class="experience-title">La soirée beauté entre amies</span>
-          <span class="experience-lead">EVJF, anniversaire ou simple moment complice&nbsp;: un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.</span>
+          <span class="experience-eyebrow" data-txt="experience.cardEyebrow">Frères d'Encre Experiences · by Alex</span>
+          <span class="experience-title" data-txt="experience.cardTitle">La soirée beauté entre amies</span>
+          <span class="experience-lead" data-txt="experience.cardLead">EVJF, anniversaire ou simple moment complice&nbsp;: un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.</span>
           <span class="experience-meta">
-            <span class="experience-price">À partir de 55&nbsp;€ / pers</span>
+            <span class="experience-price" data-txt="experience.cardPrice">À partir de 55&nbsp;€ / pers</span>
             <span class="experience-more">Découvrir l'expérience →</span>
           </span>
         </span>
@@ -225,9 +225,9 @@
   <section class="beforeafter" id="realisations">
     <div class="container">
       <div class="section-head center">
-        <p class="section-eyebrow">Avant / Après</p>
-        <h2>Nos réalisations</h2>
-        <p class="section-lead">Choisissez une prestation, puis déplacez le curseur sur l'image pour révéler le résultat.</p>
+        <p class="section-eyebrow" data-txt="realisations.eyebrow">Avant / Après</p>
+        <h2 data-txt="realisations.title">Nos réalisations</h2>
+        <p class="section-lead" data-txt="realisations.lead">Choisissez une prestation, puis déplacez le curseur sur l'image pour révéler le résultat.</p>
       </div>
 
       <!-- Onglets + images générés depuis data/content.js (avantApres).
@@ -255,7 +255,7 @@
     <div class="testimonials-overlay"></div>
     <div class="container testimonials-content">
       <p class="section-eyebrow light" id="reviewsNote">Note 5,0 sur Google &amp; Planity</p>
-      <h2>Ce que disent nos clientes</h2>
+      <h2 data-txt="avis.title">Ce que disent nos clientes</h2>
       <div class="stars" aria-hidden="true">★ ★ ★ ★ ★</div>
 
       <div class="testimonial-track" id="testimonialTrack">
@@ -281,12 +281,12 @@
   <section class="instagram" id="instagram">
     <div class="container">
       <div class="section-head center">
-        <p class="section-eyebrow">@thebeautycorner.byalex</p>
-        <h2>Suivez-nous sur Instagram</h2>
+        <p class="section-eyebrow" data-txt="instagram.handle">@thebeautycorner.byalex</p>
+        <h2 data-txt="instagram.title">Suivez-nous sur Instagram</h2>
         <p class="ig-subtitle">
-          <span class="ig-followers"><strong id="igFollowers">450</strong> abonnés</span>
+          <span class="ig-followers"><strong id="igFollowers" data-txt="instagram.followers">450</strong> abonnés</span>
           <span aria-hidden="true">·</span>
-          <span>Nos dernières réalisations</span>
+          <span data-txt="instagram.subtitle">Nos dernières réalisations</span>
         </p>
       </div>
 
@@ -319,27 +319,27 @@
   <section class="contact" id="contact">
     <div class="container contact-grid">
       <div class="contact-info">
-        <p class="section-eyebrow">Contact</p>
-        <h2>Offrez-vous<br />une parenthèse beauté</h2>
-        <p class="section-lead">
+        <p class="section-eyebrow" data-txt="contact.eyebrow">Contact</p>
+        <h2 data-txt="contact.title">Offrez-vous<br />une parenthèse beauté</h2>
+        <p class="section-lead" data-txt="contact.lead">
           La prise de rendez-vous se fait en ligne, simplement, via Planity. Une question ? Laissez-nous un message.
         </p>
 
         <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue contact-planity">Prendre rendez-vous sur Planity</a>
 
         <ul class="contact-list">
-          <li><strong>Adresse</strong><span>Salon Frères d'encre<br />42 rue Arson, 06300 Nice</span></li>
-          <li><strong>Téléphone</strong><span><a href="tel:+33601823773">06 01 82 37 73</a></span></li>
+          <li><strong>Adresse</strong><span data-txt="contact.address">Salon Frères d'encre<br />42 rue Arson, 06300 Nice</span></li>
+          <li><strong>Téléphone</strong><span><a href="tel:+33601823773" data-txt="contact.phone" data-tel-from="contact.phoneTel">06 01 82 37 73</a></span></li>
           <li class="hours-item">
             <strong>Horaires</strong>
             <span class="hours-grid">
-              <span class="day">Lundi</span><span class="time">11h00 – 19h00</span>
-              <span class="day">Mardi</span><span class="time">10h00 – 18h00</span>
-              <span class="day">Mercredi</span><span class="time">08h00 – 13h00</span>
-              <span class="day">Jeudi</span><span class="time">11h00 – 18h00</span>
-              <span class="day">Vendredi</span><span class="time">10h00 – 19h00</span>
-              <span class="day">Samedi</span><span class="time closed">Fermé</span>
-              <span class="day">Dimanche</span><span class="time closed">Fermé</span>
+              <span class="day">Lundi</span><span class="time" data-txt="contact.hoursMon">11h00 – 19h00</span>
+              <span class="day">Mardi</span><span class="time" data-txt="contact.hoursTue">10h00 – 18h00</span>
+              <span class="day">Mercredi</span><span class="time" data-txt="contact.hoursWed">08h00 – 13h00</span>
+              <span class="day">Jeudi</span><span class="time" data-txt="contact.hoursThu">11h00 – 18h00</span>
+              <span class="day">Vendredi</span><span class="time" data-txt="contact.hoursFri">10h00 – 19h00</span>
+              <span class="day">Samedi</span><span class="time" data-txt="contact.hoursSat">Fermé</span>
+              <span class="day">Dimanche</span><span class="time" data-txt="contact.hoursSun">Fermé</span>
             </span>
           </li>
         </ul>
@@ -403,86 +403,8 @@
     <div class="exp-modal-panel" role="document">
       <button class="exp-modal-close" type="button" data-exp-close aria-label="Fermer">×</button>
 
-      <header class="exp-modal-head">
-        <p class="exp-eyebrow">Frères d'Encre Experiences · by Alex</p>
-        <h2 id="expModalTitle">Une soirée entre amies, pensée pour créer des souvenirs</h2>
-        <p class="exp-sub">Groupe privé de 6 à 10 participantes · au studio Frères d'Encre, 42 rue Arson, Nice</p>
-      </header>
-
-      <!-- Formules -->
-      <div class="exp-tiers">
-        <article class="exp-tier">
-          <h3>Girls Night</h3>
-          <p class="exp-tier-price">55&nbsp;€ <span>/ pers</span></p>
-          <p class="exp-tier-tag">La soirée entre amies par excellence</p>
-          <ul class="exp-list">
-            <li>Accueil personnalisé, ambiance musicale &amp; espace photo</li>
-            <li>Softs à volonté + sélection vin blanc, rosé &amp; Martini (2 conso/pers)</li>
-            <li>Pause gourmande&nbsp;: chips, olives, biscuits apéritifs, tomates cerises, petites douceurs</li>
-            <li>Parenthèse beauté personnalisée&nbsp;: chaque participante choisit un soin</li>
-          </ul>
-        </article>
-
-        <article class="exp-tier exp-tier-featured">
-          <span class="exp-tier-flag">Le plus festif</span>
-          <h3>Glam Night</h3>
-          <p class="exp-tier-price">70&nbsp;€ <span>/ pers</span></p>
-          <p class="exp-tier-tag">Une soirée plus festive, avec des souvenirs à partager</p>
-          <ul class="exp-list">
-            <li><em>Tout de la Girls Night, et&nbsp;:</em></li>
-            <li>Souvenirs&nbsp;: polaroïds pour immortaliser la soirée</li>
-            <li>Pause gourmande enrichie&nbsp;: mini pizzas, mini quiches, bouchées salées, douceurs sucrées</li>
-            <li>Possibilité d'apporter votre propre gâteau personnalisé</li>
-          </ul>
-        </article>
-
-        <article class="exp-tier">
-          <h3>Signature</h3>
-          <p class="exp-tier-price">85&nbsp;€ <span>/ pers</span></p>
-          <p class="exp-tier-tag">Une expérience unique pensée autour de votre événement</p>
-          <ul class="exp-list">
-            <li><em>Tout de la Glam Night, et&nbsp;:</em></li>
-            <li>Cadeau personnalisé pour la future mariée</li>
-            <li>Goodies pour chaque participante</li>
-            <li>Petites attentions surprises</li>
-          </ul>
-        </article>
-      </div>
-
-      <!-- Parenthèse beauté -->
-      <section class="exp-block">
-        <h4>La parenthèse beauté personnalisée</h4>
-        <p class="exp-block-lead">Chaque participante choisit l'un de ces soins&nbsp;:</p>
-        <div class="exp-choices">
-          <div class="exp-choice"><strong>Rituel Éclat</strong><span>Nettoyage de peau &amp; massage du visage</span></div>
-          <div class="exp-choice"><strong>Pause Douceur</strong><span>Manucure &amp; massage des mains</span></div>
-          <div class="exp-choice"><strong>Regard Sublimé</strong><span>Épilation &amp; teinture des sourcils</span></div>
-        </div>
-        <p class="exp-option"><strong>Option tatouage souvenir</strong> (facultative)&nbsp;: avec les artistes Frères d'Encre — tatouage flash ou projet personnalisé, réalisé et réglé directement auprès du tatoueur.</p>
-      </section>
-
-      <!-- Conditions + infos -->
-      <div class="exp-notes">
-        <section class="exp-block">
-          <h4>Conditions de réservation</h4>
-          <ul class="exp-list exp-list-plain">
-            <li>Réservation au minimum 1 mois avant la date souhaitée</li>
-            <li>Groupes de 6 à 10 participantes</li>
-            <li>Acompte de 30&nbsp;% pour confirmer la réservation</li>
-            <li>Solde réglé selon les modalités convenues</li>
-            <li>Nombre définitif confirmé avant l'événement</li>
-            <li>Toute demande particulière signalée à la réservation</li>
-          </ul>
-        </section>
-        <section class="exp-block">
-          <h4>Bon à savoir</h4>
-          <ul class="exp-list exp-list-plain">
-            <li>Boissons alcoolisées réservées aux personnes majeures, limitées à 2 consommations par participante</li>
-            <li>L'abus d'alcool est dangereux pour la santé — à consommer avec modération</li>
-            <li>Chaque participante est responsable de ses effets personnels&nbsp;; les éventuelles dégradations pourront être facturées</li>
-          </ul>
-        </section>
-      </div>
+      <!-- Contenu généré depuis le contenu (Supabase / content.json) -->
+      <div id="expModalBody"></div>
 
       <footer class="exp-modal-actions">
         <a class="btn btn-blue" data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener">Prendre rendez-vous</a>
@@ -492,6 +414,6 @@
   </div>
 
   <script src="js/config.js?v=20260801b"></script>
-  <script src="js/script.js?v=20260802d"></script>
+  <script src="js/script.js?v=20260802e"></script>
 </body>
 </html>

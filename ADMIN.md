@@ -29,6 +29,12 @@ aucun GitHub).
    - **Réservation** : le lien Planity.
    - **Photos du site** : la grande photo d'accueil (Hero) et la photo
      de la section « À propos ».
+   - **Textes du site** : tous les textes de la page, regroupés par section
+     (Accueil, À propos, Prestations, Réalisations, Avis, Instagram,
+     Contact — dont l'adresse, le téléphone et les horaires).
+   - **Expérience** (Frères d'Encre Experiences) : la carte, la fenêtre,
+     les formules (nom, prix, ce qui est inclus), la parenthèse beauté,
+     les conditions et le « Bon à savoir ».
    - **Prestations** : titre, description, image de chaque carte (+ / −).
    - **Galerie Avant / Après** : nom + photo avant + photo après (+ / −).
    - Les images se déposent via « Choisir un fichier » (envoi automatique).

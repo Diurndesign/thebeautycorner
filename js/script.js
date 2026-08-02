@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Nombre d'abonnés
         if (typeof data.followersCount === 'number') {
           const f = document.getElementById('igFollowers');
-          if (f) f.textContent = data.followersCount.toLocaleString('fr-FR');
+          if (f) { f.textContent = data.followersCount.toLocaleString('fr-FR'); f.setAttribute('data-locked', '1'); }
         }
 
         const posts = (data.posts || []).slice(0, 3);
@@ -222,10 +222,105 @@ document.addEventListener('DOMContentLoaded', function () {
         if (aboutImg) aboutImg.src = content.aboutImage;
       }
 
+      applyTexts(content.texts || {});
+      renderExpModal(content.texts || {}, content.experience);
+
       renderPrestations(content.prestations || [], planity);
       renderBeforeAfter(content.avantApres || []);
     })
     .catch(function (err) { console.error('Chargement du contenu impossible :', err); });
+
+  /* ---------- Textes du site (liaison data-txt) ---------- */
+  function escHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function escBreak(s) { return escHtml(s).replace(/\n/g, '<br>'); }
+
+  function applyTexts(texts) {
+    document.querySelectorAll('[data-txt]').forEach(function (el) {
+      const key = el.getAttribute('data-txt');
+      const val = texts[key];
+      if (val != null && val !== '' && !el.hasAttribute('data-locked')) {
+        el.innerHTML = escBreak(val);
+      }
+      const telKey = el.getAttribute('data-tel-from');
+      if (telKey && texts[telKey]) {
+        el.setAttribute('href', 'tel:' + String(texts[telKey]).replace(/\s+/g, ''));
+      }
+    });
+  }
+
+  /* ---------- Modal Expérience : rendu depuis le contenu ---------- */
+  const DEFAULT_EXP = {
+    tiers: [
+      { name: 'Girls Night', price: '55 €', unit: '/ pers', flag: '', tag: 'La soirée entre amies par excellence',
+        items: ['Accueil personnalisé, ambiance musicale & espace photo', 'Softs à volonté + sélection vin blanc, rosé & Martini (2 conso/pers)', 'Pause gourmande : chips, olives, biscuits apéritifs, tomates cerises, petites douceurs', 'Parenthèse beauté personnalisée : chaque participante choisit un soin'] },
+      { name: 'Glam Night', price: '70 €', unit: '/ pers', flag: 'Le plus festif', tag: 'Une soirée plus festive, avec des souvenirs à partager',
+        items: ['Tout de la Girls Night, et :', 'Souvenirs : polaroïds pour immortaliser la soirée', 'Pause gourmande enrichie : mini pizzas, mini quiches, bouchées salées, douceurs sucrées', 'Possibilité d\'apporter votre propre gâteau personnalisé'] },
+      { name: 'Signature', price: '85 €', unit: '/ pers', flag: '', tag: 'Une expérience unique pensée autour de votre événement',
+        items: ['Tout de la Glam Night, et :', 'Cadeau personnalisé pour la future mariée', 'Goodies pour chaque participante', 'Petites attentions surprises'] }
+    ],
+    beautyTitle: 'La parenthèse beauté personnalisée',
+    beautyLead: 'Chaque participante choisit l\'un de ces soins :',
+    choices: [
+      { name: 'Rituel Éclat', desc: 'Nettoyage de peau & massage du visage' },
+      { name: 'Pause Douceur', desc: 'Manucure & massage des mains' },
+      { name: 'Regard Sublimé', desc: 'Épilation & teinture des sourcils' }
+    ],
+    tattoo: 'Option tatouage souvenir (facultative) : avec les artistes Frères d\'Encre — tatouage flash ou projet personnalisé, réalisé et réglé directement auprès du tatoueur.',
+    conditionsTitle: 'Conditions de réservation',
+    conditions: ['Réservation au minimum 1 mois avant la date souhaitée', 'Groupes de 6 à 10 participantes', 'Acompte de 30 % pour confirmer la réservation', 'Solde réglé selon les modalités convenues', 'Nombre définitif confirmé avant l\'événement', 'Toute demande particulière signalée à la réservation'],
+    notesTitle: 'Bon à savoir',
+    notes: ['Boissons alcoolisées réservées aux personnes majeures, limitées à 2 consommations par participante', 'L\'abus d\'alcool est dangereux pour la santé — à consommer avec modération', 'Chaque participante est responsable de ses effets personnels ; les éventuelles dégradations pourront être facturées']
+  };
+
+  function liList(arr, cls) {
+    return '<ul class="exp-list' + (cls ? ' ' + cls : '') + '">' +
+      (arr || []).map(function (i) { return '<li>' + escHtml(i) + '</li>'; }).join('') + '</ul>';
+  }
+
+  function renderExpModal(texts, exp) {
+    const body = document.getElementById('expModalBody');
+    if (!body) return;
+    exp = exp || DEFAULT_EXP;
+    const t = texts || {};
+    const eyebrow = t['experience.modalEyebrow'] || 'Frères d\'Encre Experiences · by Alex';
+    const title = t['experience.modalTitle'] || 'Une soirée entre amies, pensée pour créer des souvenirs';
+    const sub = t['experience.modalSub'] || 'Groupe privé de 6 à 10 participantes · au studio Frères d\'Encre, 42 rue Arson, Nice';
+
+    const tiers = (exp.tiers || []).map(function (tier) {
+      return '<article class="exp-tier' + (tier.flag ? ' exp-tier-featured' : '') + '">' +
+        (tier.flag ? '<span class="exp-tier-flag">' + escHtml(tier.flag) + '</span>' : '') +
+        '<h3>' + escHtml(tier.name) + '</h3>' +
+        '<p class="exp-tier-price">' + escHtml(tier.price) + ' <span>' + escHtml(tier.unit || '') + '</span></p>' +
+        '<p class="exp-tier-tag">' + escHtml(tier.tag) + '</p>' +
+        liList(tier.items) +
+      '</article>';
+    }).join('');
+
+    const choices = (exp.choices || []).map(function (c) {
+      return '<div class="exp-choice"><strong>' + escHtml(c.name) + '</strong><span>' + escHtml(c.desc) + '</span></div>';
+    }).join('');
+
+    body.innerHTML =
+      '<header class="exp-modal-head">' +
+        '<p class="exp-eyebrow">' + escHtml(eyebrow) + '</p>' +
+        '<h2 id="expModalTitle">' + escHtml(title) + '</h2>' +
+        '<p class="exp-sub">' + escHtml(sub) + '</p>' +
+      '</header>' +
+      '<div class="exp-tiers">' + tiers + '</div>' +
+      '<section class="exp-block">' +
+        '<h4>' + escHtml(exp.beautyTitle) + '</h4>' +
+        '<p class="exp-block-lead">' + escHtml(exp.beautyLead) + '</p>' +
+        '<div class="exp-choices">' + choices + '</div>' +
+        '<p class="exp-option">' + escBreak(exp.tattoo) + '</p>' +
+      '</section>' +
+      '<div class="exp-notes">' +
+        '<section class="exp-block"><h4>' + escHtml(exp.conditionsTitle) + '</h4>' + liList(exp.conditions, 'exp-list-plain') + '</section>' +
+        '<section class="exp-block"><h4>' + escHtml(exp.notesTitle) + '</h4>' + liList(exp.notes, 'exp-list-plain') + '</section>' +
+      '</div>';
+  }
 
   /* ---------- Avis clients (Google via api/reviews, avec repli) ---------- */
   const FALLBACK_REVIEWS = [
