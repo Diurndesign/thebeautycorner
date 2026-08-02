@@ -35,6 +35,15 @@ aucun GitHub).
 3. Cliquer **« Enregistrer »**. Les changements apparaissent en ligne en
    quelques secondes.
 
+## Gestion des photos (stockage)
+
+- Chaque photo déposée est envoyée dans le bucket `media` de Supabase.
+- **Nettoyage automatique** : à chaque « Enregistrer », les photos qui ne
+  sont plus utilisées nulle part sur le site sont **supprimées du stockage**.
+  Alex n'a donc rien à gérer — le stockage ne s'accumule pas.
+- Pour supprimer manuellement malgré tout : dashboard Supabase → **Storage
+  → media → uploads**, sélectionner les fichiers → **Delete**.
+
 ## Notes techniques
 
 - Le site lit le contenu depuis Supabase ; en cas d'indisponibilité, il

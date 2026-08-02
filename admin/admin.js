@@ -189,8 +189,49 @@
       .update({ data: content, updated_at: new Date().toISOString() })
       .eq('id', 1);
     if (error) { saveMsg.className = 'msg err'; saveMsg.textContent = 'Erreur : ' + error.message; return; }
+
     saveMsg.className = 'msg ok'; saveMsg.textContent = 'Enregistré ✓ — visible en ligne dans quelques secondes.';
+
+    // Nettoyage automatique : supprime du stockage les photos qui ne sont
+    // plus utilisées nulle part sur le site (évite l'accumulation).
+    const removed = await cleanupOrphans(content);
+    if (removed > 0) {
+      saveMsg.textContent = 'Enregistré ✓ — ' + removed + ' ancienne' + (removed > 1 ? 's' : '') +
+        ' photo' + (removed > 1 ? 's' : '') + ' supprimée' + (removed > 1 ? 's' : '') + ' du stockage.';
+    }
   });
+
+  /* ---------- Nettoyage des photos orphelines ---------- */
+  async function cleanupOrphans(content) {
+    try {
+      const marker = '/storage/v1/object/public/media/';
+      const used = {};
+      function addUrl(u) {
+        if (!u) return;
+        const i = u.indexOf(marker);
+        if (i !== -1) used[u.slice(i + marker.length)] = true; // ex : uploads/xxx.jpeg
+      }
+      addUrl(content.heroImage);
+      addUrl(content.aboutImage);
+      (content.prestations || []).forEach(function (p) { addUrl(p.image); });
+      (content.avantApres || []).forEach(function (b) { addUrl(b.avant); addUrl(b.apres); });
+
+      const { data: files, error } = await sb.storage.from('media').list('uploads', { limit: 1000 });
+      if (error || !files) return 0;
+
+      const toDelete = files
+        .filter(function (f) { return f && f.name && f.name.charAt(0) !== '.'; })
+        .map(function (f) { return 'uploads/' + f.name; })
+        .filter(function (path) { return !used[path]; });
+
+      if (!toDelete.length) return 0;
+      const { error: delErr } = await sb.storage.from('media').remove(toDelete);
+      if (delErr) return 0;
+      return toDelete.length;
+    } catch (e) {
+      return 0;
+    }
+  }
 
   /* ---------- Utilitaires ---------- */
   function val(card, field) {
