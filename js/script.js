@@ -395,4 +395,50 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Modal Expérience (Frères d'Encre Experiences) ---------- */
+  const expModal = document.getElementById('expModal');
+  const expCard = document.getElementById('experienceCard');
+  let expLastFocus = null;
+
+  function openExp() {
+    if (!expModal) return;
+    expLastFocus = document.activeElement;
+    expModal.hidden = false;
+    document.body.classList.add('modal-open');
+    const closeBtn = expModal.querySelector('.exp-modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeExp() {
+    if (!expModal) return;
+    expModal.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (expLastFocus && expLastFocus.focus) expLastFocus.focus();
+  }
+
+  if (expCard) expCard.addEventListener('click', openExp);
+  if (expModal) {
+    expModal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-exp-close]')) closeExp();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !expModal.hidden) closeExp();
+    });
+
+    // « Une question » : ferme le modal et amène au formulaire de contact,
+    // en pré-remplissant le message.
+    const askBtn = document.getElementById('expAsk');
+    if (askBtn) {
+      askBtn.addEventListener('click', function () {
+        closeExp();
+        const contact = document.getElementById('contact');
+        const msg = document.getElementById('message');
+        if (msg && !msg.value.trim()) {
+          msg.value = "Bonjour, je souhaite des informations sur les Frères d'Encre Experiences (Girls Night / Glam Night / Signature). ";
+        }
+        if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (msg) setTimeout(function () { msg.focus(); }, 600);
+      });
+    }
+  }
+
 });
