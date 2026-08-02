@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=20260801a" />
+  <link rel="stylesheet" href="css/style.css?v=20260802a" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -204,6 +204,20 @@
       <!-- Cartes générées depuis data/content.json (prestations) :
            image + titre + description modifiables via le CMS. -->
       <div class="prestations-grid" id="prestationsGrid"></div>
+
+      <!-- ===== Carte Expérience privée (ouvre un modal) ===== -->
+      <button type="button" class="experience-card" id="experienceCard" aria-haspopup="dialog" aria-controls="expModal">
+        <span class="experience-badge">Expérience privée · entre amies</span>
+        <span class="experience-card-body">
+          <span class="experience-eyebrow">Frères d'Encre Experiences · by Alex</span>
+          <span class="experience-title">La soirée beauté entre amies</span>
+          <span class="experience-lead">EVJF, anniversaire ou simple moment complice&nbsp;: un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.</span>
+          <span class="experience-meta">
+            <span class="experience-price">À partir de 55&nbsp;€ / pers</span>
+            <span class="experience-more">Découvrir l'expérience →</span>
+          </span>
+        </span>
+      </button>
     </div>
   </section>
 
@@ -383,7 +397,101 @@
     </div>
   </footer>
 
+  <!-- ================= MODAL EXPÉRIENCE ================= -->
+  <div class="exp-modal" id="expModal" role="dialog" aria-modal="true" aria-labelledby="expModalTitle" hidden>
+    <div class="exp-modal-overlay" data-exp-close></div>
+    <div class="exp-modal-panel" role="document">
+      <button class="exp-modal-close" type="button" data-exp-close aria-label="Fermer">×</button>
+
+      <header class="exp-modal-head">
+        <p class="exp-eyebrow">Frères d'Encre Experiences · by Alex</p>
+        <h2 id="expModalTitle">Une soirée entre amies, pensée pour créer des souvenirs</h2>
+        <p class="exp-sub">Groupe privé de 6 à 10 participantes · au studio Frères d'Encre, 42 rue Arson, Nice</p>
+      </header>
+
+      <!-- Formules -->
+      <div class="exp-tiers">
+        <article class="exp-tier">
+          <h3>Girls Night</h3>
+          <p class="exp-tier-price">55&nbsp;€ <span>/ pers</span></p>
+          <p class="exp-tier-tag">La soirée entre amies par excellence</p>
+          <ul class="exp-list">
+            <li>Accueil personnalisé, ambiance musicale &amp; espace photo</li>
+            <li>Softs à volonté + sélection vin blanc, rosé &amp; Martini (2 conso/pers)</li>
+            <li>Pause gourmande&nbsp;: chips, olives, biscuits apéritifs, tomates cerises, petites douceurs</li>
+            <li>Parenthèse beauté personnalisée&nbsp;: chaque participante choisit un soin</li>
+          </ul>
+        </article>
+
+        <article class="exp-tier exp-tier-featured">
+          <span class="exp-tier-flag">Le plus festif</span>
+          <h3>Glam Night</h3>
+          <p class="exp-tier-price">70&nbsp;€ <span>/ pers</span></p>
+          <p class="exp-tier-tag">Une soirée plus festive, avec des souvenirs à partager</p>
+          <ul class="exp-list">
+            <li><em>Tout de la Girls Night, et&nbsp;:</em></li>
+            <li>Souvenirs&nbsp;: polaroïds pour immortaliser la soirée</li>
+            <li>Pause gourmande enrichie&nbsp;: mini pizzas, mini quiches, bouchées salées, douceurs sucrées</li>
+            <li>Possibilité d'apporter votre propre gâteau personnalisé</li>
+          </ul>
+        </article>
+
+        <article class="exp-tier">
+          <h3>Signature</h3>
+          <p class="exp-tier-price">85&nbsp;€ <span>/ pers</span></p>
+          <p class="exp-tier-tag">Une expérience unique pensée autour de votre événement</p>
+          <ul class="exp-list">
+            <li><em>Tout de la Glam Night, et&nbsp;:</em></li>
+            <li>Cadeau personnalisé pour la future mariée</li>
+            <li>Goodies pour chaque participante</li>
+            <li>Petites attentions surprises</li>
+          </ul>
+        </article>
+      </div>
+
+      <!-- Parenthèse beauté -->
+      <section class="exp-block">
+        <h4>La parenthèse beauté personnalisée</h4>
+        <p class="exp-block-lead">Chaque participante choisit l'un de ces soins&nbsp;:</p>
+        <div class="exp-choices">
+          <div class="exp-choice"><strong>Rituel Éclat</strong><span>Nettoyage de peau &amp; massage du visage</span></div>
+          <div class="exp-choice"><strong>Pause Douceur</strong><span>Manucure &amp; massage des mains</span></div>
+          <div class="exp-choice"><strong>Regard Sublimé</strong><span>Épilation &amp; teinture des sourcils</span></div>
+        </div>
+        <p class="exp-option"><strong>Option tatouage souvenir</strong> (facultative)&nbsp;: avec les artistes Frères d'Encre — tatouage flash ou projet personnalisé, réalisé et réglé directement auprès du tatoueur.</p>
+      </section>
+
+      <!-- Conditions + infos -->
+      <div class="exp-notes">
+        <section class="exp-block">
+          <h4>Conditions de réservation</h4>
+          <ul class="exp-list exp-list-plain">
+            <li>Réservation au minimum 1 mois avant la date souhaitée</li>
+            <li>Groupes de 6 à 10 participantes</li>
+            <li>Acompte de 30&nbsp;% pour confirmer la réservation</li>
+            <li>Solde réglé selon les modalités convenues</li>
+            <li>Nombre définitif confirmé avant l'événement</li>
+            <li>Toute demande particulière signalée à la réservation</li>
+          </ul>
+        </section>
+        <section class="exp-block">
+          <h4>Bon à savoir</h4>
+          <ul class="exp-list exp-list-plain">
+            <li>Boissons alcoolisées réservées aux personnes majeures, limitées à 2 consommations par participante</li>
+            <li>L'abus d'alcool est dangereux pour la santé — à consommer avec modération</li>
+            <li>Chaque participante est responsable de ses effets personnels&nbsp;; les éventuelles dégradations pourront être facturées</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer class="exp-modal-actions">
+        <a class="btn btn-blue" data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener">Prendre rendez-vous</a>
+        <button class="btn btn-outline" id="expAsk" type="button">Une question</button>
+      </footer>
+    </div>
+  </div>
+
   <script src="js/config.js?v=20260801b"></script>
-  <script src="js/script.js?v=20260801c"></script>
+  <script src="js/script.js?v=20260802d"></script>
 </body>
 </html>
