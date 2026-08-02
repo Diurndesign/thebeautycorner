@@ -141,25 +141,82 @@
     if (rem) { const card = rem.closest('.card'); if (card) card.remove(); }
   });
 
+  /* ---------- Compression d'image (côté navigateur) ----------
+     Redimensionne au besoin (max 2400 px sur le grand côté) et ré-encode
+     en JPEG qualité 92 % — visuellement identique, bien plus léger.
+     Si le résultat n'est pas plus léger que l'original, on garde l'original. */
+  const MAX_SIDE = 2400;
+  const JPEG_QUALITY = 0.92;
+
+  async function compressImage(file) {
+    // On ne touche pas aux formats à préserver tels quels.
+    if (!/^image\/(jpeg|jpg|png|webp)$/i.test(file.type)) return file;
+    try {
+      let source, width, height, bitmap = null;
+      if (window.createImageBitmap) {
+        bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' }).catch(function () { return null; });
+      }
+      if (bitmap) {
+        source = bitmap; width = bitmap.width; height = bitmap.height;
+      } else {
+        const url = URL.createObjectURL(file);
+        const img = await new Promise(function (res, rej) {
+          const i = new Image(); i.onload = function () { res(i); }; i.onerror = rej; i.src = url;
+        });
+        URL.revokeObjectURL(url);
+        source = img; width = img.naturalWidth; height = img.naturalHeight;
+      }
+      if (!width || !height) return file;
+
+      const scale = Math.min(1, MAX_SIDE / Math.max(width, height));
+      const w = Math.round(width * scale), h = Math.round(height * scale);
+
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';        // fond blanc si transparence (PNG)
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(source, 0, 0, w, h);
+      if (bitmap && bitmap.close) bitmap.close();
+
+      const blob = await new Promise(function (res) { canvas.toBlob(res, 'image/jpeg', JPEG_QUALITY); });
+      if (!blob || blob.size >= file.size) return file;   // pas plus léger → on garde l'original
+      const base = (file.name.replace(/\.[^.]+$/, '') || 'photo');
+      return new File([blob], base + '.jpg', { type: 'image/jpeg' });
+    } catch (e) {
+      return file; // en cas de souci, on envoie l'original (jamais de blocage)
+    }
+  }
+
+  function fmtSize(bytes) {
+    return bytes >= 1024 * 1024
+      ? (bytes / 1024 / 1024).toFixed(1) + ' Mo'
+      : Math.round(bytes / 1024) + ' Ko';
+  }
+
   /* ---------- Upload d'image ---------- */
   document.addEventListener('change', async function (e) {
     const input = e.target.closest('[data-upload]');
     if (!input || !input.files || !input.files[0]) return;
-    const file = input.files[0];
+    const original = input.files[0];
     const box = input.closest('.up');
     const hidden = box.querySelector('[data-field]');
     const status = box.querySelector('[data-status]');
     const thumb = input.closest('.imgfield').querySelector('[data-thumb]');
-    status.textContent = 'Envoi en cours…';
+    status.textContent = 'Optimisation…';
     try {
+      const file = await compressImage(original);
+      status.textContent = 'Envoi en cours…';
       const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
       const path = 'uploads/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
-      const { error } = await sb.storage.from('media').upload(path, file, { cacheControl: '3600', upsert: false });
+      const { error } = await sb.storage.from('media').upload(path, file, { cacheControl: '3600', upsert: false, contentType: file.type });
       if (error) throw error;
       const { data } = sb.storage.from('media').getPublicUrl(path);
       hidden.value = data.publicUrl;
       thumb.style.backgroundImage = "url('" + data.publicUrl + "')";
-      status.textContent = 'Photo ajoutée ✓';
+      status.textContent = (file.size < original.size)
+        ? 'Photo ajoutée ✓ (' + fmtSize(original.size) + ' → ' + fmtSize(file.size) + ')'
+        : 'Photo ajoutée ✓';
     } catch (err) {
       status.textContent = 'Échec : ' + (err.message || err);
     }

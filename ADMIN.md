@@ -37,7 +37,12 @@ aucun GitHub).
 
 ## Gestion des photos (stockage)
 
-- Chaque photo déposée est envoyée dans le bucket `media` de Supabase.
+- Chaque photo déposée est **automatiquement optimisée** dans le navigateur
+  avant l'envoi (redimensionnée à 2400 px max, ré-encodée en JPEG qualité
+  92 % — visuellement identique, souvent 3 à 5× plus légère). Alex peut donc
+  envoyer des photos brutes de téléphone sans ralentir le site. Le message
+  affiche le gain (ex. « 3,4 Mo → 480 Ko »).
+- Chaque photo est envoyée dans le bucket `media` de Supabase.
 - **Nettoyage automatique** : à chaque « Enregistrer », les photos qui ne
   sont plus utilisées nulle part sur le site sont **supprimées du stockage**.
   Alex n'a donc rien à gérer — le stockage ne s'accumule pas.
