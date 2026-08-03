@@ -185,7 +185,13 @@ document.addEventListener('DOMContentLoaded', function () {
           a.target = '_blank';
           a.rel = 'noopener';
           a.setAttribute('aria-label', 'Voir la publication sur Instagram');
-          if (img) a.style.backgroundImage = "url('" + img + "')";
+          if (img) {
+            const im = document.createElement('img');
+            im.src = img;
+            im.alt = 'Publication Instagram de The Beauty Corner';
+            im.loading = 'lazy';
+            a.appendChild(im);
+          }
 
           const ov = document.createElement('span');
           ov.className = 'ig-post-overlay';
