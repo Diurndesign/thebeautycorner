@@ -145,9 +145,25 @@ document.addEventListener('DOMContentLoaded', function () {
       baTabsEl.appendChild(btn);
     });
 
-    baSlider.addEventListener('pointerdown', function (e) { dragging = true; setPos(pctFromEvent(e)); });
-    window.addEventListener('pointermove', function (e) { if (dragging) setPos(pctFromEvent(e)); });
-    window.addEventListener('pointerup', function () { dragging = false; });
+    // Glisser (souris + tactile) : capture du pointeur sur le slider pour
+    // que le geste fonctionne sans faire scroller la page sur mobile.
+    baSlider.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      if (baSlider.setPointerCapture) { try { baSlider.setPointerCapture(e.pointerId); } catch (_) {} }
+      setPos(pctFromEvent(e));
+      e.preventDefault();
+    });
+    baSlider.addEventListener('pointermove', function (e) {
+      if (dragging) { setPos(pctFromEvent(e)); e.preventDefault(); }
+    });
+    function endDrag(e) {
+      dragging = false;
+      if (baSlider.releasePointerCapture && e && e.pointerId != null) {
+        try { baSlider.releasePointerCapture(e.pointerId); } catch (_) {}
+      }
+    }
+    baSlider.addEventListener('pointerup', endDrag);
+    baSlider.addEventListener('pointercancel', endDrag);
 
     loadPair(baData[0]);
   }
