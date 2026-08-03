@@ -295,6 +295,10 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(function (content) {
       const planity = content.planity || 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
       document.querySelectorAll('[data-planity]').forEach(function (a) { a.href = planity; });
+      // Lien « Offrir » (carte cadeau) : configurable, sinon on garde le href du HTML
+      if (content.planityGift) {
+        document.querySelectorAll('[data-planity-gift]').forEach(function (a) { a.href = content.planityGift; });
+      }
 
       if (content.heroImage) {
         const heroBg = document.getElementById('heroBg');
