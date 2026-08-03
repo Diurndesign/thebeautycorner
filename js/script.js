@@ -394,14 +394,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const c = document.createElement('cite'); c.textContent = citeText(rv);
         bq.appendChild(p); bq.appendChild(c);
         if (rv.lien) {
-          const a = document.createElement('a');
-          a.className = 'testimonial-link';
-          a.href = rv.lien; a.target = '_blank'; a.rel = 'noopener';
-          a.textContent = 'Voir cet avis sur Google ↗';
-          bq.appendChild(a);
           bq.classList.add('is-clickable');
-          bq.addEventListener('click', function (e) {
-            if (e.target.closest('a')) return;
+          bq.setAttribute('title', 'Voir cet avis sur Google');
+          bq.addEventListener('click', function () {
             window.open(rv.lien, '_blank', 'noopener');
           });
         }
