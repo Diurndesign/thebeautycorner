@@ -134,7 +134,14 @@
     {
       "nom": "Soin de la peau",
       "description": "Des soins du visage sur-mesure pour une peau nette, hydratée et éclatante.",
-      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Soin visage bonne mine — nettoyage de peau, désincrustation des pores", "prix": "70 €", "duree": "45 min" },
+        { "nom": "Soin spécifique Homme — un soin complet, pensé pour eux", "prix": "80 €", "duree": "1 h" },
+        { "nom": "Bilan California Care", "prix": "24 €", "duree": "20 min" },
+        { "nom": "California Care — sous supervision médicale, après le bilan associé", "prix": "100 €", "duree": "1 h" },
+        { "nom": "Soin signature by Alex — combinaison de plusieurs techniques en un seul soin", "prix": "150 €", "duree": "1 h 15" }
+      ]
     },
     {
       "nom": "Épilation laser permanente",
