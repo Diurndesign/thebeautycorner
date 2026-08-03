@@ -229,6 +229,37 @@ section { padding: 100px 0; }
 .hero-tagline { font-size: 1.15rem; font-weight: 300; margin-bottom: 38px; color: rgba(246,236,218,0.9); max-width: 460px; }
 .hero-actions { display: flex; gap: 26px; align-items: center; flex-wrap: wrap; }
 
+/* Animation d'entrée du hero : apparition en cascade (fondu + glissement) */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-main .hero-logo,
+.hero-main .eyebrow,
+.hero-main h1,
+.hero-main .hero-tagline,
+.hero-main .hero-actions,
+.hero-review {
+  opacity: 0;
+  animation: heroFadeUp .9s cubic-bezier(.22, .61, .36, 1) forwards;
+}
+.hero-main .hero-logo    { animation-delay: .15s; }
+.hero-main .eyebrow      { animation-delay: .30s; }
+.hero-main h1            { animation-delay: .45s; }
+.hero-main .hero-tagline { animation-delay: .60s; }
+.hero-main .hero-actions { animation-delay: .75s; }
+.hero-review             { animation-delay: .95s; }
+
+/* Accessibilité : pas d'animation si l'utilisateur la désactive */
+@media (prefers-reduced-motion: reduce) {
+  .hero-main .hero-logo,
+  .hero-main .eyebrow,
+  .hero-main h1,
+  .hero-main .hero-tagline,
+  .hero-main .hero-actions,
+  .hero-review { opacity: 1; animation: none; }
+}
+
 .btn-blue { background: var(--blue); color: var(--cream); }
 .btn-blue:hover { background: #46656f; transform: translateY(-2px); }
 
