@@ -7,7 +7,7 @@
 /* Police principale de la cliente */
 @font-face {
   font-family: 'Soria';
-  src: url('../assets/fonts/Soria.ttf') format('truetype');
+  src: url('../assets/fonts/Soria.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -16,14 +16,14 @@
 /* Police secondaire de la cliente (paragraphes & boutons) */
 @font-face {
   font-family: 'Coconat';
-  src: url('../assets/fonts/CoconatRegular.otf') format('opentype');
+  src: url('../assets/fonts/CoconatRegular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Coconat';
-  src: url('../assets/fonts/CoconatDemi.otf') format('opentype');
+  src: url('../assets/fonts/CoconatDemi.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -105,23 +105,7 @@ section { padding: 100px 0; }
   border: 1.5px solid transparent;
   transition: transform .2s ease, background .2s ease, color .2s ease;
 }
-.btn-primary { background: var(--brown); color: var(--cream); }
-.btn-primary:hover { background: var(--terracotta); transform: translateY(-2px); }
-.btn-ghost { background: transparent; border-color: var(--cream); color: var(--cream); }
-.btn-ghost:hover { background: var(--cream); color: var(--dark); }
 .btn-block { width: 100%; text-align: center; }
-
-.link-underline {
-  display: inline-block;
-  margin-top: 8px;
-  color: var(--brown);
-  text-decoration: none;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  border-bottom: 1.5px solid var(--terracotta);
-  padding-bottom: 3px;
-}
-.link-underline:hover { color: var(--terracotta); }
 
 /* ============================================================
    HEADER
@@ -154,24 +138,6 @@ section { padding: 100px 0; }
   transition: opacity .35s ease, transform .35s ease;
 }
 .header-logo img { height: 42px; width: auto; display: block; filter: drop-shadow(0 4px 12px rgba(58, 47, 43, 0.3)); }
-
-.brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
-.brand-name {
-  font-family: var(--font-title);
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--dark);
-}
-.brand-sub {
-  font-family: var(--font-title);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: var(--terracotta);
-  letter-spacing: 0.05em;
-  margin-top: 2px;
-}
 
 .nav { display: flex; gap: 34px; }
 .nav a {
@@ -758,14 +724,6 @@ body.modal-open { overflow: hidden; }
 .ig-post img { display: block; width: 100%; height: 100%; object-fit: contain; }
 /* Vidéo/reel : remplit la vignette (rognage en hauteur accepté) */
 .ig-post.is-video img { object-fit: cover; }
-.ig-post video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 .ig-post-overlay {
   position: absolute;
   inset: 0;
@@ -946,7 +904,6 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 460px) {
-  .brand-name { font-size: 1.15rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; text-align: center; }
   .hero-review-score { font-size: 2.2rem; }
