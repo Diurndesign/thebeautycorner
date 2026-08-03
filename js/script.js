@@ -350,6 +350,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (ratingStr) {
       const hr = document.getElementById('heroRating');
       if (hr) hr.textContent = ratingStr;
+      const rc = document.getElementById('reviewsCount');
+      if (rc) rc.textContent = total ? (total + ' avis Google') : 'Avis clients Google';
       const note = document.getElementById('reviewsNote');
       if (note) note.textContent = 'Note ' + ratingStr + ' sur Google' + (total ? ' · ' + total + ' avis' : '');
 

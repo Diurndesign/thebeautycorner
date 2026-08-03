@@ -148,8 +148,7 @@
     { title: 'Accueil (Hero)', fields: [
       ['hero.eyebrow', 'Sur-titre', 'input'],
       ['hero.title', 'Titre principal', 'area'],
-      ['hero.tagline', 'Accroche', 'area'],
-      ['hero.stat1label', 'Libellé sous la note (ex : Note clients)', 'input']
+      ['hero.tagline', 'Accroche', 'area']
     ] },
     { title: 'À propos', fields: [
       ['about.eyebrow', 'Sur-titre', 'input'],
