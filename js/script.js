@@ -462,6 +462,20 @@ document.addEventListener('DOMContentLoaded', function () {
         items[curS].classList.add('active'); dots[curS].classList.add('active');
       }
       dots.forEach(function (d, i) { d.addEventListener('click', function () { goToS(i); }); });
+
+      // Hauteur figée sur l'avis le plus grand → plus de saut de mise en page
+      function sizeTrack() {
+        let max = 0;
+        items.forEach(function (it) { max = Math.max(max, it.offsetHeight); });
+        if (max) track.style.height = max + 'px';
+      }
+      sizeTrack();
+      if (window.__baResize) window.removeEventListener('resize', window.__baResize);
+      window.__baResize = sizeTrack;
+      window.addEventListener('resize', sizeTrack, { passive: true });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeTrack);
+      setTimeout(sizeTrack, 400);
+
       if (sectionInterval) clearInterval(sectionInterval);
       if (items.length > 1) sectionInterval = setInterval(function () { goToS((curS + 1) % items.length); }, 6000);
     }
