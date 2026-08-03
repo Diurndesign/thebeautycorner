@@ -119,7 +119,20 @@
     {
       "nom": "Dermopigmentation",
       "description": "Sourcils poil à poil ou powder brows : un maquillage semi-permanent naturel et sur-mesure.",
-      "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Sourcils poudrés", "prix": "350 €", "duree": "2 h" },
+        { "nom": "Hairstroke poil à poil", "prix": "380 €", "duree": "2 h" },
+        { "nom": "Retouche annuelle sourcils (ancienne pigmentation par une autre technicienne)", "prix": "175 €", "duree": "1 h" },
+        { "nom": "Retouche annuelle sourcils", "prix": "150 €", "duree": "1 h" },
+        { "nom": "Blush lips (bouche)", "prix": "400 €", "duree": "2 h" },
+        { "nom": "Retouche annuelle bouche", "prix": "200 €", "duree": "1 h" },
+        { "nom": "Aréole mammaire", "prix": "350 €", "duree": "2 h" },
+        { "nom": "Aréoles mammaires", "prix": "600 €", "duree": "3 h" },
+        { "nom": "Cicatrices", "prix": "Sur devis", "duree": "30 min" },
+        { "nom": "Grain de beauté", "prix": "50 €", "duree": "30 min" },
+        { "nom": "Tache de rousseurs", "prix": "à partir de 120 €", "duree": "45 min" }
+      ]
     },
     {
       "nom": "Ongles",
