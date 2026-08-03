@@ -762,6 +762,11 @@ body.modal-open { overflow: hidden; }
   transition: opacity .35s ease;
 }
 .ig-post:hover .ig-post-overlay { opacity: 1; }
+/* Tuiles de repli (si le flux Behold échoue) : fond de marque + logo visible */
+.ig-post-fallback { background: linear-gradient(135deg, var(--terracotta), var(--brown)); }
+.ig-post-fallback:nth-child(2) { background: linear-gradient(135deg, var(--blue), var(--brown)); }
+.ig-post-fallback:nth-child(3) { background: linear-gradient(135deg, var(--brown), var(--terracotta)); }
+.ig-post-fallback .ig-post-overlay { opacity: 1; background: transparent; }
 .ig-post-video {
   position: absolute;
   top: 10px; right: 10px;

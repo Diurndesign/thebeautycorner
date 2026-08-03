@@ -149,31 +149,5 @@
       "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
     }
   ],
-  "avantApres": [
-    {
-      "categorie": "Dermopigmentation",
-      "avant": "assets/avant-apres/sourcils-avant.jpg",
-      "apres": "assets/avant-apres/sourcils-apres.jpg"
-    },
-    {
-      "categorie": "Rehaussement de cils",
-      "avant": "assets/avant-apres/cils-avant.jpg",
-      "apres": "assets/avant-apres/cils-apres.jpg"
-    },
-    {
-      "categorie": "Ongles",
-      "avant": "assets/avant-apres/ongles-avant.jpg",
-      "apres": "assets/avant-apres/ongles-apres.jpg"
-    },
-    {
-      "categorie": "Soin de la peau",
-      "avant": "assets/avant-apres/peau-avant.jpg",
-      "apres": "assets/avant-apres/peau-apres.jpg"
-    },
-    {
-      "categorie": "Détatouage",
-      "avant": "assets/avant-apres/detatouage-avant.jpg",
-      "apres": "assets/avant-apres/detatouage-apres.jpg"
-    }
-  ]
+  "avantApres": []
 }

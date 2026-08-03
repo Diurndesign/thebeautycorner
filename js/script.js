@@ -87,7 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function renderBeforeAfter(baData) {
     const baSlider = document.getElementById('baSlider');
-    if (!baSlider || !baData || !baData.length) return;
+    if (!baSlider) return;
+    // Aucune donnée (ex. repli hors-ligne) : on masque toute la section
+    // au lieu d'afficher un cadre vide.
+    if (!baData || !baData.length) {
+      const section = document.getElementById('realisations');
+      if (section) section.style.display = 'none';
+      return;
+    }
     const baTabsEl = document.getElementById('baTabs');
     const baBefore = document.getElementById('baBefore');
     const baBeforeImg = document.getElementById('baBeforeImg');
