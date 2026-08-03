@@ -16,7 +16,7 @@
 // ============================================================
 
 const DEFAULT_QUERY = 'The Beauty Corner by Alex, 42 rue Arson, 06300 Nice';
-const FIELDS = 'rating,userRatingCount,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription';
+const FIELDS = 'rating,userRatingCount,googleMapsUri,reviews.rating,reviews.text,reviews.authorAttribution,reviews.relativePublishTimeDescription,reviews.googleMapsUri';
 
 export default async function handler(req, res) {
   const key = process.env.GOOGLE_API_KEY;
@@ -74,7 +74,9 @@ export default async function handler(req, res) {
           auteur: (rv.authorAttribution && rv.authorAttribution.displayName) || 'Client',
           note: rv.rating || 5,
           source: 'Google',
-          date: rv.relativePublishTimeDescription || ''
+          date: rv.relativePublishTimeDescription || '',
+          // Lien direct vers cet avis précis sur Google Maps (repli : la fiche)
+          lien: rv.googleMapsUri || place.googleMapsUri || null
         };
       });
 
@@ -87,6 +89,7 @@ export default async function handler(req, res) {
       ok: true,
       note: typeof place.rating === 'number' ? place.rating : null,
       total: place.userRatingCount || 0,
+      lienFiche: place.googleMapsUri || null,
       avis: avis
     });
   } catch (e) {
