@@ -124,12 +124,31 @@
     {
       "nom": "Ongles",
       "description": "Manucure, pose et sublimation de vos ongles, du soin naturel au semi-permanent.",
-      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Pose complète capsules", "prix": "55 €", "duree": "1 h 30" },
+        { "nom": "Remplissage", "prix": "45 €", "duree": "1 h 10" },
+        { "nom": "Mini remplissage gel (2 semaines)", "prix": "30 €", "duree": "35 min" },
+        { "nom": "Dépose gel (sans remplissage)", "prix": "10 €", "duree": "20 min" },
+        { "nom": "Semi permanent (dépose compris)", "prix": "35 €", "duree": "40 min" },
+        { "nom": "Manucure sans vernis", "prix": "20 €", "duree": "20 min" },
+        { "nom": "Pose de vernis", "prix": "10 €", "duree": "15 min" },
+        { "nom": "Beauté des pieds", "prix": "35 €", "duree": "40 min" },
+        { "nom": "Semi permanent pieds (dépose inclus)", "prix": "30 €", "duree": "30 min" },
+        { "nom": "Beauté des pieds + semi permanent (dépose inclus)", "prix": "45 €", "duree": "45 min" },
+        { "nom": "Déco strass baby boomer", "prix": "5 €", "duree": "15 min" },
+        { "nom": "Déco plus élaborée", "prix": "15 €", "duree": "30 min" }
+      ]
     },
     {
       "nom": "Rehaussement de cils",
       "description": "Un regard intensifié et un effet longue tenue, tout en naturel.",
-      "image": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "image": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Rehaussement de cils sans teinture", "prix": "50 €", "duree": "1 h" },
+        { "nom": "Teinture cils ou sourcils", "prix": "15 €", "duree": "15 min" },
+        { "nom": "Korean Lash Lift avec teinture", "prix": "70 €", "duree": "1 h 10" }
+      ]
     },
     {
       "nom": "Soin de la peau",
