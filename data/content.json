@@ -176,7 +176,7 @@
       ]
     },
     {
-      "nom": "Épilation laser permanente",
+      "nom": "Épilation laser femme",
       "description": "Une solution durable et confortable pour une peau lisse au quotidien.",
       "detail": "Épilation définitive multi-zones (femme), avec un médecin référent qui vous accompagne tout au long du traitement — plus de sérénité et de sécurité, et possibilité d'une crème anesthésiante sur prescription si nécessaire.\nForfaits 6 séances : 2 séances offertes.",
       "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
@@ -194,6 +194,46 @@
         { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières", "prix": "290 €", "duree": "1 h" },
         { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières - forfait 6 séances (2 offertes)", "prix": "1780 €", "duree": "30 min" },
         { "nom": "Bilan préalable", "prix": "Offert", "duree": "15 min" }
+      ]
+    },
+    {
+      "nom": "Épilation laser homme",
+      "description": "Épilation définitive au laser pour homme, zone par zone ou en forfait 6 séances.",
+      "detail": "Épilation définitive au laser (homme), avec un médecin référent qui vous accompagne tout au long du traitement — plus de sérénité et de sécurité, et possibilité d'une crème anesthésiante sur prescription si nécessaire.\nForfaits 6 séances : 2 séances offertes.",
+      "image": "",
+      "formules": [
+        { "nom": "Barbe", "prix": "80 €", "duree": "15 min" },
+        { "nom": "Inter sourcils", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Nuque", "prix": "40 €", "duree": "15 min" },
+        { "nom": "Pommettes", "prix": "30 €", "duree": "10 min" },
+        { "nom": "Tour de cou", "prix": "40 €", "duree": "15 min" },
+        { "nom": "Demi-jambes + pieds", "prix": "100 €", "duree": "30 min" },
+        { "nom": "Jambes complètes + pieds", "prix": "200 €", "duree": "40 min" },
+        { "nom": "Pieds", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Torse", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Ventre", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Haut du dos", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Bas du dos", "prix": "60 €", "duree": "20 min" },
+        { "nom": "Fesses", "prix": "60 €", "duree": "15 min" },
+        { "nom": "Maillot", "prix": "100 €", "duree": "15 min" },
+        { "nom": "Aisselles", "prix": "40 €", "duree": "15 min" },
+        { "nom": "Avant-bras + mains", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Bras entiers + mains", "prix": "100 €", "duree": "40 min" },
+        { "nom": "Mains", "prix": "30 €", "duree": "10 min" },
+        { "nom": "Épaules", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Barbe - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Inter sourcils - forfait 6 séances (2 offertes)", "prix": "100 €", "duree": "30 min" },
+        { "nom": "Nuque - forfait 6 séances (2 offertes)", "prix": "215 €", "duree": "30 min" },
+        { "nom": "Pommettes - forfait 6 séances (2 offertes)", "prix": "160 €", "duree": "30 min" },
+        { "nom": "Tour de cou - forfait 6 séances (2 offertes)", "prix": "215 €", "duree": "30 min" },
+        { "nom": "Demi-jambes + pieds - forfait 6 séances (2 offertes)", "prix": "540 €", "duree": "30 min" },
+        { "nom": "Jambes complètes + pieds - forfait 6 séances (2 offertes)", "prix": "1080 €", "duree": "30 min" },
+        { "nom": "Pieds - forfait 6 séances (2 offertes)", "prix": "100 €", "duree": "30 min" },
+        { "nom": "Torse - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Ventre - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Haut du dos - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Bas du dos - forfait 6 séances (2 offertes)", "prix": "320 €", "duree": "30 min" },
+        { "nom": "Fesses - forfait 6 séances (2 offertes)", "prix": "320 €", "duree": "30 min" }
       ]
     },
     {
