@@ -1019,3 +1019,6 @@ body.modal-open { overflow: hidden; }
 .footer-legal a { color: rgba(246,236,218,0.6); text-decoration: none; transition: color .25s ease; }
 .footer-legal a:hover { color: var(--terracotta); }
 .footer-legal span { color: rgba(246,236,218,0.3); }
+.footer-credit { margin-top: 6px; font-size: 0.72rem; letter-spacing: 0.04em; color: rgba(246,236,218,0.42); }
+.footer-credit a { color: rgba(246,236,218,0.6); text-decoration: none; transition: color .25s ease; }
+.footer-credit a:hover { color: var(--terracotta); }
