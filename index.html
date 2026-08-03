@@ -37,7 +37,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260803j" />
+  <link rel="stylesheet" href="css/style.css?v=20260803k" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -95,6 +95,22 @@
     }
   }
   </script>
+
+  <!-- Données structurées FAQ (rich results Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Combien de temps dure une séance ?", "acceptedAnswer": { "@type": "Answer", "text": "Selon la prestation, comptez de 30 min (pose d'ongles) à environ 2 h (dermopigmentation complète). La durée exacte vous est précisée lors de la prise de rendez-vous." } },
+      { "@type": "Question", "name": "La dermopigmentation, est-ce douloureux ?", "acceptedAnswer": { "@type": "Answer", "text": "L'inconfort est minime : une crème anesthésiante est appliquée pour votre confort. La plupart des clientes décrivent une simple sensation de picotement." } },
+      { "@type": "Question", "name": "Combien de temps tient la dermopigmentation ?", "acceptedAnswer": { "@type": "Answer", "text": "En moyenne 1 à 3 ans, selon votre peau, votre mode de vie et l'entretien. Une retouche annuelle permet de conserver un résultat impeccable." } },
+      { "@type": "Question", "name": "Une retouche est-elle nécessaire ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui, une retouche est généralement conseillée 4 à 6 semaines après la première séance, pour un rendu optimal et durable." } },
+      { "@type": "Question", "name": "Comment prendre rendez-vous ?", "acceptedAnswer": { "@type": "Answer", "text": "En ligne, en quelques clics, via Planity. Pour toute question, n'hésitez pas à nous contacter directement." } },
+      { "@type": "Question", "name": "Où se trouve le salon ?", "acceptedAnswer": { "@type": "Answer", "text": "Au sein du studio de tatouage Frères d'encre, 42 rue Arson, 06300 Nice." } }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -132,6 +148,7 @@
 
   <!-- ================= HERO ================= -->
   <section class="hero" id="accueil">
+    <div class="hero-bg" id="heroBg"></div>
     <div class="hero-overlay"></div>
 
     <div class="container hero-content">
@@ -294,20 +311,62 @@
            Les 3 tuiles ci-dessous servent de repli si le flux échoue. -->
       <div class="ig-feed" id="igFeed">
         <div class="ig-preview" id="igPreview" aria-label="Dernières publications Instagram">
-          <a class="ig-post ig-post-fallback" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" aria-label="Voir sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
-          </a>
-          <a class="ig-post ig-post-fallback" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" aria-label="Voir sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
-          </a>
-          <a class="ig-post ig-post-fallback" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" aria-label="Voir sur Instagram">
-            <span class="ig-post-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg></span>
-          </a>
+          <div class="ig-skeleton" aria-hidden="true"></div>
+          <div class="ig-skeleton" aria-hidden="true"></div>
+          <div class="ig-skeleton" aria-hidden="true"></div>
         </div>
       </div>
 
       <div class="center ig-cta">
         <a href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" class="btn btn-blue">Suivre sur Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CARTE CADEAU ================= -->
+  <section class="giftcard" id="giftcard">
+    <div class="container giftcard-inner">
+      <div class="giftcard-text">
+        <p class="section-eyebrow" data-txt="giftcard.eyebrow">Idée cadeau</p>
+        <h2 data-txt="giftcard.title">Offrez un moment de beauté</h2>
+        <p data-txt="giftcard.text">La carte cadeau The Beauty Corner : un joli présent pour toute prestation, à offrir à celles et ceux que vous aimez.</p>
+      </div>
+      <a href="#contact" class="btn btn-blue giftcard-btn">Demander une carte cadeau</a>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-head center">
+        <p class="section-eyebrow">Questions fréquentes</p>
+        <h2>Vos questions, nos réponses</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Combien de temps dure une séance ?</summary>
+          <div class="faq-a">Selon la prestation, comptez de 30&nbsp;min (pose d'ongles) à environ 2&nbsp;h (dermopigmentation complète). La durée exacte vous est précisée lors de la prise de rendez-vous.</div>
+        </details>
+        <details class="faq-item">
+          <summary>La dermopigmentation, est-ce douloureux ?</summary>
+          <div class="faq-a">L'inconfort est minime&nbsp;: une crème anesthésiante est appliquée pour votre confort. La plupart des clientes décrivent une simple sensation de picotement.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Combien de temps tient la dermopigmentation ?</summary>
+          <div class="faq-a">En moyenne 1 à 3 ans, selon votre peau, votre mode de vie et l'entretien. Une retouche annuelle permet de conserver un résultat impeccable.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Une retouche est-elle nécessaire ?</summary>
+          <div class="faq-a">Oui, une retouche est généralement conseillée 4 à 6 semaines après la première séance, pour un rendu optimal et durable.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Comment prendre rendez-vous ?</summary>
+          <div class="faq-a">En ligne, en quelques clics, via Planity (bouton «&nbsp;Prendre rendez-vous&nbsp;»). Pour toute question, n'hésitez pas à nous contacter directement.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Où se trouve le salon ?</summary>
+          <div class="faq-a">Au sein du studio de tatouage Frères d'encre, 42 rue Arson, 06300 Nice.</div>
+        </details>
       </div>
     </div>
   </section>
@@ -340,6 +399,13 @@
             </span>
           </li>
         </ul>
+
+        <div class="contact-map">
+          <iframe
+            title="Localisation du salon The Beauty Corner à Nice"
+            src="https://maps.google.com/maps?q=42%20rue%20Arson%2C%2006300%20Nice&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            width="100%" height="240" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
 
       <form class="contact-form" id="contactForm" novalidate>
@@ -383,6 +449,7 @@
         <a href="#prestations">Prestations</a>
         <a href="#realisations">Réalisations</a>
         <a href="#avis">Avis</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
       </nav>
 
@@ -393,6 +460,11 @@
       <p class="footer-copy">© 2026 The Beauty Corner by Alex — Nice</p>
     </div>
   </footer>
+
+  <!-- Barre de réservation fixe (mobile uniquement) -->
+  <div class="mobile-book-bar">
+    <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue btn-block">Prendre rendez-vous</a>
+  </div>
 
   <!-- ================= MODAL EXPÉRIENCE ================= -->
   <div class="exp-modal" id="expModal" role="dialog" aria-modal="true" aria-labelledby="expModalTitle" hidden>
@@ -411,6 +483,6 @@
   </div>
 
   <script src="js/config.js?v=20260801b"></script>
-  <script src="js/script.js?v=20260803g"></script>
+  <script src="js/script.js?v=20260803h"></script>
 </body>
 </html>
