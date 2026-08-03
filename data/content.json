@@ -178,7 +178,23 @@
     {
       "nom": "Épilation laser permanente",
       "description": "Une solution durable et confortable pour une peau lisse au quotidien.",
-      "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "detail": "Épilation définitive multi-zones (femme), avec un médecin référent qui vous accompagne tout au long du traitement — plus de sérénité et de sécurité, et possibilité d'une crème anesthésiante sur prescription si nécessaire.\nForfaits 6 séances : 2 séances offertes.",
+      "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Aisselles + maillot classique", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Aisselles + maillot classique - forfait 6 séances (2 offertes)", "prix": "350 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif", "prix": "110 €", "duree": "35 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif - forfait 6 séances (2 offertes)", "prix": "650 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot classique + demi-jambes", "prix": "180 €", "duree": "45 min" },
+        { "nom": "Aisselles + maillot classique + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1070 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes", "prix": "210 €", "duree": "55 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1250 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot classique + jambes entières", "prix": "260 €", "duree": "55 min" },
+        { "nom": "Aisselles + maillot classique + jambes entières - forfait 6 séances (2 offertes)", "prix": "1550 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières", "prix": "290 €", "duree": "1 h" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières - forfait 6 séances (2 offertes)", "prix": "1780 €", "duree": "30 min" },
+        { "nom": "Bilan préalable", "prix": "Offert", "duree": "15 min" }
+      ]
     },
     {
       "nom": "Épilation à la cire",
