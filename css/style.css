@@ -293,8 +293,8 @@ section { padding: 100px 0; }
 .hero-review-meta { display: flex; flex-direction: column; gap: 5px; }
 .hero-review .stars { color: var(--terracotta); letter-spacing: 3px; font-size: 0.95rem; }
 .hero-review-count { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(246, 236, 218, 0.72); }
-.hero-review p { font-family: var(--font-title); font-style: italic; font-size: 1.1rem; line-height: 1.45; margin-bottom: 14px; transition: opacity .25s ease; }
-.hero-review cite { font-style: normal; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,236,218,0.75); transition: opacity .25s ease; }
+.hero-review p { font-family: var(--font-title); font-style: italic; font-size: 1.1rem; line-height: 1.45; margin-bottom: 14px; transition: opacity .45s ease; will-change: opacity; transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.hero-review cite { font-style: normal; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,236,218,0.75); transition: opacity .45s ease; will-change: opacity; transform: translateZ(0); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .hero-review.is-fading p, .hero-review.is-fading cite { opacity: 0; }
 
 /* ============================================================
