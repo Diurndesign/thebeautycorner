@@ -37,7 +37,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260803q" />
+  <link rel="stylesheet" href="css/style.css?v=20260803r" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -488,7 +488,17 @@
     </div>
   </div>
 
+  <!-- ================= MODAL PRESTATION (formules) ================= -->
+  <div class="exp-modal" id="prestaModal" role="dialog" aria-modal="true" aria-labelledby="prestaModalTitle" hidden>
+    <div class="exp-modal-overlay" data-presta-close></div>
+    <div class="exp-modal-panel" role="document">
+      <button class="exp-modal-close" type="button" data-presta-close aria-label="Fermer">×</button>
+      <!-- Contenu généré depuis les prestations (Supabase / content.json) -->
+      <div id="prestaModalBody"></div>
+    </div>
+  </div>
+
   <script src="js/config.js?v=20260801b"></script>
-  <script src="js/script.js?v=20260803l"></script>
+  <script src="js/script.js?v=20260803m"></script>
 </body>
 </html>
