@@ -277,6 +277,8 @@ section { padding: 100px 0; }
 
 .hero-stats { display: flex; gap: 46px; }
 .stat { text-align: center; }
+/* Note seule : alignée sur le bord droit de la carte avis (même colonne) */
+.hero-bottom-inner .stat { text-align: right; }
 .stat .num { display: block; font-family: var(--font-title); font-size: 2.1rem; line-height: 1; color: var(--cream); }
 .stat .label { display: block; margin-top: 8px; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,236,218,0.7); }
 
@@ -912,6 +914,7 @@ body.modal-open { overflow: hidden; }
   .hero-review { align-self: center; margin-bottom: 0; max-width: 420px; }
   .hero-bottom { margin-top: 52px; }
   .hero-bottom-inner { flex-direction: column; align-items: center; gap: 26px; }
+  .hero-bottom-inner .stat { text-align: center; }
   .hero-stats { gap: 32px; }
 }
 

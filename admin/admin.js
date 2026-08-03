@@ -149,11 +149,7 @@
       ['hero.eyebrow', 'Sur-titre', 'input'],
       ['hero.title', 'Titre principal', 'area'],
       ['hero.tagline', 'Accroche', 'area'],
-      ['hero.stat1label', 'Statistique 1 — libellé', 'input'],
-      ['hero.stat2num', 'Statistique 2 — valeur', 'input'],
-      ['hero.stat2label', 'Statistique 2 — libellé', 'input'],
-      ['hero.stat3num', 'Statistique 3 — valeur', 'input'],
-      ['hero.stat3label', 'Statistique 3 — libellé', 'input']
+      ['hero.stat1label', 'Libellé sous la note (ex : Note clients)', 'input']
     ] },
     { title: 'À propos', fields: [
       ['about.eyebrow', 'Sur-titre', 'input'],
