@@ -49,6 +49,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* ---------- Apparition des sections au scroll ---------- */
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    const sel = '.section-head, .about-grid, .prestations-grid, .experience-card, .ba-tabs, .ba-slider, .testimonials-content, .ig-feed, .giftcard-inner, .faq-list, .contact-grid';
+    const els = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!els.length) return;
+    els.forEach(function (el) { el.classList.add('reveal'); });
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
   /* ---------- Contenu dynamique chargé depuis data/content.json ----------
      (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
      fichier, puis le site se redéploie et affiche les nouvelles images.) */
@@ -66,11 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
           '<div class="presta-cell-head">' +
             '<h3 class="presta-name"></h3>' +
             '<p class="presta-desc"></p>' +
+            '<p class="presta-price"></p>' +
           '</div>' +
           '<a class="presta-reserve" href="' + planity + '" target="_blank" rel="noopener">Réserver <span aria-hidden="true">→</span></a>' +
         '</div>';
       art.querySelector('.presta-name').textContent = item.nom || '';
       art.querySelector('.presta-desc').textContent = item.description || '';
+      const priceEl = art.querySelector('.presta-price');
+      if (item.prix) priceEl.textContent = item.prix; else priceEl.style.display = 'none';
       if (item.image) art.querySelector('.presta-cell-img').style.backgroundImage = "url('" + item.image + "')";
       prestaGrid.appendChild(art);
     });
@@ -177,10 +195,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const IG_SVG = '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.15" fill="currentColor" stroke="none"/></svg>';
     const PLAY_SVG = '<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
 
+    // Repli : 3 tuiles de marque (si le flux Behold échoue ou est vide)
+    function showIgFallback() {
+      const a = '<a class="ig-post ig-post-fallback" href="https://www.instagram.com/thebeautycorner.byalex" target="_blank" rel="noopener" aria-label="Voir sur Instagram"><span class="ig-post-overlay" aria-hidden="true">' + IG_SVG + '</span></a>';
+      igPreview.innerHTML = a + a + a;
+    }
+
     fetch(BEHOLD_FEED, { cache: 'no-cache' })
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        if (!data) return;
+        if (!data) { showIgFallback(); return; }
 
         // Nombre d'abonnés
         if (typeof data.followersCount === 'number') {
@@ -189,9 +213,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const posts = (data.posts || []).slice(0, 3);
-        if (!posts.length) return;
+        if (!posts.length) { showIgFallback(); return; }
 
-        // Remplace les vignettes de repli par les vrais posts
+        // Remplace les squelettes par les vrais posts
         igPreview.innerHTML = '';
         posts.forEach(function (post) {
           const img = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl) || post.thumbnailUrl || post.mediaUrl;
@@ -227,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
           igPreview.appendChild(a);
         });
       })
-      .catch(function () { /* repli statique conservé */ });
+      .catch(function () { showIgFallback(); });
   })();
 
   // Contenu du site : d'abord Supabase (base de données éditable via l'admin),
@@ -258,8 +282,8 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelectorAll('[data-planity]').forEach(function (a) { a.href = planity; });
 
       if (content.heroImage) {
-        const hero = document.getElementById('accueil');
-        if (hero) hero.style.backgroundImage = "url('" + content.heroImage + "')";
+        const heroBg = document.getElementById('heroBg');
+        if (heroBg) heroBg.style.backgroundImage = "url('" + content.heroImage + "')";
       }
       if (content.aboutImage) {
         const aboutImg = document.getElementById('aboutImg');

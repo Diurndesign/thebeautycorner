@@ -190,16 +190,25 @@ section { padding: 100px 0; }
   align-items: center;
   color: var(--cream);
   background-color: var(--brown);
+  overflow: hidden;
+  padding-top: var(--header-h);
+}
+/* Calque image de fond animé (léger zoom continu « Ken Burns ») */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
   background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding-top: var(--header-h);
+  animation: heroZoom 22s ease-in-out infinite alternate;
+  will-change: transform;
 }
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.09); } }
 .hero-overlay {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(120deg, rgba(58,47,43,0.72) 0%, rgba(129,94,84,0.55) 55%, rgba(88,125,141,0.45) 100%);
 }
+@media (prefers-reduced-motion: reduce) { .hero-bg { animation: none; } }
 /* hero devient une colonne : contenu centré + barre d'infos en bas */
 .hero { flex-direction: column; align-items: stretch; }
 
@@ -939,3 +948,72 @@ body.modal-open { overflow: hidden; }
   .hero-actions .btn { width: 100%; text-align: center; }
   .hero-review-score { font-size: 2.2rem; }
 }
+
+/* ============================================================
+   AMÉLIORATIONS : carte cadeau, FAQ, carte, barre mobile, reveal
+   ============================================================ */
+
+/* Apparition au scroll (sections) */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* Carte cadeau */
+.giftcard { background: var(--brown); color: var(--cream); padding: 64px 0; }
+.giftcard-inner { display: flex; align-items: center; justify-content: space-between; gap: 34px; flex-wrap: wrap; }
+.giftcard-text { max-width: 620px; }
+.giftcard .section-eyebrow { color: var(--terracotta); }
+.giftcard h2 { color: var(--cream); font-size: clamp(1.7rem, 3.4vw, 2.6rem); margin-bottom: 12px; }
+.giftcard p { color: rgba(246,236,218,0.9); }
+.giftcard-btn { flex-shrink: 0; }
+@media (max-width: 700px) { .giftcard-inner { flex-direction: column; align-items: flex-start; } }
+
+/* FAQ (accordéon natif) */
+.faq { background: var(--cream); }
+.faq-list { max-width: 760px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid rgba(129,94,84,0.18); }
+.faq-item summary {
+  list-style: none; cursor: pointer; position: relative;
+  padding: 22px 44px 22px 0;
+  font-family: var(--font-title); font-size: 1.15rem; color: var(--dark);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+  font-size: 1.5rem; color: var(--terracotta); transition: transform .25s ease;
+}
+.faq-item[open] summary::after { content: '–'; }
+.faq-item summary:hover { color: var(--terracotta); }
+.faq-a { padding: 0 44px 24px 0; color: var(--text); line-height: 1.7; }
+
+/* Carte Google (Contact) */
+.contact-map { margin-top: 28px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); }
+.contact-map iframe { display: block; filter: grayscale(0.15); }
+
+/* Barre de réservation fixe (mobile) */
+.mobile-book-bar { display: none; }
+@media (max-width: 760px) {
+  .mobile-book-bar {
+    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: rgba(251,246,236,0.94);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(129,94,84,0.15);
+    box-shadow: 0 -6px 24px rgba(58,47,43,0.14);
+  }
+  .mobile-book-bar .btn { margin: 0; }
+  body { padding-bottom: 74px; }
+}
+
+/* Squelettes de chargement Instagram (shimmer) */
+.ig-skeleton {
+  aspect-ratio: 4 / 5; border-radius: var(--radius);
+  background: linear-gradient(100deg, #efe6d6 30%, #f8f1e5 50%, #efe6d6 70%);
+  background-size: 200% 100%; animation: igShimmer 1.3s ease-in-out infinite;
+}
+@keyframes igShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .ig-skeleton { animation: none; } }
+
+/* Prix indicatif sur les cartes prestations (optionnel) */
+.presta-price { margin-top: 8px; font-family: var(--font-title); font-size: 1.05rem; color: var(--terracotta); transition: color .4s ease; }
+.presta-cell.is-open .presta-price { color: var(--cream); }
