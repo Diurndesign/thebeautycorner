@@ -233,7 +233,14 @@
         { "nom": "Ventre - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
         { "nom": "Haut du dos - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
         { "nom": "Bas du dos - forfait 6 séances (2 offertes)", "prix": "320 €", "duree": "30 min" },
-        { "nom": "Fesses - forfait 6 séances (2 offertes)", "prix": "320 €", "duree": "30 min" }
+        { "nom": "Fesses - forfait 6 séances (2 offertes)", "prix": "320 €", "duree": "30 min" },
+        { "nom": "Maillot - forfait 6 séances (2 offertes)", "prix": "540 €", "duree": "30 min" },
+        { "nom": "Aisselles - forfait 6 séances (2 offertes)", "prix": "215 €", "duree": "30 min" },
+        { "nom": "Avant-bras + mains - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Bras entiers + mains - forfait 6 séances (2 offertes)", "prix": "540 €", "duree": "30 min" },
+        { "nom": "Mains - forfait 6 séances (2 offertes)", "prix": "160 €", "duree": "30 min" },
+        { "nom": "Épaules - forfait 6 séances (2 offertes)", "prix": "430 €", "duree": "30 min" },
+        { "nom": "Bilan préalable", "prix": "Offert", "duree": "15 min" }
       ]
     },
     {
