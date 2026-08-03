@@ -80,16 +80,18 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderPrestations(data, planity) {
     const prestaGrid = document.getElementById('prestationsGrid');
     if (!prestaGrid || !data || !data.length) return;
+    prestaGrid.innerHTML = '';   // rendu idempotent : on repart d'une grille vide
 
     // Clic sur une prestation : ouvre le modal des formules si elles existent,
     // sinon renvoie directement sur Planity (dégradation propre).
     function openAction(item) {
-      if (item.formules && item.formules.length) openPrestaModal(item, planity);
-      else window.open(planity, '_blank', 'noopener');
+      if ((item.formules && item.formules.length) || item.detail) openPrestaModal(item, planity);
+      else window.open(item.bookHref || planity, '_blank', 'noopener');
     }
 
     data.forEach(function (item, i) {
       const hasFormules = !!(item.formules && item.formules.length);
+      const btnLabel = item.cardLabel || (hasFormules ? 'Voir les formules' : 'Réserver');
       const art = document.createElement('article');
       art.className = 'presta-cell';
       art.innerHTML =
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             '<p class="presta-desc"></p>' +
             '<p class="presta-price"></p>' +
           '</div>' +
-          '<button class="presta-reserve" type="button">' + (hasFormules ? 'Voir les formules' : 'Réserver') + ' <span aria-hidden="true">→</span></button>' +
+          '<button class="presta-reserve" type="button">' + btnLabel + ' <span aria-hidden="true">→</span></button>' +
         '</div>';
       art.querySelector('.presta-name').textContent = item.nom || '';
       art.querySelector('.presta-desc').textContent = item.description || '';
@@ -673,6 +675,11 @@ document.addEventListener('DOMContentLoaded', function () {
           (f.duree ? '<span class="pf-duree">' + escHtml(f.duree) + '</span>' : '') +
         '</div></div>';
     }).join('');
+    // Bouton d'action : par défaut « Réserver sur Planity », ou un bouton
+    // personnalisé (ex. appel téléphonique) si la prestation le définit.
+    const bookHref = item.bookHref || planity;
+    const bookLabel = item.bookLabel || 'Réserver sur Planity';
+    const bookTarget = item.bookHref ? '' : ' target="_blank" rel="noopener"';
     body.innerHTML =
       '<header class="presta-modal-head">' +
         '<p class="exp-eyebrow">Prestation</p>' +
@@ -681,7 +688,7 @@ document.addEventListener('DOMContentLoaded', function () {
       '</header>' +
       '<div class="presta-formules">' + rows + '</div>' +
       '<div class="exp-modal-actions">' +
-        '<a class="btn btn-blue" href="' + planity + '" target="_blank" rel="noopener">Réserver sur Planity</a>' +
+        '<a class="btn btn-blue" href="' + bookHref + '"' + bookTarget + '>' + escHtml(bookLabel) + '</a>' +
       '</div>';
     prestaLastFocus = document.activeElement;
     prestaModal.hidden = false;

@@ -94,9 +94,18 @@
     "beautyTitle": "La parenthèse beauté personnalisée",
     "beautyLead": "Chaque participante choisit l'un de ces soins :",
     "choices": [
-      { "name": "Rituel Éclat", "desc": "Nettoyage de peau & massage du visage" },
-      { "name": "Pause Douceur", "desc": "Manucure & massage des mains" },
-      { "name": "Regard Sublimé", "desc": "Épilation & teinture des sourcils" }
+      {
+        "name": "Rituel Éclat",
+        "desc": "Nettoyage de peau & massage du visage"
+      },
+      {
+        "name": "Pause Douceur",
+        "desc": "Manucure & massage des mains"
+      },
+      {
+        "name": "Regard Sublimé",
+        "desc": "Épilation & teinture des sourcils"
+      }
     ],
     "tattoo": "Option tatouage souvenir (facultative) : avec les artistes Frères d'Encre — tatouage flash ou projet personnalisé, réalisé et réglé directement auprès du tatoueur.",
     "conditionsTitle": "Conditions de réservation",
@@ -117,100 +126,18 @@
   },
   "prestations": [
     {
-      "nom": "Dermopigmentation",
-      "description": "Sourcils poil à poil ou powder brows : un maquillage semi-permanent naturel et sur-mesure.",
-      "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "nom": "Détatouage",
+      "description": "Effacement progressif de vos tatouages, en toute sécurité et en douceur.",
+      "detail": "Détatouage au laser sous supervision médicale — prévoir un bilan minimum 48h avant la première séance.\nLe protocole varie selon la taille, la couleur, la densité et la profondeur du tatouage, ainsi que l'immunité de chacun. Pour une atténuation optimale, il est recommandé de prévoir 8 à 12 séances espacées de 8 semaines.",
+      "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
       "formules": [
-        { "nom": "Sourcils poudrés", "prix": "350 €", "duree": "2 h" },
-        { "nom": "Hairstroke poil à poil", "prix": "380 €", "duree": "2 h" },
-        { "nom": "Retouche annuelle sourcils (ancienne pigmentation par une autre technicienne)", "prix": "175 €", "duree": "1 h" },
-        { "nom": "Retouche annuelle sourcils", "prix": "150 €", "duree": "1 h" },
-        { "nom": "Blush lips (bouche)", "prix": "400 €", "duree": "2 h" },
-        { "nom": "Retouche annuelle bouche", "prix": "200 €", "duree": "1 h" },
-        { "nom": "Aréole mammaire", "prix": "350 €", "duree": "2 h" },
-        { "nom": "Aréoles mammaires", "prix": "600 €", "duree": "3 h" },
-        { "nom": "Cicatrices", "prix": "Sur devis", "duree": "30 min" },
-        { "nom": "Grain de beauté", "prix": "50 €", "duree": "30 min" },
-        { "nom": "Tache de rousseurs", "prix": "à partir de 120 €", "duree": "45 min" }
-      ]
-    },
-    {
-      "nom": "Ongles",
-      "description": "Manucure, pose et sublimation de vos ongles, du soin naturel au semi-permanent.",
-      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
-      "formules": [
-        { "nom": "Pose complète capsules", "prix": "55 €", "duree": "1 h 30" },
-        { "nom": "Remplissage", "prix": "45 €", "duree": "1 h 10" },
-        { "nom": "Mini remplissage gel (2 semaines)", "prix": "30 €", "duree": "35 min" },
-        { "nom": "Dépose gel (sans remplissage)", "prix": "10 €", "duree": "20 min" },
-        { "nom": "Semi permanent (dépose compris)", "prix": "35 €", "duree": "40 min" },
-        { "nom": "Manucure sans vernis", "prix": "20 €", "duree": "20 min" },
-        { "nom": "Pose de vernis", "prix": "10 €", "duree": "15 min" },
-        { "nom": "Beauté des pieds", "prix": "35 €", "duree": "40 min" },
-        { "nom": "Semi permanent pieds (dépose inclus)", "prix": "30 €", "duree": "30 min" },
-        { "nom": "Beauté des pieds + semi permanent (dépose inclus)", "prix": "45 €", "duree": "45 min" },
-        { "nom": "Déco strass baby boomer", "prix": "5 €", "duree": "15 min" },
-        { "nom": "Déco plus élaborée", "prix": "15 €", "duree": "30 min" }
-      ]
-    },
-    {
-      "nom": "Rehaussement de cils",
-      "description": "Un regard intensifié et un effet longue tenue, tout en naturel.",
-      "image": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
-      "formules": [
-        { "nom": "Rehaussement de cils sans teinture", "prix": "50 €", "duree": "1 h" },
-        { "nom": "Teinture cils ou sourcils", "prix": "15 €", "duree": "15 min" },
-        { "nom": "Korean Lash Lift avec teinture", "prix": "70 €", "duree": "1 h 10" }
-      ]
-    },
-    {
-      "nom": "Soin de la peau",
-      "description": "Des soins du visage sur-mesure pour une peau nette, hydratée et éclatante.",
-      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
-      "formules": [
-        { "nom": "Soin visage bonne mine — nettoyage de peau, désincrustation des pores", "prix": "70 €", "duree": "45 min" },
-        { "nom": "Soin spécifique Homme — un soin complet, pensé pour eux", "prix": "80 €", "duree": "1 h" },
-        { "nom": "Bilan California Care", "prix": "24 €", "duree": "20 min" },
-        { "nom": "California Care — sous supervision médicale, après le bilan associé", "prix": "100 €", "duree": "1 h" },
-        { "nom": "Soin signature by Alex — combinaison de plusieurs techniques en un seul soin", "prix": "150 €", "duree": "1 h 15" }
-      ]
-    },
-    {
-      "nom": "Épilation laser femme",
-      "description": "Une solution durable et confortable pour une peau lisse au quotidien.",
-      "detail": "Épilation définitive multi-zones (femme), avec un médecin référent qui vous accompagne tout au long du traitement — plus de sérénité et de sécurité, et possibilité d'une crème anesthésiante sur prescription si nécessaire.\nForfaits 6 séances : 2 séances offertes.",
-      "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
-      "formules": [
-        { "nom": "Inter sourcils", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Lèvre supérieure", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Menton", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Pattes", "prix": "30 €", "duree": "10 min" },
-        { "nom": "Demi-jambes + pieds", "prix": "100 €", "duree": "20 min" },
-        { "nom": "Jambes entières + pieds", "prix": "180 €", "duree": "30 min" },
-        { "nom": "Cuisses", "prix": "120 €", "duree": "20 min" },
-        { "nom": "Pieds", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Maillot classique", "prix": "50 €", "duree": "10 min" },
-        { "nom": "Maillot échancré ou intégral + sif", "prix": "80 €", "duree": "25 min" },
-        { "nom": "Aréoles mammaires", "prix": "30 €", "duree": "10 min" },
-        { "nom": "Bas du dos", "prix": "40 €", "duree": "10 min" },
-        { "nom": "Ligne ventre", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Aisselles", "prix": "30 €", "duree": "10 min" },
-        { "nom": "Avant-bras + mains", "prix": "80 €", "duree": "20 min" },
-        { "nom": "Bras entiers", "prix": "120 €", "duree": "35 min" },
-        { "nom": "Mains", "prix": "20 €", "duree": "10 min" },
-        { "nom": "Aisselles + maillot classique", "prix": "80 €", "duree": "20 min" },
-        { "nom": "Aisselles + maillot classique - forfait 6 séances (2 offertes)", "prix": "350 €", "duree": "30 min" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif", "prix": "110 €", "duree": "35 min" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif - forfait 6 séances (2 offertes)", "prix": "650 €", "duree": "30 min" },
-        { "nom": "Aisselles + maillot classique + demi-jambes", "prix": "180 €", "duree": "45 min" },
-        { "nom": "Aisselles + maillot classique + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1070 €", "duree": "30 min" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes", "prix": "210 €", "duree": "55 min" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1250 €", "duree": "30 min" },
-        { "nom": "Aisselles + maillot classique + jambes entières", "prix": "260 €", "duree": "55 min" },
-        { "nom": "Aisselles + maillot classique + jambes entières - forfait 6 séances (2 offertes)", "prix": "1550 €", "duree": "30 min" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières", "prix": "290 €", "duree": "1 h" },
-        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières - forfait 6 séances (2 offertes)", "prix": "1780 €", "duree": "30 min" },
-        { "nom": "Bilan préalable", "prix": "Offert", "duree": "15 min" }
+        { "nom": "Détatouage XS — moins de 5 cm²", "prix": "50 €", "duree": "15 min" },
+        { "nom": "Détatouage S — 5 à 15 cm²", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Détatouage M — 16 à 50 cm²", "prix": "120 €", "duree": "35 min" },
+        { "nom": "Détatouage L — 51 à 100 cm²", "prix": "160 €", "duree": "40 min" },
+        { "nom": "Détatouage XL — 101 à 200 cm²", "prix": "200 €", "duree": "45 min" },
+        { "nom": "Détatouage sourcils", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Bilan validation médicale (48h avant)", "prix": "24 €", "duree": "30 min" }
       ]
     },
     {
@@ -261,6 +188,91 @@
       ]
     },
     {
+      "nom": "Épilation laser femme",
+      "description": "Une solution durable et confortable pour une peau lisse au quotidien.",
+      "detail": "Épilation définitive multi-zones (femme), avec un médecin référent qui vous accompagne tout au long du traitement — plus de sérénité et de sécurité, et possibilité d'une crème anesthésiante sur prescription si nécessaire.\nForfaits 6 séances : 2 séances offertes.",
+      "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Inter sourcils", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Lèvre supérieure", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Menton", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Pattes", "prix": "30 €", "duree": "10 min" },
+        { "nom": "Demi-jambes + pieds", "prix": "100 €", "duree": "20 min" },
+        { "nom": "Jambes entières + pieds", "prix": "180 €", "duree": "30 min" },
+        { "nom": "Cuisses", "prix": "120 €", "duree": "20 min" },
+        { "nom": "Pieds", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Maillot classique", "prix": "50 €", "duree": "10 min" },
+        { "nom": "Maillot échancré ou intégral + sif", "prix": "80 €", "duree": "25 min" },
+        { "nom": "Aréoles mammaires", "prix": "30 €", "duree": "10 min" },
+        { "nom": "Bas du dos", "prix": "40 €", "duree": "10 min" },
+        { "nom": "Ligne ventre", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Aisselles", "prix": "30 €", "duree": "10 min" },
+        { "nom": "Avant-bras + mains", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Bras entiers", "prix": "120 €", "duree": "35 min" },
+        { "nom": "Mains", "prix": "20 €", "duree": "10 min" },
+        { "nom": "Aisselles + maillot classique", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Aisselles + maillot classique - forfait 6 séances (2 offertes)", "prix": "350 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif", "prix": "110 €", "duree": "35 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif - forfait 6 séances (2 offertes)", "prix": "650 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot classique + demi-jambes", "prix": "180 €", "duree": "45 min" },
+        { "nom": "Aisselles + maillot classique + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1070 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes", "prix": "210 €", "duree": "55 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + demi-jambes - forfait 6 séances (2 offertes)", "prix": "1250 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot classique + jambes entières", "prix": "260 €", "duree": "55 min" },
+        { "nom": "Aisselles + maillot classique + jambes entières - forfait 6 séances (2 offertes)", "prix": "1550 €", "duree": "30 min" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières", "prix": "290 €", "duree": "1 h" },
+        { "nom": "Aisselles + maillot échancré ou intégral + sif + jambes entières - forfait 6 séances (2 offertes)", "prix": "1780 €", "duree": "30 min" },
+        { "nom": "Bilan préalable", "prix": "Offert", "duree": "15 min" }
+      ]
+    },
+    {
+      "nom": "Ongles",
+      "description": "Manucure, pose et sublimation de vos ongles, du soin naturel au semi-permanent.",
+      "image": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Pose complète capsules", "prix": "55 €", "duree": "1 h 30" },
+        { "nom": "Remplissage", "prix": "45 €", "duree": "1 h 10" },
+        { "nom": "Mini remplissage gel (2 semaines)", "prix": "30 €", "duree": "35 min" },
+        { "nom": "Dépose gel (sans remplissage)", "prix": "10 €", "duree": "20 min" },
+        { "nom": "Semi permanent (dépose compris)", "prix": "35 €", "duree": "40 min" },
+        { "nom": "Manucure sans vernis", "prix": "20 €", "duree": "20 min" },
+        { "nom": "Pose de vernis", "prix": "10 €", "duree": "15 min" },
+        { "nom": "Beauté des pieds", "prix": "35 €", "duree": "40 min" },
+        { "nom": "Semi permanent pieds (dépose inclus)", "prix": "30 €", "duree": "30 min" },
+        { "nom": "Beauté des pieds + semi permanent (dépose inclus)", "prix": "45 €", "duree": "45 min" },
+        { "nom": "Déco strass baby boomer", "prix": "5 €", "duree": "15 min" },
+        { "nom": "Déco plus élaborée", "prix": "15 €", "duree": "30 min" }
+      ]
+    },
+    {
+      "nom": "Rehaussement de cils",
+      "description": "Un regard intensifié et un effet longue tenue, tout en naturel.",
+      "image": "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Rehaussement de cils sans teinture", "prix": "50 €", "duree": "1 h" },
+        { "nom": "Teinture cils ou sourcils", "prix": "15 €", "duree": "15 min" },
+        { "nom": "Korean Lash Lift avec teinture", "prix": "70 €", "duree": "1 h 10" }
+      ]
+    },
+    {
+      "nom": "Dermopigmentation",
+      "description": "Sourcils poil à poil ou powder brows : un maquillage semi-permanent naturel et sur-mesure.",
+      "image": "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Sourcils poudrés", "prix": "350 €", "duree": "2 h" },
+        { "nom": "Hairstroke poil à poil", "prix": "380 €", "duree": "2 h" },
+        { "nom": "Retouche annuelle sourcils (ancienne pigmentation par une autre technicienne)", "prix": "175 €", "duree": "1 h" },
+        { "nom": "Retouche annuelle sourcils", "prix": "150 €", "duree": "1 h" },
+        { "nom": "Blush lips (bouche)", "prix": "400 €", "duree": "2 h" },
+        { "nom": "Retouche annuelle bouche", "prix": "200 €", "duree": "1 h" },
+        { "nom": "Aréole mammaire", "prix": "350 €", "duree": "2 h" },
+        { "nom": "Aréoles mammaires", "prix": "600 €", "duree": "3 h" },
+        { "nom": "Cicatrices", "prix": "Sur devis", "duree": "30 min" },
+        { "nom": "Grain de beauté", "prix": "50 €", "duree": "30 min" },
+        { "nom": "Tache de rousseurs", "prix": "à partir de 120 €", "duree": "45 min" }
+      ]
+    },
+    {
       "nom": "Épilation à la cire",
       "description": "Une épilation à la cire soignée, pour une peau douce et nette durablement.",
       "image": "",
@@ -282,18 +294,27 @@
       ]
     },
     {
-      "nom": "Détatouage",
-      "description": "Effacement progressif de vos tatouages, en toute sécurité et en douceur.",
-      "detail": "Détatouage au laser sous supervision médicale — prévoir un bilan minimum 48h avant la première séance.\nLe protocole varie selon la taille, la couleur, la densité et la profondeur du tatouage, ainsi que l'immunité de chacun. Pour une atténuation optimale, il est recommandé de prévoir 8 à 12 séances espacées de 8 semaines.",
-      "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "nom": "Tatouage artistique",
+      "description": "Projets de tatouage sur mesure, en lien avec les artistes du studio Frères d'Encre.",
+      "detail": "Les projets de tatouage artistiques nécessitent une discussion personnalisée. Pour toute demande (style, emplacement, faisabilité), présentez-vous directement au salon.\nCette prestation ne se réserve pas en ligne : merci d'appeler le 06 01 82 37 73.",
+      "image": "",
+      "cardLabel": "En savoir plus",
+      "bookHref": "tel:+33601823773",
+      "bookLabel": "Appeler pour un devis",
       "formules": [
-        { "nom": "Détatouage XS — moins de 5 cm²", "prix": "50 €", "duree": "15 min" },
-        { "nom": "Détatouage S — 5 à 15 cm²", "prix": "80 €", "duree": "20 min" },
-        { "nom": "Détatouage M — 16 à 50 cm²", "prix": "120 €", "duree": "35 min" },
-        { "nom": "Détatouage L — 51 à 100 cm²", "prix": "160 €", "duree": "40 min" },
-        { "nom": "Détatouage XL — 101 à 200 cm²", "prix": "200 €", "duree": "45 min" },
-        { "nom": "Détatouage sourcils", "prix": "80 €", "duree": "20 min" },
-        { "nom": "Bilan validation médicale (48h avant)", "prix": "24 €", "duree": "30 min" }
+        { "nom": "Projet personnalisé", "prix": "Sur devis", "duree": "30 min" }
+      ]
+    },
+    {
+      "nom": "Soin de la peau",
+      "description": "Des soins du visage sur-mesure pour une peau nette, hydratée et éclatante.",
+      "image": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Soin visage bonne mine — nettoyage de peau, désincrustation des pores", "prix": "70 €", "duree": "45 min" },
+        { "nom": "Soin spécifique Homme — un soin complet, pensé pour eux", "prix": "80 €", "duree": "1 h" },
+        { "nom": "Bilan California Care", "prix": "24 €", "duree": "20 min" },
+        { "nom": "California Care — sous supervision médicale, après le bilan associé", "prix": "100 €", "duree": "1 h" },
+        { "nom": "Soin signature by Alex — combinaison de plusieurs techniques en un seul soin", "prix": "150 €", "duree": "1 h 15" }
       ]
     }
   ],
