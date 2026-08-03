@@ -707,11 +707,11 @@ body.modal-open { overflow: hidden; }
 
 .testimonial-track { position: relative; min-height: 170px; }
 .testimonial {
-  position: absolute; inset: 0;
+  position: absolute; top: 0; left: 0; right: 0;
   opacity: 0; visibility: hidden;
   transition: opacity .5s ease;
 }
-.testimonial.active { opacity: 1; visibility: visible; position: relative; }
+.testimonial.active { opacity: 1; visibility: visible; }
 .testimonial p {
   font-family: var(--font-title);
   font-style: italic;
@@ -1017,3 +1017,9 @@ body.modal-open { overflow: hidden; }
 /* Prix indicatif sur les cartes prestations (optionnel) */
 .presta-price { margin-top: 8px; font-family: var(--font-title); font-size: 1.05rem; color: var(--terracotta); transition: color .4s ease; }
 .presta-cell.is-open .presta-price { color: var(--cream); }
+
+/* Liens légaux (footer) */
+.footer-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 0.78rem; }
+.footer-legal a { color: rgba(246,236,218,0.6); text-decoration: none; transition: color .25s ease; }
+.footer-legal a:hover { color: var(--terracotta); }
+.footer-legal span { color: rgba(246,236,218,0.3); }
