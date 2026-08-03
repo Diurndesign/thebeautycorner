@@ -181,6 +181,12 @@
       "image": "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
     },
     {
+      "nom": "Épilation à la cire",
+      "description": "Une épilation à la cire soignée, pour une peau douce et nette durablement.",
+      "image": "",
+      "formules": []
+    },
+    {
       "nom": "Détatouage",
       "description": "Effacement progressif de vos tatouages, en toute sécurité et en douceur.",
       "detail": "Détatouage au laser sous supervision médicale — prévoir un bilan minimum 48h avant la première séance.\nLe protocole varie selon la taille, la couleur, la densité et la profondeur du tatouage, ainsi que l'immunité de chacun. Pour une atténuation optimale, il est recommandé de prévoir 8 à 12 séances espacées de 8 semaines.",
