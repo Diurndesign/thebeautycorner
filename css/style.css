@@ -744,16 +744,18 @@ body.modal-open { overflow: hidden; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+  align-items: start;
 }
 .ig-post {
   position: relative;
   display: block;
-  aspect-ratio: 4 / 5;
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--cream) center/cover no-repeat;
+  background: var(--cream);
   box-shadow: var(--shadow-soft);
 }
+/* Image affichée à sa vraie taille (proportions Instagram, sans rognage) */
+.ig-post img { display: block; width: 100%; height: auto; }
 .ig-post video {
   position: absolute;
   inset: 0;
@@ -775,7 +777,7 @@ body.modal-open { overflow: hidden; }
 }
 .ig-post:hover .ig-post-overlay { opacity: 1; }
 /* Tuiles de repli (si le flux Behold échoue) : fond de marque + logo visible */
-.ig-post-fallback { background: linear-gradient(135deg, var(--terracotta), var(--brown)); }
+.ig-post-fallback { aspect-ratio: 4 / 5; background: linear-gradient(135deg, var(--terracotta), var(--brown)); }
 .ig-post-fallback:nth-child(2) { background: linear-gradient(135deg, var(--blue), var(--brown)); }
 .ig-post-fallback:nth-child(3) { background: linear-gradient(135deg, var(--brown), var(--terracotta)); }
 .ig-post-fallback .ig-post-overlay { opacity: 1; background: transparent; }
