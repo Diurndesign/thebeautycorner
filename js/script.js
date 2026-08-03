@@ -24,17 +24,30 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ---------- Header : fond sombre au scroll (lisibilité) ---------- */
+  /* ---------- Header : fond sombre au scroll + logo qui apparaît ---------- */
   const header = document.getElementById('header');
+  const headerLogo = document.getElementById('headerLogo');
   function updateHeader() {
-    if (window.scrollY > 80) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+    const y = window.scrollY;
+    if (y > 80) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    if (headerLogo) {
+      // Apparition progressive du logo entre 40 px et 220 px de scroll
+      const p = Math.max(0, Math.min(1, (y - 40) / 180));
+      headerLogo.style.opacity = p;
+      headerLogo.style.transform = 'translateY(' + ((1 - p) * -6).toFixed(1) + 'px) scale(' + (0.85 + 0.15 * p).toFixed(3) + ')';
+      headerLogo.style.pointerEvents = p > 0.05 ? 'auto' : 'none';
     }
   }
   updateHeader();
   window.addEventListener('scroll', updateHeader, { passive: true });
+
+  // Clic sur le logo → retour en haut du site (défilement doux)
+  if (headerLogo) {
+    headerLogo.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 
   /* ---------- Contenu dynamique chargé depuis data/content.json ----------
      (édité par la cliente via le CMS ; toute modif est enregistrée dans ce

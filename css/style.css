@@ -143,6 +143,18 @@ section { padding: 100px 0; }
 }
 .header-inner { height: 100%; display: flex; align-items: center; justify-content: flex-end; gap: 40px; }
 
+/* Logo qui apparaît progressivement dans la navbar au scroll */
+.header-logo {
+  margin-right: auto;               /* pousse la nav et les actions à droite */
+  display: inline-flex; align-items: center;
+  opacity: 0;                       /* piloté au scroll par le JS */
+  transform: translateY(-6px) scale(0.85);
+  transform-origin: left center;
+  pointer-events: none;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.header-logo img { height: 42px; width: auto; display: block; filter: drop-shadow(0 4px 12px rgba(58, 47, 43, 0.3)); }
+
 .brand { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
 .brand-name {
   font-family: var(--font-title);
