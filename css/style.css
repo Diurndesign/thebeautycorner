@@ -744,21 +744,20 @@ body.modal-open { overflow: hidden; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  align-items: start;
 }
 .ig-post {
   position: relative;
   display: block;
+  aspect-ratio: 4 / 5;               /* même dimension pour toutes les vignettes */
   border-radius: var(--radius);
   overflow: hidden;
-  background: var(--cream);
+  background: var(--cream-soft);     /* fond doux autour d'une photo entière */
   box-shadow: var(--shadow-soft);
 }
-/* Photo : affichée à sa vraie taille (proportions Instagram, sans rognage) */
-.ig-post img { display: block; width: 100%; height: auto; }
-/* Vidéo/reel : cadrée en 4:5 (peut être rognée en hauteur, sans souci) */
-.ig-post.is-video { aspect-ratio: 4 / 5; }
-.ig-post.is-video img { height: 100%; object-fit: cover; }
+/* Photo : affichée en entier (texte visible), jamais rognée */
+.ig-post img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Vidéo/reel : remplit la vignette (rognage en hauteur accepté) */
+.ig-post.is-video img { object-fit: cover; }
 .ig-post video {
   position: absolute;
   inset: 0;
