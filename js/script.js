@@ -200,6 +200,8 @@ document.addEventListener('DOMContentLoaded', function () {
           a.appendChild(ov);
 
           if (post.mediaType === 'VIDEO' || post.isReel) {
+            // Vidéo/reel : cadrée (peut être rognée en hauteur, sans souci)
+            a.classList.add('is-video');
             const badge = document.createElement('span');
             badge.className = 'ig-post-video';
             badge.setAttribute('aria-hidden', 'true');
