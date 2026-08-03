@@ -187,13 +187,14 @@ section { padding: 100px 0; }
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;          /* contenu centré + barre d'infos en bas */
+  align-items: stretch;
   color: var(--cream);
   background-color: var(--brown);
   overflow: hidden;
   padding-top: var(--header-h);
 }
-/* Calque image de fond animé (léger zoom continu « Ken Burns ») */
+/* Calque image de fond du hero */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');
@@ -205,8 +206,6 @@ section { padding: 100px 0; }
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(120deg, rgba(58,47,43,0.72) 0%, rgba(129,94,84,0.55) 55%, rgba(88,125,141,0.45) 100%);
 }
-/* hero devient une colonne : contenu centré + barre d'infos en bas */
-.hero { flex-direction: column; align-items: stretch; }
 
 .hero-content {
   position: relative;
@@ -818,7 +817,6 @@ body.modal-open { overflow: hidden; }
 }
 .hours-grid .day { font-size: 0.95rem; color: var(--muted); }
 .hours-grid .time { font-size: 0.95rem; color: var(--text); text-align: right; }
-.hours-grid .time.closed { color: var(--terracotta); }
 
 .contact-form {
   background: var(--white);

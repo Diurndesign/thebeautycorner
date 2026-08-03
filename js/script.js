@@ -75,9 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
     els.forEach(function (el) { io.observe(el); });
   })();
 
-  /* ---------- Contenu dynamique chargé depuis data/content.json ----------
-     (édité par la cliente via le CMS ; toute modif est enregistrée dans ce
-     fichier, puis le site se redéploie et affiche les nouvelles images.) */
+  /* ---------- Rendu des prestations (données éditées via l'admin, stockées
+     dans Supabase ; repli sur data/content.json — voir loadContent). ---------- */
   function renderPrestations(data, planity) {
     const prestaGrid = document.getElementById('prestationsGrid');
     if (!prestaGrid || !data || !data.length) return;
