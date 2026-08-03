@@ -659,9 +659,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const body = document.getElementById('prestaModalBody');
     const intro = item.detail || item.description || '';
     const rows = (item.formules || []).map(function (f) {
+      // Sous-titre : ce qui suit le tiret dans le nom (ex. « XS — moins de 5 cm² »),
+      // affiché en italique sous le titre pour une présentation plus claire.
+      const raw = String(f.nom || '');
+      const m = raw.match(/^(.*?)\s+[—–-]\s+(.*)$/);
+      const fname = m ? m[1] : raw;
+      const fdetail = f.detail || (m ? m[2] : '');
       return '<div class="pf-row">' +
-        '<div class="pf-info"><span class="pf-name">' + escHtml(f.nom || '') + '</span>' +
-          (f.detail ? '<span class="pf-detail">' + escHtml(f.detail) + '</span>' : '') + '</div>' +
+        '<div class="pf-info"><span class="pf-name">' + escHtml(fname) + '</span>' +
+          (fdetail ? '<span class="pf-detail">' + escHtml(fdetail) + '</span>' : '') + '</div>' +
         '<div class="pf-meta">' +
           (f.prix ? '<span class="pf-price">' + escHtml(f.prix) + '</span>' : '') +
           (f.duree ? '<span class="pf-duree">' + escHtml(f.duree) + '</span>' : '') +
