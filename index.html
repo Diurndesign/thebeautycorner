@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://images.unsplash.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=20260802c" />
+  <link rel="stylesheet" href="css/style.css?v=20260802d" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -201,11 +201,7 @@
         </p>
       </div>
 
-      <!-- Cartes générées depuis data/content.json (prestations) :
-           image + titre + description modifiables via le CMS. -->
-      <div class="prestations-grid" id="prestationsGrid"></div>
-
-      <!-- ===== Carte Expérience privée (ouvre un modal) ===== -->
+      <!-- ===== Carte Expérience privée (ouvre un modal), mise en avant ===== -->
       <button type="button" class="experience-card" id="experienceCard" aria-haspopup="dialog" aria-controls="expModal">
         <span class="experience-badge" data-txt="experience.badge">Expérience privée · entre amies</span>
         <span class="experience-card-body">
@@ -218,6 +214,10 @@
           </span>
         </span>
       </button>
+
+      <!-- Cartes générées depuis data/content.json (prestations) :
+           image + titre + description modifiables via le CMS. -->
+      <div class="prestations-grid" id="prestationsGrid"></div>
     </div>
   </section>
 
