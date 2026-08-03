@@ -1015,6 +1015,27 @@ body.modal-open { overflow: hidden; }
 .presta-price { margin-top: 8px; font-family: var(--font-title); font-size: 1.05rem; color: var(--terracotta); transition: color .4s ease; }
 .presta-cell.is-open .presta-price { color: var(--cream); }
 
+/* Sur écran tactile (pas de survol) : le bouton reste visible en permanence */
+@media (hover: none) {
+  .presta-reserve { opacity: 1; transform: none; pointer-events: auto; }
+}
+
+/* Modal Prestation : liste des formules (prix + durée) */
+.presta-modal-head { text-align: center; margin-bottom: 26px; }
+.presta-formules { display: flex; flex-direction: column; }
+.pf-row {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 18px;
+  padding: 15px 0; border-bottom: 1px solid rgba(129, 94, 84, 0.16);
+}
+.pf-row:last-child { border-bottom: 0; }
+.pf-info { display: flex; flex-direction: column; }
+.pf-name { font-family: var(--font-title); font-size: 1.1rem; color: var(--dark); line-height: 1.2; }
+.pf-detail { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+.pf-meta { display: flex; align-items: baseline; gap: 12px; white-space: nowrap; flex-shrink: 0; }
+.pf-price { font-family: var(--font-title); font-size: 1.2rem; color: var(--blue); }
+.pf-duree { font-size: 0.85rem; color: var(--muted); }
+.presta-formules + .exp-modal-actions { margin-top: 24px; }
+
 /* Liens légaux (footer) */
 .footer-legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 0.78rem; }
 .footer-legal a { color: rgba(246,236,218,0.6); text-decoration: none; transition: color .25s ease; }

@@ -144,7 +144,17 @@
     {
       "nom": "Détatouage",
       "description": "Effacement progressif de vos tatouages, en toute sécurité et en douceur.",
-      "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80"
+      "detail": "Détatouage au laser sous supervision médicale — prévoir un bilan minimum 48h avant la première séance.\nLe protocole varie selon la taille, la couleur, la densité et la profondeur du tatouage, ainsi que l'immunité de chacun. Pour une atténuation optimale, il est recommandé de prévoir 8 à 12 séances espacées de 8 semaines.",
+      "image": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&crop=faces,center&w=800&h=1000&q=80",
+      "formules": [
+        { "nom": "Détatouage XS — moins de 5 cm²", "prix": "50 €", "duree": "15 min" },
+        { "nom": "Détatouage S — 5 à 15 cm²", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Détatouage M — 16 à 50 cm²", "prix": "120 €", "duree": "35 min" },
+        { "nom": "Détatouage L — 51 à 100 cm²", "prix": "160 €", "duree": "40 min" },
+        { "nom": "Détatouage XL — 101 à 200 cm²", "prix": "200 €", "duree": "45 min" },
+        { "nom": "Détatouage sourcils", "prix": "80 €", "duree": "20 min" },
+        { "nom": "Bilan validation médicale (48h avant)", "prix": "24 €", "duree": "30 min" }
+      ]
     }
   ],
   "avantApres": []

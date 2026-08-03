@@ -81,7 +81,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const prestaGrid = document.getElementById('prestationsGrid');
     if (!prestaGrid || !data || !data.length) return;
 
+    // Clic sur une prestation : ouvre le modal des formules si elles existent,
+    // sinon renvoie directement sur Planity (dégradation propre).
+    function openAction(item) {
+      if (item.formules && item.formules.length) openPrestaModal(item, planity);
+      else window.open(planity, '_blank', 'noopener');
+    }
+
     data.forEach(function (item, i) {
+      const hasFormules = !!(item.formules && item.formules.length);
       const art = document.createElement('article');
       art.className = 'presta-cell';
       art.innerHTML =
@@ -93,37 +101,32 @@ document.addEventListener('DOMContentLoaded', function () {
             '<p class="presta-desc"></p>' +
             '<p class="presta-price"></p>' +
           '</div>' +
-          '<a class="presta-reserve" href="' + planity + '" target="_blank" rel="noopener">Réserver <span aria-hidden="true">→</span></a>' +
+          '<button class="presta-reserve" type="button">' + (hasFormules ? 'Voir les formules' : 'Réserver') + ' <span aria-hidden="true">→</span></button>' +
         '</div>';
       art.querySelector('.presta-name').textContent = item.nom || '';
       art.querySelector('.presta-desc').textContent = item.description || '';
       const priceEl = art.querySelector('.presta-price');
       if (item.prix) priceEl.textContent = item.prix; else priceEl.style.display = 'none';
       if (item.image) art.querySelector('.presta-cell-img').style.backgroundImage = "url('" + item.image + "')";
+      // Le bouton est dans la card : le clic remonte au gestionnaire de la card.
+      art.addEventListener('click', function () { openAction(item); });
       prestaGrid.appendChild(art);
     });
 
-    // Interactions : survol (desktop) / tap (mobile) + focus clavier
+    // Révélation de l'image au survol (desktop) + focus clavier sur le bouton
     const cells = Array.from(prestaGrid.querySelectorAll('.presta-cell'));
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    cells.forEach(function (cell) {
-      if (canHover) {
+    if (canHover) {
+      cells.forEach(function (cell) {
         cell.addEventListener('pointerenter', function () { cell.classList.add('is-open'); });
         cell.addEventListener('pointerleave', function () { cell.classList.remove('is-open'); });
-        const link = cell.querySelector('.presta-reserve');
-        if (link) {
-          link.addEventListener('focus', function () { cell.classList.add('is-open'); });
-          link.addEventListener('blur', function () { cell.classList.remove('is-open'); });
+        const btn = cell.querySelector('.presta-reserve');
+        if (btn) {
+          btn.addEventListener('focus', function () { cell.classList.add('is-open'); });
+          btn.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
-      } else {
-        cell.addEventListener('click', function (e) {
-          if (e.target.closest('.presta-reserve')) return;
-          const alreadyOpen = cell.classList.contains('is-open');
-          cells.forEach(function (c) { c.classList.remove('is-open'); });
-          if (!alreadyOpen) cell.classList.add('is-open');
-        });
-      }
-    });
+      });
+    }
   }
 
   function renderBeforeAfter(baData) {
@@ -645,6 +648,54 @@ document.addEventListener('DOMContentLoaded', function () {
         if (msg) setTimeout(function () { msg.focus(); }, 600);
       });
     }
+  }
+
+  /* ---------- Modal Prestation : formules + prix, bouton vers Planity ---------- */
+  const prestaModal = document.getElementById('prestaModal');
+  let prestaLastFocus = null;
+
+  function openPrestaModal(item, planity) {
+    if (!prestaModal) { window.open(planity, '_blank', 'noopener'); return; }
+    const body = document.getElementById('prestaModalBody');
+    const intro = item.detail || item.description || '';
+    const rows = (item.formules || []).map(function (f) {
+      return '<div class="pf-row">' +
+        '<div class="pf-info"><span class="pf-name">' + escHtml(f.nom || '') + '</span>' +
+          (f.detail ? '<span class="pf-detail">' + escHtml(f.detail) + '</span>' : '') + '</div>' +
+        '<div class="pf-meta">' +
+          (f.prix ? '<span class="pf-price">' + escHtml(f.prix) + '</span>' : '') +
+          (f.duree ? '<span class="pf-duree">' + escHtml(f.duree) + '</span>' : '') +
+        '</div></div>';
+    }).join('');
+    body.innerHTML =
+      '<header class="presta-modal-head">' +
+        '<p class="exp-eyebrow">Prestation</p>' +
+        '<h2 id="prestaModalTitle">' + escHtml(item.nom || '') + '</h2>' +
+        (intro ? '<p class="exp-sub">' + escBreak(intro) + '</p>' : '') +
+      '</header>' +
+      '<div class="presta-formules">' + rows + '</div>' +
+      '<div class="exp-modal-actions">' +
+        '<a class="btn btn-blue" href="' + planity + '" target="_blank" rel="noopener">Réserver sur Planity</a>' +
+      '</div>';
+    prestaLastFocus = document.activeElement;
+    prestaModal.hidden = false;
+    document.body.classList.add('modal-open');
+    const closeBtn = prestaModal.querySelector('.exp-modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+  function closePresta() {
+    if (!prestaModal) return;
+    prestaModal.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (prestaLastFocus && prestaLastFocus.focus) prestaLastFocus.focus();
+  }
+  if (prestaModal) {
+    prestaModal.addEventListener('click', function (e) {
+      if (e.target.closest('[data-presta-close]')) closePresta();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !prestaModal.hidden) closePresta();
+    });
   }
 
 });

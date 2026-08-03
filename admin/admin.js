@@ -103,10 +103,28 @@
     el.innerHTML =
       '<div class="row-head"><strong>Prestation</strong><button class="btn-danger" data-remove type="button">Supprimer</button></div>' +
       '<label>Titre</label><input type="text" data-field="nom" value="' + escAttr(p.nom) + '" />' +
-      '<label>Description</label><textarea data-field="description">' + escHtml(p.description) + '</textarea>' +
-      '<label>Prix indicatif (optionnel, ex : « À partir de 55 € »)</label><input type="text" data-field="prix" value="' + escAttr(p.prix) + '" />' +
+      '<label>Description courte (sur la carte)</label><textarea data-field="description">' + escHtml(p.description) + '</textarea>' +
+      '<label>Description détaillée (optionnel — en haut de la fenêtre des formules)</label><textarea data-field="detail">' + escHtml(p.detail) + '</textarea>' +
+      '<label>Prix indicatif sur la carte (optionnel, ex : « À partir de 55 € »)</label><input type="text" data-field="prix" value="' + escAttr(p.prix) + '" />' +
+      '<label>Formules — une par ligne, format : <em>Nom | Prix | Durée</em><br>' +
+        '<span style="color:#8a7d73;font-size:.85em;">Ex : Détatouage S (5–15 cm²) | 80 € | 20 min</span></label>' +
+      '<textarea data-formules style="min-height:150px;">' + escHtml(formulesToText(p.formules)) + '</textarea>' +
       imgField('image', p.image);
     return el;
+  }
+
+  // Formules ↔ texte (une formule par ligne : « Nom | Prix | Durée »)
+  function formulesToText(arr) {
+    return (arr || []).map(function (f) {
+      return [f.nom || '', f.prix || '', f.duree || ''].join(' | ');
+    }).join('\n');
+  }
+  function textToFormules(text) {
+    return String(text || '').split('\n').map(function (line) {
+      const parts = line.split('|').map(function (s) { return s.trim(); });
+      if (!parts[0]) return null;
+      return { nom: parts[0], prix: parts[1] || '', duree: parts[2] || '' };
+    }).filter(Boolean);
   }
 
   function baCard(b) {
@@ -417,8 +435,10 @@
       content.texts[el.getAttribute('data-tkey')] = el.value;
     });
     prestaWrap.querySelectorAll('[data-presta]').forEach(function (card) {
-      const nom = val(card, 'nom'), description = val(card, 'description'), prix = val(card, 'prix'), image = val(card, 'image');
-      if (nom || description || image) content.prestations.push({ nom: nom, description: description, prix: prix, image: image });
+      const nom = val(card, 'nom'), description = val(card, 'description'), detail = val(card, 'detail'), prix = val(card, 'prix'), image = val(card, 'image');
+      const ta = card.querySelector('[data-formules]');
+      const formules = textToFormules(ta ? ta.value : '');
+      if (nom || description || image) content.prestations.push({ nom: nom, description: description, detail: detail, prix: prix, image: image, formules: formules });
     });
     baWrap.querySelectorAll('[data-ba]').forEach(function (card) {
       const categorie = val(card, 'categorie'), avant = val(card, 'avant'), apres = val(card, 'apres');
