@@ -266,21 +266,18 @@ section { padding: 100px 0; }
   backdrop-filter: blur(6px);
   color: var(--cream);
 }
-.hero-review .stars { color: var(--terracotta); letter-spacing: 3px; font-size: 0.95rem; margin-bottom: 14px; }
+.hero-review-top {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 18px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(246, 236, 218, 0.18);
+}
+.hero-review-score { font-family: var(--font-title); font-size: 2.6rem; line-height: 1; color: var(--cream); }
+.hero-review-meta { display: flex; flex-direction: column; gap: 5px; }
+.hero-review .stars { color: var(--terracotta); letter-spacing: 3px; font-size: 0.95rem; }
+.hero-review-count { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(246, 236, 218, 0.72); }
 .hero-review p { font-family: var(--font-title); font-style: italic; font-size: 1.1rem; line-height: 1.45; margin-bottom: 14px; transition: opacity .25s ease; }
 .hero-review cite { font-style: normal; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,236,218,0.75); transition: opacity .25s ease; }
 .hero-review.is-fading p, .hero-review.is-fading cite { opacity: 0; }
-
-/* Barre d'infos en bas du hero : stats (droite) */
-.hero-bottom { position: relative; z-index: 2; padding-bottom: 34px; }
-.hero-bottom-inner { display: flex; justify-content: flex-end; align-items: flex-end; gap: 30px; }
-
-.hero-stats { display: flex; gap: 46px; }
-.stat { text-align: center; }
-/* Note seule : alignée sur le bord droit de la carte avis (même colonne) */
-.hero-bottom-inner .stat { text-align: right; }
-.stat .num { display: block; font-family: var(--font-title); font-size: 2.1rem; line-height: 1; color: var(--cream); }
-.stat .label { display: block; margin-top: 8px; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,236,218,0.7); }
 
 /* ============================================================
    PRESTATIONS
@@ -912,10 +909,7 @@ body.modal-open { overflow: hidden; }
   .hero-logo { margin-left: auto; margin-right: auto; }
   .hero-actions { justify-content: center; }
   .hero-review { align-self: center; margin-bottom: 0; max-width: 420px; }
-  .hero-bottom { margin-top: 52px; }
-  .hero-bottom-inner { flex-direction: column; align-items: center; gap: 26px; }
-  .hero-bottom-inner .stat { text-align: center; }
-  .hero-stats { gap: 32px; }
+  .hero-review-top { justify-content: center; }
 }
 
 @media (max-width: 760px) {
@@ -947,6 +941,5 @@ body.modal-open { overflow: hidden; }
   .brand-name { font-size: 1.15rem; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; text-align: center; }
-  .hero-stats { gap: 20px; }
-  .stat .num { font-size: 1.7rem; }
+  .hero-review-score { font-size: 2.2rem; }
 }
