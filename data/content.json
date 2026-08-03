@@ -184,7 +184,22 @@
       "nom": "Épilation à la cire",
       "description": "Une épilation à la cire soignée, pour une peau douce et nette durablement.",
       "image": "",
-      "formules": []
+      "formules": [
+        { "nom": "Restructuration sourcils", "prix": "15 €", "duree": "15 min" },
+        { "nom": "Entretien sourcils", "prix": "10 €", "duree": "15 min" },
+        { "nom": "Lèvres", "prix": "10 €", "duree": "10 min" },
+        { "nom": "Lèvres / sourcils au fil", "prix": "15 €", "duree": "20 min" },
+        { "nom": "Aisselles", "prix": "10 €", "duree": "20 min" },
+        { "nom": "Maillot", "prix": "15 €", "duree": "20 min" },
+        { "nom": "Maillot échancré", "prix": "20 €", "duree": "25 min" },
+        { "nom": "Maillot intégral", "prix": "30 €", "duree": "30 min" },
+        { "nom": "Demi-jambes", "prix": "20 €", "duree": "20 min" },
+        { "nom": "Cuisses", "prix": "20 €", "duree": "20 min" },
+        { "nom": "Jambes entières", "prix": "25 €", "duree": "40 min" },
+        { "nom": "Bras", "prix": "15 €", "duree": "15 min" },
+        { "nom": "Dos", "prix": "35 €", "duree": "35 min" },
+        { "nom": "Torse", "prix": "30 €", "duree": "30 min" }
+      ]
     },
     {
       "nom": "Détatouage",
