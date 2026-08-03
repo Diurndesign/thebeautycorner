@@ -80,9 +80,9 @@ export default async function handler(req, res) {
         };
       });
 
-    // Cache CDN Vercel : servi tel quel 7 jours, rafraîchi en arrière-plan
-    // → l'API Google n'est appelée qu'environ 1 fois par semaine (coût nul).
-    res.setHeader('Cache-Control', 's-maxage=604800, stale-while-revalidate=604800');
+    // Cache CDN Vercel : servi tel quel 30 jours, rafraîchi en arrière-plan
+    // → l'API Google n'est appelée qu'environ 1 fois par mois (~12/an, coût nul).
+    res.setHeader('Cache-Control', 's-maxage=2592000, stale-while-revalidate=2592000');
 
     return res.status(200).json({
       configured: true,
