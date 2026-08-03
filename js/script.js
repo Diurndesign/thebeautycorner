@@ -377,7 +377,20 @@ document.addEventListener('DOMContentLoaded', function () {
         bq.className = 'testimonial' + (i === 0 ? ' active' : '');
         const p = document.createElement('p'); p.textContent = '« ' + rv.texte + ' »';
         const c = document.createElement('cite'); c.textContent = citeText(rv);
-        bq.appendChild(p); bq.appendChild(c); track.appendChild(bq);
+        bq.appendChild(p); bq.appendChild(c);
+        if (rv.lien) {
+          const a = document.createElement('a');
+          a.className = 'testimonial-link';
+          a.href = rv.lien; a.target = '_blank'; a.rel = 'noopener';
+          a.textContent = 'Voir cet avis sur Google ↗';
+          bq.appendChild(a);
+          bq.classList.add('is-clickable');
+          bq.addEventListener('click', function (e) {
+            if (e.target.closest('a')) return;
+            window.open(rv.lien, '_blank', 'noopener');
+          });
+        }
+        track.appendChild(bq);
         const dot = document.createElement('button');
         dot.setAttribute('aria-label', 'Avis ' + (i + 1));
         if (i === 0) dot.classList.add('active');
@@ -403,6 +416,15 @@ document.addEventListener('DOMContentLoaded', function () {
       function showHero(i) {
         if (hp) hp.textContent = '« ' + truncate(reviews[i].texte, 150) + ' »';
         if (hc) hc.textContent = citeText(reviews[i]);
+        const lien = reviews[i].lien || '';
+        if (lien) { heroReview.dataset.lien = lien; heroReview.style.cursor = 'pointer'; heroReview.setAttribute('title', 'Voir cet avis sur Google'); }
+        else { delete heroReview.dataset.lien; heroReview.style.cursor = ''; heroReview.removeAttribute('title'); }
+      }
+      if (!heroReview.__clickBound) {
+        heroReview.__clickBound = true;
+        heroReview.addEventListener('click', function () {
+          if (heroReview.dataset.lien) window.open(heroReview.dataset.lien, '_blank', 'noopener');
+        });
       }
       showHero(0);
       if (heroInterval) clearInterval(heroInterval);

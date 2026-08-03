@@ -704,6 +704,15 @@ body.modal-open { overflow: hidden; }
   margin-bottom: 20px;
 }
 .testimonial cite { font-family: var(--font-body); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; color: var(--terracotta); }
+.testimonial.is-clickable { cursor: pointer; }
+.testimonial-link {
+  display: inline-block; margin-top: 16px;
+  font-family: var(--font-body); font-size: 0.85rem; letter-spacing: 0.04em;
+  color: var(--cream); opacity: 0.8;
+  text-decoration: underline; text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+.testimonial-link:hover { opacity: 1; }
 
 .testimonial-dots { display: flex; gap: 12px; justify-content: center; margin-top: 34px; }
 .testimonial-dots button {
