@@ -40,7 +40,7 @@ export default async function handler(req, res) {
       const data = await r.json();
       if (!r.ok) {
         res.setHeader('Cache-Control', 'no-store');
-        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
+        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status), detail: (data && data.error && data.error.message) || null });
       }
       place = data;
     } else {
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
       const data = await r.json();
       if (!r.ok) {
         res.setHeader('Cache-Control', 'no-store');
-        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status) });
+        return res.status(200).json({ configured: true, ok: false, error: (data && data.error && data.error.status) || ('HTTP ' + r.status), detail: (data && data.error && data.error.message) || null });
       }
       place = (data.places && data.places[0]) || null;
       if (!place) {
