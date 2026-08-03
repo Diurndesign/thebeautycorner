@@ -504,8 +504,8 @@ document.addEventListener('DOMContentLoaded', function () {
         heroInterval = setInterval(function () {
           curH = (curH + 1) % reviews.length;
           heroReview.classList.add('is-fading');
-          setTimeout(function () { showHero(curH); heroReview.classList.remove('is-fading'); }, 250);
-        }, 5000);
+          setTimeout(function () { showHero(curH); heroReview.classList.remove('is-fading'); }, 450);
+        }, 5500);
       }
     }
   }
