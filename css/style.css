@@ -800,7 +800,7 @@ body.modal-open { overflow: hidden; }
   color: var(--cream);
   margin-bottom: 20px;
 }
-.testimonial cite { font-family: var(--font-body); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; color: var(--terracotta); }
+.testimonial cite { font-family: var(--font-body); font-style: normal; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.85rem; color: #fff; }
 .testimonial.is-clickable { cursor: pointer; }
 
 .testimonial-dots { display: flex; gap: 12px; justify-content: center; margin-top: 34px; }

@@ -337,6 +337,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const aboutImg = document.getElementById('aboutImg');
         if (aboutImg) aboutImg.src = content.aboutImage;
       }
+      if (content.avisImage) {
+        const avisSection = document.getElementById('avis');
+        if (avisSection) avisSection.style.backgroundImage = "url('" + content.avisImage + "')";
+      }
 
       applyTexts(content.texts || {});
       renderExpModal(content.texts || {}, content.experience);

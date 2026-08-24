@@ -92,7 +92,8 @@
   function renderSiteImages(c) {
     siteImagesWrap.innerHTML =
       '<div data-siteimg="heroImage">' + imgField('heroImage', c.heroImage, 'Photo du Hero (grande image d\'accueil, en fond)') + '</div>' +
-      '<div data-siteimg="aboutImage" style="margin-top:14px;">' + imgField('aboutImage', c.aboutImage, 'Photo de la section « À propos »') + '</div>';
+      '<div data-siteimg="aboutImage" style="margin-top:14px;">' + imgField('aboutImage', c.aboutImage, 'Photo de la section « À propos »') + '</div>' +
+      '<div data-siteimg="avisImage" style="margin-top:14px;">' + imgField('avisImage', c.avisImage, 'Fond de la section « Avis » (image en arrière-plan)') + '</div>';
   }
 
   function imgField(fieldName, url, customLabel) {
@@ -472,6 +473,7 @@
       planity: document.getElementById('planity').value.trim(),
       heroImage: val(siteImagesWrap, 'heroImage'),
       aboutImage: val(siteImagesWrap, 'aboutImage'),
+      avisImage: val(siteImagesWrap, 'avisImage'),
       texts: {},
       experience: collectExp(),
       prestations: [],
@@ -519,6 +521,7 @@
       }
       addUrl(content.heroImage);
       addUrl(content.aboutImage);
+      addUrl(content.avisImage);
       (content.prestations || []).forEach(function (p) { addUrl(p.image); });
       (content.avantApres || []).forEach(function (b) { addUrl(b.avant); addUrl(b.apres); });
 
