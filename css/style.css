@@ -152,14 +152,36 @@ section { padding: 100px 0; }
   position: relative;
   padding-bottom: 4px;
 }
+/* Halo « poudre » sous le lien : un trait flou et lumineux qui éclot au survol.
+   Le dégradé radial estompe les bords (poudre dispersée), le box-shadow crée
+   le halo, et le flou + montée en échelle donnent l'effet de floraison. */
 .nav a::after {
   content: '';
-  position: absolute; left: 0; bottom: 0;
-  width: 0; height: 1.5px; background: var(--terracotta);
-  transition: width .25s ease;
+  position: absolute; left: 50%; bottom: -2px;
+  width: 100%; height: 3px;
+  transform: translateX(-50%) scaleX(0.35);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center,
+              rgba(202, 148, 121, 0.95) 0%,
+              rgba(202, 148, 121, 0.5) 42%,
+              rgba(202, 148, 121, 0) 75%);
+  box-shadow: 0 0 12px 3px rgba(202, 148, 121, 0.45);
+  opacity: 0;
+  filter: blur(2.5px);
+  transition: opacity .45s ease,
+              transform .55s cubic-bezier(0.2, 0.7, 0.2, 1),
+              filter .55s ease;
+  pointer-events: none;
 }
-.nav a:hover { color: var(--terracotta); }
-.nav a:hover::after { width: 100%; }
+.nav a:hover { color: var(--cream); }          /* la typo reste blanche */
+.nav a:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scaleX(1);
+  filter: blur(1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav a::after { transition: opacity .3s ease; transform: translateX(-50%) scaleX(1); filter: blur(1px); }
+}
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
 .header-instagram {
@@ -951,7 +973,7 @@ body.modal-open { overflow: hidden; }
   }
   .nav.open { transform: translateY(0); }
   .nav a { color: var(--text); text-shadow: none; }
-  .nav a:hover { color: var(--terracotta); }
+  .nav a:hover { color: var(--text); }   /* menu clair : texte foncé conservé, seul le halo s'anime */
   .burger { display: flex; }
 
   .testimonials { background-attachment: scroll; }
