@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Rechargement : rester en haut (ne pas sauter vers une ancre restée dans l'URL) ---------- */
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) {
-    var _root = document.documentElement;
-    var _prevBehavior = _root.style.scrollBehavior;
+    const _root = document.documentElement;
+    const _prevBehavior = _root.style.scrollBehavior;
     _root.style.scrollBehavior = 'auto';            // annule le défilement doux le temps de remettre en haut
     history.replaceState(null, '', window.location.pathname + window.location.search);
     window.scrollTo(0, 0);
