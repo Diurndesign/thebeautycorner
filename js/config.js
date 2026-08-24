@@ -10,4 +10,4 @@ window.SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsIn
 /* Formulaire de contact — clé publique Web3Forms.
    Les messages sont envoyés à l'email lié à cette clé (celui d'Alexandra).
    Obtenir la clé gratuitement sur https://web3forms.com (voir CONTACT.md). */
-window.WEB3FORMS_KEY = '';
+window.WEB3FORMS_KEY = '77ba4594-5eea-4b83-b977-817899da05ab';
