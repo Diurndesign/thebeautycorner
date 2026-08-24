@@ -118,6 +118,23 @@ section { padding: 100px 0; }
   background: transparent;
   transition: padding .4s ease;
 }
+/* Voile sombre en haut (derrière la capsule) : comble l'écart clair au-dessus
+   quand on scrolle, pour que la capsule ne semble plus flotter. */
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 104px;
+  background: linear-gradient(to bottom,
+              rgba(58, 47, 43, 0.6) 0%,
+              rgba(58, 47, 43, 0.28) 45%,
+              rgba(58, 47, 43, 0) 100%);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity .4s ease;
+}
+.site-header.scrolled::before { opacity: 1; }
 .header-inner {
   height: var(--header-h);
   display: flex; align-items: center; justify-content: flex-end; gap: 40px;
