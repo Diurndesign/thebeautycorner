@@ -98,8 +98,9 @@
   }
   </script>
 
-  <!-- Données structurées FAQ (rich results Google) -->
-  <script type="application/ld+json">
+  <!-- Données structurées FAQ (rich results Google). Régénérées par le JS si la
+       FAQ est modifiée depuis l'admin (sinon, ce contenu par défaut s'applique). -->
+  <script type="application/ld+json" id="faqSchema">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -344,7 +345,7 @@
         <p class="section-eyebrow">Questions fréquentes</p>
         <h2>Vos questions, nos réponses</h2>
       </div>
-      <div class="faq-list">
+      <div class="faq-list" id="faqList">
         <details class="faq-item">
           <summary>Combien de temps dure une séance ?</summary>
           <div class="faq-a">Selon la prestation, comptez de 30&nbsp;min (pose d'ongles) à environ 2&nbsp;h (dermopigmentation complète). La durée exacte vous est précisée lors de la prise de rendez-vous.</div>
@@ -507,6 +508,6 @@
   </div>
 
   <script src="js/config.js?v=20260824a"></script>
-  <script src="js/script.js?v=20260824h"></script>
+  <script src="js/script.js?v=20260824l"></script>
 </body>
 </html>

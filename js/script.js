@@ -143,6 +143,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  /* ---------- FAQ (éditable depuis l'admin) ---------- */
+  function renderFaq(list) {
+    const wrap = document.getElementById('faqList');
+    if (!wrap || !Array.isArray(list)) return;
+    const items = list.filter(function (f) { return f && (f.question || f.q); });
+    if (!items.length) return;   // aucune FAQ définie : on garde le contenu par défaut du HTML
+
+    wrap.innerHTML = items.map(function (f) {
+      const q = f.question || f.q || '';
+      const a = f.answer || f.reponse || f.a || '';
+      return '<details class="faq-item"><summary>' + escHtml(q) + '</summary>' +
+             '<div class="faq-a">' + escBreak(a) + '</div></details>';
+    }).join('');
+
+    // Données structurées FAQ (SEO) synchronisées avec le contenu affiché
+    const schema = document.getElementById('faqSchema');
+    if (schema) {
+      schema.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: items.map(function (f) {
+          return {
+            '@type': 'Question',
+            name: f.question || f.q || '',
+            acceptedAnswer: { '@type': 'Answer', text: f.answer || f.reponse || f.a || '' }
+          };
+        })
+      });
+    }
+  }
+
   function renderBeforeAfter(baData) {
     const baSlider = document.getElementById('baSlider');
     if (!baSlider) return;
@@ -347,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       renderPrestations(content.prestations || [], planity);
       renderBeforeAfter(content.avantApres || []);
+      renderFaq(content.faq || []);
       fillServiceSelect(content.prestations || []);
     })
     .catch(function (err) { console.error('Chargement du contenu impossible :', err); });

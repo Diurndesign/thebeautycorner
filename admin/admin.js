@@ -82,12 +82,14 @@
     renderExp(c.experience || {}, c.texts || {});
     renderPrestations(c.prestations || []);
     renderBa(c.avantApres || []);
+    renderFaq(c.faq || []);
   }
 
   /* ---------- Rendu des champs ---------- */
   const prestaWrap = document.getElementById('prestations');
   const baWrap = document.getElementById('avantApres');
   const siteImagesWrap = document.getElementById('siteImages');
+  const faqWrap = document.getElementById('faq');
 
   function renderSiteImages(c) {
     siteImagesWrap.innerHTML =
@@ -163,6 +165,21 @@
   function renderBa(list) {
     baWrap.innerHTML = '';
     (list.length ? list : [{}]).forEach(function (b) { baWrap.appendChild(baCard(b)); });
+  }
+
+  function faqCard(f) {
+    f = f || {};
+    const el = document.createElement('div');
+    el.className = 'card'; el.setAttribute('data-faq', '');
+    el.innerHTML =
+      '<div class="row-head"><strong>Question</strong><button class="btn-danger" data-remove type="button">Supprimer</button></div>' +
+      '<label>Question</label><input type="text" data-field="question" value="' + escAttr(f.question) + '" />' +
+      '<label>Réponse</label><textarea data-field="answer">' + escHtml(f.answer) + '</textarea>';
+    return el;
+  }
+  function renderFaq(list) {
+    faqWrap.innerHTML = '';
+    (list.length ? list : [{}]).forEach(function (f) { faqWrap.appendChild(faqCard(f)); });
   }
 
   /* ---------- Textes du site ---------- */
@@ -344,6 +361,7 @@
       const kind = add.getAttribute('data-add');
       if (kind === 'prestation') prestaWrap.appendChild(prestaCard({}));
       else if (kind === 'ba') baWrap.appendChild(baCard({}));
+      else if (kind === 'faq') faqWrap.appendChild(faqCard({}));
       else if (kind === 'tier') document.getElementById('expTiers').appendChild(tierCard({}));
       else if (kind === 'choice') document.getElementById('expChoices').appendChild(choiceRow({}));
       return;
@@ -477,7 +495,8 @@
       texts: {},
       experience: collectExp(),
       prestations: [],
-      avantApres: []
+      avantApres: [],
+      faq: []
     };
     document.querySelectorAll('[data-tkey]').forEach(function (el) {
       content.texts[el.getAttribute('data-tkey')] = el.value;
@@ -491,6 +510,10 @@
     baWrap.querySelectorAll('[data-ba]').forEach(function (card) {
       const categorie = val(card, 'categorie'), avant = val(card, 'avant'), apres = val(card, 'apres');
       if (categorie || avant || apres) content.avantApres.push({ categorie: categorie, avant: avant, apres: apres });
+    });
+    faqWrap.querySelectorAll('[data-faq]').forEach(function (card) {
+      const question = val(card, 'question'), answer = val(card, 'answer');
+      if (question || answer) content.faq.push({ question: question, answer: answer });
     });
 
     const { error } = await sb.from('site_content')
