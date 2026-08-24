@@ -39,7 +39,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260803v" />
+  <link rel="stylesheet" href="css/style.css?v=20260803w" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -449,7 +449,7 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="4" placeholder="Vos disponibilités, vos envies…"></textarea>
         </div>
-        <input type="text" name="_gotcha" id="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp-field" />
+        <input type="text" name="_gotcha" id="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" aria-label="Ne pas remplir (anti-spam)" class="hp-field" />
         <button type="submit" class="btn btn-blue btn-block">Envoyer ma demande</button>
         <p class="form-feedback" id="formFeedback" role="status"></p>
       </form>
@@ -490,7 +490,7 @@
   </div>
 
   <!-- ================= MODAL EXPÉRIENCE ================= -->
-  <div class="exp-modal" id="expModal" role="dialog" aria-modal="true" aria-labelledby="expModalTitle" hidden>
+  <div class="exp-modal" id="expModal" role="dialog" aria-modal="true" aria-label="L'expérience signature" hidden>
     <div class="exp-modal-overlay" data-exp-close></div>
     <div class="exp-modal-panel" role="document">
       <button class="exp-modal-close" type="button" data-exp-close aria-label="Fermer">×</button>
@@ -506,7 +506,7 @@
   </div>
 
   <!-- ================= MODAL PRESTATION (formules) ================= -->
-  <div class="exp-modal" id="prestaModal" role="dialog" aria-modal="true" aria-labelledby="prestaModalTitle" hidden>
+  <div class="exp-modal" id="prestaModal" role="dialog" aria-modal="true" aria-label="Détails de la prestation" hidden>
     <div class="exp-modal-overlay" data-presta-close></div>
     <div class="exp-modal-panel" role="document">
       <button class="exp-modal-close" type="button" data-presta-close aria-label="Fermer">×</button>
@@ -516,6 +516,6 @@
   </div>
 
   <script src="js/config.js?v=20260824a"></script>
-  <script src="js/script.js?v=20260803r"></script>
+  <script src="js/script.js?v=20260803s"></script>
 </body>
 </html>
