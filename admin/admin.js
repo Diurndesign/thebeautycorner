@@ -3,6 +3,20 @@
    Connexion Supabase + édition du contenu + upload d'images.
    ============================================================ */
 (function () {
+  // Garde-fou : si une dépendance n'a pas pu se charger, on affiche un message
+  // clair plutôt qu'une page blanche.
+  if (!window.supabase || !window.supabase.createClient) {
+    document.body.innerHTML = '<div style="max-width:520px;margin:14vh auto;padding:0 22px;font-family:system-ui,sans-serif;text-align:center;color:#4a4038">' +
+      '<h1 style="color:#b45f4d;font-size:1.4rem;margin-bottom:10px">Impossible de charger l\'administration</h1>' +
+      '<p style="line-height:1.6">La librairie de connexion n\'a pas pu se charger. Si tu utilises un bloqueur (Brave Shields, uBlock, AdBlock…), désactive-le sur cette page puis recharge (F5).</p></div>';
+    return;
+  }
+  if (!window.SB_URL || !window.SB_KEY) {
+    document.body.innerHTML = '<div style="max-width:520px;margin:14vh auto;padding:0 22px;font-family:system-ui,sans-serif;text-align:center;color:#4a4038">' +
+      '<h1 style="color:#b45f4d;font-size:1.4rem;margin-bottom:10px">Configuration manquante</h1>' +
+      '<p style="line-height:1.6">Le fichier de configuration ne s\'est pas chargé. Recharge la page (F5) ; si le problème persiste, contacte le développeur.</p></div>';
+    return;
+  }
   const sb = window.supabase.createClient(window.SB_URL, window.SB_KEY);
 
   const loginView = document.getElementById('loginView');
