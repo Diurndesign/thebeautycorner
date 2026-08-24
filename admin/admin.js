@@ -353,10 +353,16 @@
 
   /* ---------- Compression d'image (côté navigateur) ----------
      Redimensionne au besoin (max 2400 px sur le grand côté) et ré-encode
-     en JPEG qualité 92 % — visuellement identique, bien plus léger.
-     Si le résultat n'est pas plus léger que l'original, on garde l'original. */
+     en WebP (plus léger que le JPEG à qualité égale) — repli JPEG si le
+     navigateur ne sait pas produire de WebP. Si le résultat n'est pas plus
+     léger que l'original, on garde l'original. */
   const MAX_SIDE = 2400;
+  const WEBP_QUALITY = 0.90;
   const JPEG_QUALITY = 0.92;
+
+  function canvasToBlob(canvas, type, quality) {
+    return new Promise(function (res) { canvas.toBlob(res, type, quality); });
+  }
 
   async function compressImage(file) {
     // On ne touche pas aux formats à préserver tels quels.
@@ -389,10 +395,16 @@
       ctx.drawImage(source, 0, 0, w, h);
       if (bitmap && bitmap.close) bitmap.close();
 
-      const blob = await new Promise(function (res) { canvas.toBlob(res, 'image/jpeg', JPEG_QUALITY); });
+      // WebP d'abord (plus léger) ; repli JPEG si le navigateur ne le produit pas.
+      let blob = await canvasToBlob(canvas, 'image/webp', WEBP_QUALITY);
+      let ext = 'webp', outType = 'image/webp';
+      if (!blob || blob.type !== 'image/webp') {
+        blob = await canvasToBlob(canvas, 'image/jpeg', JPEG_QUALITY);
+        ext = 'jpg'; outType = 'image/jpeg';
+      }
       if (!blob || blob.size >= file.size) return file;   // pas plus léger → on garde l'original
       const base = (file.name.replace(/\.[^.]+$/, '') || 'photo');
-      return new File([blob], base + '.jpg', { type: 'image/jpeg' });
+      return new File([blob], base + '.' + ext, { type: outType });
     } catch (e) {
       return file; // en cas de souci, on envoie l'original (jamais de blocage)
     }
