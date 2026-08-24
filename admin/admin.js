@@ -550,5 +550,37 @@
   function escAttr(s) { return String(s || '').replace(/"/g, '&quot;'); }
   function escHtml(s) { return String(s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 
+  /* ---------- Navbar des sections : surligne la catégorie active au défilement ---------- */
+  function setupSectionNav() {
+    const nav = document.getElementById('adminNav');
+    if (!nav) return;
+    const links = Array.from(nav.querySelectorAll('a'));
+    const sections = links
+      .map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+      .filter(Boolean);
+    if (!sections.length) return;
+
+    function setActive(id) {
+      links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+    }
+    setActive(sections[0].id);
+    links.forEach(function (a) {
+      a.addEventListener('click', function () { setActive(a.getAttribute('href').slice(1)); });
+    });
+
+    if (!('IntersectionObserver' in window)) return;
+    const visible = new Set();
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visible.add(e.target.id); else visible.delete(e.target.id);
+      });
+      for (let i = 0; i < sections.length; i++) {
+        if (visible.has(sections[i].id)) { setActive(sections[i].id); break; }
+      }
+    }, { rootMargin: '-72px 0px -55% 0px', threshold: 0 });
+    sections.forEach(function (s) { io.observe(s); });
+  }
+  setupSectionNav();
+
   refresh();
 })();

@@ -52,6 +52,25 @@
     .col2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
     @media (max-width:560px){ .col2{ grid-template-columns:1fr; } }
     .grip { color:var(--muted); font-size:.8rem; }
+    /* Navbar des sections : collante en haut, onglet par catégorie */
+    html { scroll-behavior:smooth; }
+    .admin-nav {
+      position:sticky; top:0; z-index:30;
+      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto;
+      padding:12px 0; margin:0 0 24px;
+      background:var(--cream-soft);
+      border-bottom:1px solid rgba(129,94,84,.16);
+      -webkit-overflow-scrolling:touch; scrollbar-width:thin;
+    }
+    .admin-nav a {
+      flex:0 0 auto; padding:8px 15px; border-radius:999px;
+      font-size:.82rem; font-weight:500; text-decoration:none; white-space:nowrap;
+      color:var(--text); background:#fff; border:1px solid rgba(129,94,84,.22);
+      transition:background .2s, color .2s, border-color .2s;
+    }
+    .admin-nav a:hover { border-color:var(--blue); }
+    .admin-nav a.active { background:var(--blue); color:#fff; border-color:var(--blue); }
+    section[id] { scroll-margin-top:76px; }
   </style>
 </head>
 <body>
@@ -80,7 +99,16 @@
     </div>
     <p class="sub">Modifiez les textes et les photos, puis cliquez sur « Enregistrer ». Les changements sont visibles en ligne immédiatement.</p>
 
-    <section>
+    <nav class="admin-nav" id="adminNav" aria-label="Sections de l'administration">
+      <a href="#sec-reservation">Réservation</a>
+      <a href="#sec-photos">Photos</a>
+      <a href="#sec-textes">Textes</a>
+      <a href="#sec-experience">Expérience</a>
+      <a href="#sec-prestations">Prestations</a>
+      <a href="#sec-ba">Avant / Après</a>
+    </nav>
+
+    <section id="sec-reservation">
       <h2>Réservation</h2>
       <div class="card">
         <label for="planity">Lien Planity (boutons « Prendre rendez-vous »)</label>
@@ -88,29 +116,29 @@
       </div>
     </section>
 
-    <section style="margin-top:26px;">
+    <section style="margin-top:26px;" id="sec-photos">
       <h2>Photos du site</h2>
       <div class="card" id="siteImages"></div>
     </section>
 
-    <section style="margin-top:26px;">
+    <section style="margin-top:26px;" id="sec-textes">
       <h2>Textes du site</h2>
       <p class="sub" style="margin:-6px 0 14px;">Chaque zone de texte de la page. Astuce&nbsp;: pour un retour à la ligne dans un titre, appuyez sur Entrée.</p>
       <div id="textsEditor"></div>
     </section>
 
-    <section style="margin-top:26px;">
+    <section style="margin-top:26px;" id="sec-experience">
       <h2>Expérience (Frères d'Encre Experiences)</h2>
       <div id="expEditor"></div>
     </section>
 
-    <section style="margin-top:26px;">
+    <section style="margin-top:26px;" id="sec-prestations">
       <h2>Prestations</h2>
       <div id="prestations"></div>
       <button class="btn btn-ghost btn-sm" type="button" data-add="prestation">+ Ajouter une prestation</button>
     </section>
 
-    <section style="margin-top:26px;">
+    <section style="margin-top:26px;" id="sec-ba">
       <h2>Galerie Avant / Après</h2>
       <div id="avantApres"></div>
       <button class="btn btn-ghost btn-sm" type="button" data-add="ba">+ Ajouter une prestation</button>
@@ -126,6 +154,6 @@
   <!-- Librairie Supabase hébergée en local (fiable même avec un bloqueur type Brave) -->
   <script src="/admin/vendor/supabase.js?v=2"></script>
   <script src="/js/config.js?v=20260824a"></script>
-  <script src="/admin/admin.js?v=20260824a"></script>
+  <script src="/admin/admin.js?v=20260824b"></script>
 </body>
 </html>
