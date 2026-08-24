@@ -208,10 +208,11 @@ section { padding: 100px 0; }
   overflow: hidden;
   padding-top: var(--header-h);
 }
-/* Calque image de fond du hero */
+/* Calque image de fond du hero — l'image réelle est injectée par le JS
+   (Supabase). Pas d'image par défaut : évite le flash d'une ancienne image. */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=1600&q=80');
+  background-color: var(--brown);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
