@@ -11,7 +11,9 @@
       --dark:#3a2f2b; --text:#4a4038; --muted:#8a7d73; --cream-soft:#fbf6ec;
     }
     * { box-sizing:border-box; margin:0; padding:0; }
-    html, body { max-width:100%; overflow-x:hidden; }
+    /* overflow-x:clip (et non hidden) : bloque le débordement horizontal
+       SANS casser le position:sticky de la barre de catégories. */
+    html, body { max-width:100%; overflow-x:clip; }
     body { font-family:'Jost','Segoe UI',system-ui,sans-serif; background:var(--cream-soft); color:var(--text); line-height:1.5; }
     a { color:var(--blue); }
     .wrap { max-width:820px; margin:0 auto; padding:24px 18px 120px; }
