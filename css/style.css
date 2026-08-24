@@ -195,11 +195,6 @@ section { padding: 100px 0; }
 .header-cta { padding: 11px 26px; background: var(--blue); color: var(--cream); }
 .header-cta:hover { background: #46656f; }
 
-/* Bouton « Offrir » : identique au CTA (btn btn-blue header-cta) ;
-   cette classe n'ajoute que la disposition icône + libellé. */
-.header-gift { display: inline-flex; align-items: center; gap: 8px; }
-.header-gift svg { display: block; }
-
 .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
 .burger span { width: 26px; height: 2px; background: var(--cream); transition: .3s; border-radius: 2px; box-shadow: 0 1px 4px rgba(58,47,43,0.4); }
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -944,10 +939,7 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 760px) {
-  .header-cta:not(.header-gift) { display: none; }   /* masque « Prendre rendez-vous », garde « Offrir » */
-  /* Bouton Offrir : icône seule (pilule bleue compacte) sur mobile */
-  .header-gift { padding: 9px 11px; }
-  .header-gift span { display: none; }
+  .header-cta { display: none; }
   .nav {
     position: fixed;
     top: var(--header-h); left: 0; right: 0;
