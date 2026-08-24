@@ -559,7 +559,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ---------- Formulaire de contact (envoi par email via Web3Forms) ---------- */
   const form = document.getElementById('contactForm');
   const feedback = document.getElementById('formFeedback');
-  const RED = '#b45f4d', BLUE = '#587D8D';
+  const RED = '#b45f4d', BLUE = '#4a6b7a';
 
   if (form) {
     form.addEventListener('submit', function (e) {
