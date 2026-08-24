@@ -115,8 +115,12 @@ section { padding: 100px 0; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: transparent;
-  transition: padding .4s ease;
+  /* Bandeau sombre translucide (verre dépoli) : rend les liens lisibles
+     au-dessus du hero ET donne un vrai fond de contraste (WCAG/WAVE). */
+  background: rgba(58, 47, 43, 0.8);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(12px) saturate(140%);
+  transition: padding .4s ease, background .4s ease, backdrop-filter .4s ease;
 }
 /* Voile sombre en haut (derrière la capsule) : comble l'écart clair au-dessus
    quand on scrolle, pour que la capsule ne semble plus flotter. */
@@ -143,8 +147,13 @@ section { padding: 100px 0; }
               border-radius .4s cubic-bezier(0.2, 0.7, 0.2, 1),
               border-color .4s ease, box-shadow .4s ease, backdrop-filter .4s ease;
 }
-/* État scrollé : capsule flottante en verre dépoli, coins arrondis (façon Apple) */
-.site-header.scrolled { padding-top: 12px; }
+/* État scrollé : le bandeau plein s'efface, la capsule flottante prend le relais */
+.site-header.scrolled {
+  padding-top: 12px;
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
 .site-header.scrolled .header-inner {
   height: 60px;
   padding: 0 18px 0 22px;
