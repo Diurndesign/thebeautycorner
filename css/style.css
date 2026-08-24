@@ -473,9 +473,11 @@ section { padding: 100px 0; }
   text-decoration: none;
   white-space: nowrap;
   opacity: 0;
+  visibility: hidden;              /* masqué aux lecteurs/outils (WAVE) au repos */
   transform: translateY(14px);
   pointer-events: none;
-  transition: opacity .45s ease, transform .45s ease, background .25s ease;
+  transition: opacity .45s ease, transform .45s ease,
+              visibility 0s linear .45s, background .25s ease;
 }
 .presta-reserve span { transition: transform .25s ease; }
 .presta-reserve:hover { background: #46656f; }
@@ -487,7 +489,10 @@ section { padding: 100px 0; }
 .presta-cell.is-open .presta-num { color: rgba(255,255,255,0.7); }
 .presta-cell.is-open .presta-name { color: #fff; }
 .presta-cell.is-open .presta-desc { color: rgba(255,255,255,0.88); }
-.presta-cell.is-open .presta-reserve { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.presta-cell.is-open .presta-reserve {
+  opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
+  transition: opacity .45s ease, transform .45s ease, visibility 0s, background .25s ease;
+}
 
 @media (max-width: 900px) {
   .prestations-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1104,7 +1109,7 @@ body.modal-open { overflow: hidden; }
 
 /* Sur écran tactile (pas de survol) : le bouton reste visible en permanence */
 @media (hover: none) {
-  .presta-reserve { opacity: 1; transform: none; pointer-events: auto; }
+  .presta-reserve { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
 }
 
 /* Modal Prestation : liste des formules (prix + durée) */
