@@ -114,19 +114,31 @@ section { padding: 100px 0; }
 .site-header {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: var(--header-h);
   z-index: 100;
   background: transparent;
-  transition: background .3s ease, box-shadow .3s ease, height .3s ease;
+  transition: padding .4s ease;
 }
-.site-header.scrolled {
-  background: rgba(58, 47, 43, 0.45);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  backdrop-filter: blur(16px) saturate(140%);
-  box-shadow: 0 6px 26px rgba(58, 47, 43, 0.18);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.header-inner {
+  height: var(--header-h);
+  display: flex; align-items: center; justify-content: flex-end; gap: 40px;
+  border: 1px solid transparent;     /* réserve la place de la bordure (évite tout saut) */
+  transition: height .4s ease, padding .4s ease, background .4s ease,
+              border-radius .4s cubic-bezier(0.2, 0.7, 0.2, 1),
+              border-color .4s ease, box-shadow .4s ease, backdrop-filter .4s ease;
 }
-.header-inner { height: 100%; display: flex; align-items: center; justify-content: flex-end; gap: 40px; }
+/* État scrollé : capsule flottante en verre dépoli, coins arrondis (façon Apple) */
+.site-header.scrolled { padding-top: 12px; }
+.site-header.scrolled .header-inner {
+  height: 60px;
+  padding: 0 18px 0 22px;
+  border-radius: 999px;
+  background: rgba(58, 47, 43, 0.5);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 12px 36px rgba(58, 47, 43, 0.30),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
 
 /* Logo qui apparaît progressivement dans la navbar au scroll */
 .header-logo {
