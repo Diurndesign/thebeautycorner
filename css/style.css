@@ -188,28 +188,17 @@ section { padding: 100px 0; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--cream);
+  color: var(--cream);                 /* logo Instagram : blanc, sans animation au survol */
   filter: drop-shadow(0 1px 8px rgba(58, 47, 43, 0.35));
-  transition: color .25s ease, transform .25s ease;
 }
-.header-instagram:hover { color: var(--terracotta); transform: translateY(-1px); }
 
 .header-cta { padding: 11px 26px; background: var(--blue); color: var(--cream); }
 .header-cta:hover { background: #46656f; }
 
-/* Bouton « Offrir » (carte cadeau) dans la navbar */
-.header-gift {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--cream); text-decoration: none;
-  font-family: var(--font-body);
-  font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 10px 20px; border-radius: 40px;
-  border: 1.5px solid rgba(246, 236, 218, 0.55);
-  filter: drop-shadow(0 1px 8px rgba(58, 47, 43, 0.35));
-  transition: color .25s ease, border-color .25s ease, background .25s ease;
-}
+/* Bouton « Offrir » : identique au CTA (btn btn-blue header-cta) ;
+   cette classe n'ajoute que la disposition icône + libellé. */
+.header-gift { display: inline-flex; align-items: center; gap: 8px; }
 .header-gift svg { display: block; }
-.header-gift:hover { color: var(--terracotta); border-color: var(--terracotta); }
 
 .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
 .burger span { width: 26px; height: 2px; background: var(--cream); transition: .3s; border-radius: 2px; box-shadow: 0 1px 4px rgba(58,47,43,0.4); }
@@ -955,9 +944,9 @@ body.modal-open { overflow: hidden; }
 }
 
 @media (max-width: 760px) {
-  .header-cta { display: none; }
-  /* Bouton Offrir : icône seule sur mobile pour gagner de la place */
-  .header-gift { padding: 8px; border: none; }
+  .header-cta:not(.header-gift) { display: none; }   /* masque « Prendre rendez-vous », garde « Offrir » */
+  /* Bouton Offrir : icône seule (pilule bleue compacte) sur mobile */
+  .header-gift { padding: 9px 11px; }
   .header-gift span { display: none; }
   .nav {
     position: fixed;
