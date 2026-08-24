@@ -142,6 +142,9 @@ section { padding: 100px 0; }
 
 .nav { display: flex; gap: 34px; }
 .nav a {
+  display: inline-block;
+  position: relative;
+  z-index: 0;                      /* contexte d'empilement : garde le halo derrière le texte */
   text-decoration: none;
   color: var(--cream);
   text-shadow: 0 1px 8px rgba(58, 47, 43, 0.35);
@@ -149,38 +152,45 @@ section { padding: 100px 0; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 400;
-  position: relative;
-  padding-bottom: 4px;
+  transition: color .4s ease,
+              transform .5s cubic-bezier(0.2, 0.7, 0.2, 1),
+              text-shadow .5s ease;
 }
-/* Halo « poudre » sous le lien : un trait flou et lumineux qui éclot au survol.
-   Le dégradé radial estompe les bords (poudre dispersée), le box-shadow crée
-   le halo, et le flou + montée en échelle donnent l'effet de floraison. */
+/* « Éclat de poudre » : au survol, un halo chaud et flou éclot DERRIÈRE le mot
+   (crème -> terracotta), comme un pigment qui capte la lumière. Pas de trait. */
 .nav a::after {
   content: '';
-  position: absolute; left: 50%; bottom: -2px;
-  width: 100%; height: 3px;
-  transform: translateX(-50%) scaleX(0.35);
-  border-radius: 50%;
+  position: absolute;
+  left: 50%; top: 48%;
+  width: 155%; height: 240%;
+  transform: translate(-50%, -50%) scale(0.55);
   background: radial-gradient(ellipse at center,
-              rgba(202, 148, 121, 0.95) 0%,
-              rgba(202, 148, 121, 0.5) 42%,
-              rgba(202, 148, 121, 0) 75%);
-  box-shadow: 0 0 12px 3px rgba(202, 148, 121, 0.45);
+              rgba(246, 236, 218, 0.32) 0%,
+              rgba(202, 148, 121, 0.30) 38%,
+              rgba(202, 148, 121, 0) 70%);
+  filter: blur(7px);
   opacity: 0;
-  filter: blur(2.5px);
-  transition: opacity .45s ease,
-              transform .55s cubic-bezier(0.2, 0.7, 0.2, 1),
-              filter .55s ease;
+  z-index: -1;
   pointer-events: none;
+  transition: opacity .5s ease,
+              transform .6s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.nav a:hover { color: var(--cream); }          /* la typo reste blanche */
+.nav a:hover {
+  color: #fff;                     /* la typo s'illumine en blanc pur */
+  transform: translateY(-2px);     /* respire légèrement vers le haut */
+  text-shadow: 0 0 10px rgba(246, 236, 218, 0.5),
+               0 0 22px rgba(202, 148, 121, 0.5),
+               0 1px 8px rgba(58, 47, 43, 0.35);
+}
 .nav a:hover::after {
   opacity: 1;
-  transform: translateX(-50%) scaleX(1);
-  filter: blur(1px);
+  transform: translate(-50%, -50%) scale(1);   /* le halo éclot */
 }
 @media (prefers-reduced-motion: reduce) {
-  .nav a::after { transition: opacity .3s ease; transform: translateX(-50%) scaleX(1); filter: blur(1px); }
+  .nav a { transition: color .25s ease, text-shadow .25s ease; }
+  .nav a:hover { transform: none; }
+  .nav a::after { transition: opacity .25s ease; }
+  .nav a:hover::after { transform: translate(-50%, -50%) scale(1); }
 }
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
@@ -954,7 +964,9 @@ body.modal-open { overflow: hidden; }
   }
   .nav.open { transform: translateY(0); }
   .nav a { color: var(--text); text-shadow: none; }
-  .nav a:hover { color: var(--text); }   /* menu clair : texte foncé conservé, seul le halo s'anime */
+  .nav a::after { display: none; }        /* pas de halo sur le menu clair */
+  /* menu clair : glissement doux + teinte terracotta (lisible), sans halo */
+  .nav a:hover { color: var(--terracotta-deep); transform: translateX(6px); text-shadow: none; }
   .burger { display: flex; }
 
   .testimonials { background-attachment: scroll; }
