@@ -39,7 +39,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260824g" />
+  <link rel="stylesheet" href="css/style.css?v=20260824h" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -385,12 +385,12 @@
 
         <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue contact-planity">Prendre rendez-vous sur Planity</a>
 
-        <ul class="contact-list">
-          <li><strong>Adresse</strong><span data-txt="contact.address">Salon Frères d'encre<br />42 rue Arson, 06300 Nice</span></li>
-          <li><strong>Téléphone</strong><span><a href="tel:+33601823773" data-txt="contact.phone" data-tel-from="contact.phoneTel">06 01 82 37 73</a></span></li>
-          <li class="hours-item">
-            <strong>Horaires</strong>
-            <span class="hours-grid">
+        <dl class="contact-list">
+          <div class="contact-item"><dt>Adresse</dt><dd data-txt="contact.address">Salon Frères d'encre<br />42 rue Arson, 06300 Nice</dd></div>
+          <div class="contact-item"><dt>Téléphone</dt><dd><a href="tel:+33601823773" data-txt="contact.phone" data-tel-from="contact.phoneTel">06 01 82 37 73</a></dd></div>
+          <div class="contact-item hours-item">
+            <dt>Horaires</dt>
+            <dd class="hours-grid">
               <span class="day">Lundi</span><span class="time" data-txt="contact.hoursMon">11h00 – 19h00</span>
               <span class="day">Mardi</span><span class="time" data-txt="contact.hoursTue">10h00 – 18h00</span>
               <span class="day">Mercredi</span><span class="time" data-txt="contact.hoursWed">08h00 – 13h00</span>
@@ -398,9 +398,9 @@
               <span class="day">Vendredi</span><span class="time" data-txt="contact.hoursFri">10h00 – 19h00</span>
               <span class="day">Samedi</span><span class="time" data-txt="contact.hoursSat">Fermé</span>
               <span class="day">Dimanche</span><span class="time" data-txt="contact.hoursSun">Fermé</span>
-            </span>
-          </li>
-        </ul>
+            </dd>
+          </div>
+        </dl>
 
         <div class="contact-map">
           <iframe
@@ -507,6 +507,6 @@
   </div>
 
   <script src="js/config.js?v=20260824a"></script>
-  <script src="js/script.js?v=20260824g"></script>
+  <script src="js/script.js?v=20260824h"></script>
 </body>
 </html>

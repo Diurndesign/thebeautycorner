@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (img) {
             const im = document.createElement('img');
             im.src = img;
-            im.alt = 'Publication Instagram de The Beauty Corner';
+            im.alt = '';   // décorative : le lien porte déjà aria-label (évite les alt identiques)
             im.loading = 'lazy';
             a.appendChild(im);
           }
