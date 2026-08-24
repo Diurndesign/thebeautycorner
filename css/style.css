@@ -1078,4 +1078,3 @@ body.modal-open { overflow: hidden; }
 .legal ul { padding-left: 22px; margin-bottom: 10px; }
 .legal a { color: var(--blue); }
 .legal-back { margin-top: 40px; }
-.todo { background: rgba(202,148,121,.14); border-left: 3px solid var(--terracotta); padding: 4px 8px; border-radius: 4px; }
