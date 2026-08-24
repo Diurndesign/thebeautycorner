@@ -291,6 +291,23 @@ document.addEventListener('DOMContentLoaded', function () {
     return fromFile();
   }
 
+  // Remplit le menu « Prestation souhaitée » du formulaire de contact à partir
+  // des prestations (reste synchronisé avec l'admin) + une option « Autre ».
+  function fillServiceSelect(prestations) {
+    const sel = document.getElementById('service');
+    if (!sel || !prestations || !prestations.length) return;
+    sel.innerHTML = '';
+    prestations.forEach(function (p) {
+      if (!p || !p.nom) return;
+      const o = document.createElement('option');
+      o.textContent = p.nom;
+      sel.appendChild(o);
+    });
+    const autre = document.createElement('option');
+    autre.textContent = 'Autre / Plusieurs prestations';
+    sel.appendChild(autre);
+  }
+
   loadContent()
     .then(function (content) {
       const planity = content.planity || 'https://www.planity.com/the-beauty-corner-by-alex--06300-nice';
@@ -314,6 +331,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       renderPrestations(content.prestations || [], planity);
       renderBeforeAfter(content.avantApres || []);
+      fillServiceSelect(content.prestations || []);
     })
     .catch(function (err) { console.error('Chargement du contenu impossible :', err); });
 
