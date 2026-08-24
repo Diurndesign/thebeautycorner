@@ -103,7 +103,7 @@
       '<div class="imgfield">' +
         '<span class="thumb" data-thumb style="background-image:url(\'' + (url || '') + '\')"></span>' +
         '<div class="up">' +
-          '<input type="file" accept="image/*" data-upload />' +
+          '<input type="file" accept="image/jpeg,image/png,.jpg,.jpeg,.png" data-upload />' +
           '<input type="hidden" data-field="' + fieldName + '" value="' + (url || '') + '" />' +
           '<div class="grip" data-status></div>' +
         '</div>' +
@@ -416,6 +416,17 @@
       : Math.round(bytes / 1024) + ' Ko';
   }
 
+  /* ---------- Sécurité : formats autorisés (JPG/JPEG/PNG) + poids maximum ---------- */
+  const MAX_UPLOAD_BYTES = 15 * 1024 * 1024; // 15 Mo
+  function validateImage(file) {
+    const okType = /^image\/(jpe?g|png)$/i.test(file.type);
+    const okExt = /\.(jpe?g|png)$/i.test(file.name || '');
+    const allowed = file.type ? okType : okExt; // on se fie au type MIME s'il existe, sinon à l'extension
+    if (!allowed) return 'Format non autorisé — seuls JPG, JPEG et PNG sont acceptés.';
+    if (file.size > MAX_UPLOAD_BYTES) return 'Image trop lourde (' + fmtSize(file.size) + ') — 15 Mo maximum.';
+    return null;
+  }
+
   /* ---------- Upload d'image ---------- */
   document.addEventListener('change', async function (e) {
     const input = e.target.closest('[data-upload]');
@@ -425,6 +436,15 @@
     const hidden = box.querySelector('[data-field]');
     const status = box.querySelector('[data-status]');
     const thumb = input.closest('.imgfield').querySelector('[data-thumb]');
+    // Sécurité : on refuse tout ce qui n'est pas JPG/JPEG/PNG, ou trop lourd.
+    const invalid = validateImage(original);
+    if (invalid) {
+      status.style.color = '#b45f4d';
+      status.textContent = invalid;
+      input.value = '';   // vide le champ pour permettre une nouvelle sélection
+      return;
+    }
+    status.style.color = '';
     status.textContent = 'Optimisation…';
     try {
       const file = await compressImage(original);
