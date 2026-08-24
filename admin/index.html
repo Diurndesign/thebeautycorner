@@ -58,12 +58,17 @@
     html { scroll-behavior:smooth; }
     .admin-nav {
       position:sticky; top:0; z-index:30;
-      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto;
+      display:flex; align-items:center; gap:10px;
       padding:12px 0; margin:0 0 24px;
       background:var(--cream-soft);
       border-bottom:1px solid rgba(129,94,84,.16);
+    }
+    .admin-nav__tabs {
+      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto;
+      flex:1 1 auto; min-width:0;
       -webkit-overflow-scrolling:touch; scrollbar-width:thin;
     }
+    .admin-nav__logout { flex:0 0 auto; }
     .admin-nav a {
       flex:0 0 auto; padding:8px 15px; border-radius:999px;
       font-size:.82rem; font-weight:500; text-decoration:none; white-space:nowrap;
@@ -97,17 +102,19 @@
   <div id="editorView" class="wrap hidden">
     <div class="top">
       <h1>Contenu du site</h1>
-      <button id="logout" class="btn btn-ghost btn-sm" type="button">Se déconnecter</button>
     </div>
     <p class="sub">Modifiez les textes et les photos, puis cliquez sur « Enregistrer ». Les changements sont visibles en ligne immédiatement.</p>
 
     <nav class="admin-nav" id="adminNav" aria-label="Sections de l'administration">
-      <a href="#sec-reservation">Réservation</a>
-      <a href="#sec-photos">Photos</a>
-      <a href="#sec-textes">Textes</a>
-      <a href="#sec-experience">Expérience</a>
-      <a href="#sec-prestations">Prestations</a>
-      <a href="#sec-ba">Avant / Après</a>
+      <div class="admin-nav__tabs">
+        <a href="#sec-reservation">Réservation</a>
+        <a href="#sec-photos">Photos</a>
+        <a href="#sec-textes">Textes</a>
+        <a href="#sec-experience">Expérience</a>
+        <a href="#sec-prestations">Prestations</a>
+        <a href="#sec-ba">Avant / Après</a>
+      </div>
+      <button id="logout" class="btn btn-ghost btn-sm admin-nav__logout" type="button">Se déconnecter</button>
     </nav>
 
     <section id="sec-reservation">
