@@ -109,22 +109,34 @@ document.addEventListener('DOMContentLoaded', function () {
       art.querySelector('.presta-desc').textContent = item.description || '';
       const priceEl = art.querySelector('.presta-price');
       if (item.prix) priceEl.textContent = item.prix; else priceEl.style.display = 'none';
-      if (item.image) art.querySelector('.presta-cell-img').style.backgroundImage = "url('" + item.image + "')";
+      // Image de fond : mémorisée mais NON chargée ici. Elle n'apparaît qu'au
+      // survol ; on la charge à la demande (ci-dessous) pour éviter une rafale
+      // de téléchargements au scroll (et rien d'inutile sur mobile).
+      if (item.image) art.querySelector('.presta-cell-img').dataset.bg = item.image;
       // Le bouton est dans la card : le clic remonte au gestionnaire de la card.
       art.addEventListener('click', function () { openAction(item); });
       prestaGrid.appendChild(art);
     });
+
+    // Charge l'image de fond d'une carte une seule fois (au 1er survol/focus)
+    function loadCellBg(cell) {
+      const imgEl = cell.querySelector('.presta-cell-img');
+      if (imgEl && imgEl.dataset.bg) {
+        imgEl.style.backgroundImage = "url('" + imgEl.dataset.bg + "')";
+        delete imgEl.dataset.bg;
+      }
+    }
 
     // Révélation de l'image au survol (desktop) + focus clavier sur le bouton
     const cells = Array.from(prestaGrid.querySelectorAll('.presta-cell'));
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     if (canHover) {
       cells.forEach(function (cell) {
-        cell.addEventListener('pointerenter', function () { cell.classList.add('is-open'); });
+        cell.addEventListener('pointerenter', function () { loadCellBg(cell); cell.classList.add('is-open'); });
         cell.addEventListener('pointerleave', function () { cell.classList.remove('is-open'); });
         const btn = cell.querySelector('.presta-reserve');
         if (btn) {
-          btn.addEventListener('focus', function () { cell.classList.add('is-open'); });
+          btn.addEventListener('focus', function () { loadCellBg(cell); cell.classList.add('is-open'); });
           btn.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
       });
