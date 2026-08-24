@@ -150,7 +150,17 @@ section { padding: 100px 0; }
   pointer-events: none;
   transition: opacity .35s ease, transform .35s ease;
 }
-.header-logo img { height: 42px; width: auto; display: block; filter: drop-shadow(0 4px 12px rgba(58, 47, 43, 0.3)); }
+.header-logo img {
+  height: 42px; width: auto; display: block;
+  filter: drop-shadow(0 4px 12px rgba(58, 47, 43, 0.3));
+  transition: transform .35s cubic-bezier(0.2, 0.7, 0.2, 1), filter .35s ease;
+}
+/* Survol : halo flou lumineux -> montre que le logo est cliquable */
+.header-logo:hover img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 4px 12px rgba(58, 47, 43, 0.3))
+          drop-shadow(0 0 12px rgba(246, 236, 218, 0.55));
+}
 
 .nav { display: flex; gap: 34px; }
 .nav a {
@@ -203,6 +213,8 @@ section { padding: 100px 0; }
   .nav a:hover { transform: none; }
   .nav a::after { transition: opacity .25s ease; }
   .nav a:hover::after { transform: translate(-50%, -50%) scale(1); }
+  .header-logo:hover img,
+  .header-instagram:hover { transform: none; }   /* halo conservé, sans mouvement */
 }
 
 .header-actions { display: flex; align-items: center; gap: 18px; }
@@ -210,8 +222,16 @@ section { padding: 100px 0; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--cream);                 /* logo Instagram : blanc, sans animation au survol */
+  color: var(--cream);
   filter: drop-shadow(0 1px 8px rgba(58, 47, 43, 0.35));
+  transition: transform .35s cubic-bezier(0.2, 0.7, 0.2, 1), filter .35s ease, color .35s ease;
+}
+/* Survol : halo flou lumineux (reste blanc) -> montre que l'icône est cliquable */
+.header-instagram:hover {
+  color: #fff;
+  transform: translateY(-1px) scale(1.08);
+  filter: drop-shadow(0 1px 8px rgba(58, 47, 43, 0.35))
+          drop-shadow(0 0 11px rgba(246, 236, 218, 0.6));
 }
 
 .header-cta { padding: 11px 26px; background: var(--blue); color: var(--cream); }
