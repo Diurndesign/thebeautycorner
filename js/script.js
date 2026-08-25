@@ -89,13 +89,14 @@ document.addEventListener('DOMContentLoaded', function () {
       else window.open(item.bookHref || planity, '_blank', 'noopener');
     }
 
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
     data.forEach(function (item, i) {
       const hasFormules = !!(item.formules && item.formules.length);
       const btnLabel = item.cardLabel || (hasFormules ? 'Voir les formules' : 'Réserver');
       const art = document.createElement('article');
       art.className = 'presta-cell';
       art.innerHTML =
-        '<div class="presta-cell-img" aria-hidden="true"></div>' +
         '<div class="presta-cell-inner">' +
           '<span class="presta-num">' + ('0' + (i + 1)).slice(-2) + '</span>' +
           '<div class="presta-cell-head">' +
@@ -109,60 +110,37 @@ document.addEventListener('DOMContentLoaded', function () {
       art.querySelector('.presta-desc').textContent = item.description || '';
       const priceEl = art.querySelector('.presta-price');
       if (item.prix) priceEl.textContent = item.prix; else priceEl.style.display = 'none';
-      // Image de fond : mémorisée mais NON chargée ici. Elle n'apparaît qu'au
-      // survol ; on la charge à la demande (ci-dessous) pour éviter une rafale
-      // de téléchargements au scroll (et rien d'inutile sur mobile).
-      if (item.image) art.querySelector('.presta-cell-img').dataset.bg = item.image;
+
+      // Image de survol : vraie balise <img> en lazy-load (desktop uniquement).
+      // Le navigateur la charge quand la carte approche de l'écran -> déjà prête
+      // au survol, sans rafale au scroll ni téléchargement inutile sur mobile.
+      if (canHover && item.image) {
+        const im = document.createElement('img');
+        im.className = 'presta-cell-img';
+        im.alt = '';
+        im.setAttribute('aria-hidden', 'true');
+        im.loading = 'lazy';
+        im.decoding = 'async';
+        im.src = item.image;
+        art.insertBefore(im, art.firstChild);
+      }
+
       // Le bouton est dans la card : le clic remonte au gestionnaire de la card.
       art.addEventListener('click', function () { openAction(item); });
       prestaGrid.appendChild(art);
     });
 
-    // Charge l'image de fond d'une carte une seule fois (au 1er survol/focus)
-    function loadCellBg(cell) {
-      const imgEl = cell.querySelector('.presta-cell-img');
-      if (imgEl && imgEl.dataset.bg) {
-        imgEl.style.backgroundImage = "url('" + imgEl.dataset.bg + "')";
-        delete imgEl.dataset.bg;
-      }
-    }
-
-    // Révélation de l'image au survol (desktop) + focus clavier sur le bouton
-    const cells = Array.from(prestaGrid.querySelectorAll('.presta-cell'));
-    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    // Survol (desktop) : révèle l'image + focus clavier sur le bouton
     if (canHover) {
-      cells.forEach(function (cell) {
-        cell.addEventListener('pointerenter', function () { loadCellBg(cell); cell.classList.add('is-open'); });
+      Array.prototype.forEach.call(prestaGrid.querySelectorAll('.presta-cell'), function (cell) {
+        cell.addEventListener('pointerenter', function () { cell.classList.add('is-open'); });
         cell.addEventListener('pointerleave', function () { cell.classList.remove('is-open'); });
         const btn = cell.querySelector('.presta-reserve');
         if (btn) {
-          btn.addEventListener('focus', function () { loadCellBg(cell); cell.classList.add('is-open'); });
+          btn.addEventListener('focus', function () { cell.classList.add('is-open'); });
           btn.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
       });
-
-      // Préchargement discret (pendant les temps morts) : les images de survol
-      // arrivent en cache AVANT le survol -> affichage instantané, sans la
-      // saccade au scroll (décodage hors du fil principal, une image à la fois).
-      (function prefetchHoverImages() {
-        const urls = cells.map(function (c) {
-          const i = c.querySelector('.presta-cell-img');
-          return i && i.dataset.bg;
-        }).filter(Boolean);
-        let i = 0;
-        function step() {
-          if (i >= urls.length) return;
-          const im = new Image();
-          im.src = urls[i++];
-          const done = im.decode ? im.decode().catch(function () {}) : Promise.resolve();
-          done.then(schedule);
-        }
-        function schedule() {
-          if ('requestIdleCallback' in window) requestIdleCallback(step, { timeout: 2000 });
-          else setTimeout(step, 250);
-        }
-        schedule();
-      })();
     }
   }
 

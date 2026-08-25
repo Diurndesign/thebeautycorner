@@ -415,13 +415,13 @@ section { padding: 100px 0; }
 }
 .presta-cell:hover { transform: translateY(-4px); }
 
-/* Image révélée au survol / tap */
+/* Image révélée au survol / tap (vraie <img> en lazy-load, injectée par le JS) */
 .presta-cell-img {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-color: var(--cream);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0;
   transform: scale(1.1);
   transition: opacity .55s ease, transform 1.3s ease;
