@@ -286,15 +286,14 @@ section { padding: 100px 0; }
   overflow: hidden;
   padding-top: var(--header-h);
 }
-/* Calque image de fond du hero. L'URL ci-dessous est la photo actuelle du
-   hero : elle est préchargée dans le <head> (rel="preload") et posée ici en
-   fond pour un affichage immédiat au lancement. Le JS (Supabase) réinjecte la
-   même URL au chargement ; si la photo est changée depuis l'admin, pensez à
-   mettre à jour cette URL et celle du <link rel="preload"> dans index.html. */
+/* Calque image de fond du hero. On pointe vers l'URL STABLE /api/hero-image,
+   qui redirige côté serveur vers la photo actuelle en base : le fond reste
+   donc toujours synchronisé avec l'admin, sans URL à maintenir ici. Le JS
+   (Supabase) réinjecte ensuite l'URL directe pour l'état final. */
 .hero-bg {
   position: absolute; inset: 0; z-index: 0;
   background-color: var(--dark);
-  background-image: url('https://ssrjzqprpovhuyaumyuw.supabase.co/storage/v1/object/public/media/uploads/1787674425918-rhkgvp.webp');
+  background-image: url('/api/hero-image');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
