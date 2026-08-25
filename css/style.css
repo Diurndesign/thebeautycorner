@@ -254,6 +254,18 @@ section { padding: 100px 0; }
 .header-cta { padding: 11px 26px; background: var(--blue); color: var(--cream); }
 .header-cta:hover { background: #46656f; }
 
+/* Laptops (~901–1080px, ex. 1024px) : la nav complète + le CTA tiennent juste —
+   on resserre les espacements pour éviter tout débordement. En dessous de 900px,
+   la nav passe en menu burger (voir plus bas). */
+@media (min-width: 901px) and (max-width: 1080px) {
+  .container { width: 94%; }
+  .header-inner { gap: 20px; }
+  .nav { gap: 18px; }
+  .nav a { font-size: 0.8rem; letter-spacing: 0.04em; }
+  .header-actions { gap: 12px; }
+  .header-cta { padding: 10px 16px; font-size: 0.76rem; letter-spacing: 0.06em; }
+}
+
 .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
 .burger span { width: 26px; height: 2px; background: var(--cream); transition: .3s; border-radius: 2px; box-shadow: 0 1px 4px rgba(58,47,43,0.4); }
 .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -1002,7 +1014,7 @@ body.modal-open { overflow: hidden; }
   .hero-review-top { justify-content: center; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .header-cta { display: none; }
   .nav {
     position: fixed;
@@ -1081,7 +1093,7 @@ body.modal-open { overflow: hidden; }
 
 /* Barre de réservation fixe (mobile) */
 .mobile-book-bar { display: none; }
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .mobile-book-bar {
     display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
     padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
