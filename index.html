@@ -39,7 +39,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260824p" />
+  <link rel="stylesheet" href="css/style.css?v=20260824q" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -393,8 +393,10 @@
         <a data-planity href="https://www.planity.com/the-beauty-corner-by-alex--06300-nice" target="_blank" rel="noopener" class="btn btn-blue contact-planity">Prendre rendez-vous sur Planity</a>
 
         <dl class="contact-list">
-          <div class="contact-item"><dt>Adresse</dt><dd data-txt="contact.address">Salon Frères d'encre<br />42 rue Arson, 06300 Nice</dd></div>
-          <div class="contact-item"><dt>Téléphone</dt><dd><a href="tel:+33601823773" data-txt="contact.phone" data-tel-from="contact.phoneTel">06 01 82 37 73</a></dd></div>
+          <div class="contact-duo">
+            <div class="contact-item"><dt>Adresse</dt><dd data-txt="contact.address">Salon Frères d'encre<br />42 rue Arson, 06300 Nice</dd></div>
+            <div class="contact-item"><dt>Téléphone</dt><dd><a href="tel:+33601823773" data-txt="contact.phone" data-tel-from="contact.phoneTel">06 01 82 37 73</a></dd></div>
+          </div>
           <div class="contact-item hours-item">
             <dt>Horaires</dt>
             <dd class="hours-grid">
@@ -408,13 +410,6 @@
             </dd>
           </div>
         </dl>
-
-        <div class="contact-map">
-          <iframe
-            title="Localisation du salon The Beauty Corner à Nice"
-            src="https://maps.google.com/maps?q=42%20rue%20Arson%2C%2006300%20Nice&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            width="100%" height="240" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
       </div>
 
       <form class="contact-form" id="contactForm" novalidate>
@@ -451,6 +446,13 @@
         <button type="submit" class="btn btn-blue btn-block">Envoyer ma demande</button>
         <p class="form-feedback" id="formFeedback" role="status"></p>
       </form>
+
+      <div class="contact-map">
+        <iframe
+          title="Localisation du salon The Beauty Corner à Nice"
+          src="https://maps.google.com/maps?q=42%20rue%20Arson%2C%2006300%20Nice&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          width="100%" height="280" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
     </div>
   </section>
 

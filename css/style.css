@@ -898,11 +898,15 @@ body.modal-open { overflow: hidden; }
    CONTACT
    ============================================================ */
 .contact { background: var(--cream); }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 70px; row-gap: 44px; align-items: start; }
 .contact-info h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
 .contact-planity { margin: 28px 0 4px; }
 .contact-list { list-style: none; margin: 34px 0; }
 .contact-item { display: flex; flex-direction: column; margin-bottom: 20px; }
+/* Adresse + Téléphone côte à côte (ergonomie) */
+.contact-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-bottom: 20px; }
+.contact-duo .contact-item { margin-bottom: 0; }
+@media (max-width: 560px) { .contact-duo { grid-template-columns: 1fr; } }
 .contact-list dt {
   font-family: var(--font-body);
   text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
@@ -1105,7 +1109,9 @@ body.modal-open { overflow: hidden; }
 .faq-a { padding: 0 44px 24px 0; color: var(--text); line-height: 1.7; }
 
 /* Carte Google (Contact) */
-.contact-map { margin-top: 28px; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); }
+/* Carte Google Maps : pleine largeur sous les deux colonnes (alignée avec les
+   horaires à gauche et le formulaire à droite). */
+.contact-map { grid-column: 1 / -1; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft); }
 .contact-map iframe { display: block; width: 100%; border: 0; filter: grayscale(0.15); }
 
 /* Champ piège anti-spam (honeypot) : masqué à l'écran et aux lecteurs d'écran */
