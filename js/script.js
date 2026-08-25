@@ -141,6 +141,19 @@ document.addEventListener('DOMContentLoaded', function () {
           btn.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
       });
+
+      // Préchargement en arrière-plan, dès l'arrivée sur la page (priorité basse
+      // pour ne pas gêner le hero) : les images de survol sont en cache AVANT
+      // qu'on atteigne la section -> 1er survol instantané, même pour un gros
+      // fichier. C'est ce qui manquait : le lazy-load ne chargeait qu'au dernier
+      // moment, trop tard pour une image lourde.
+      data.forEach(function (item) {
+        if (!item.image) return;
+        const im = new Image();
+        if ('fetchPriority' in im) im.fetchPriority = 'low';
+        im.decoding = 'async';
+        im.src = item.image;
+      });
     }
   }
 
