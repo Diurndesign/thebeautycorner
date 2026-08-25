@@ -91,6 +91,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
+    // Sert une version redimensionnée + recompressée via la transformation
+    // d'image Supabase (bien plus légère que l'original). Renvoie null si l'URL
+    // n'est pas une image publique Supabase ; l'<img> retombe alors sur l'original.
+    function optimizedUrl(url, w) {
+      const marker = '/storage/v1/object/public/';
+      if (typeof url !== 'string' || url.indexOf(marker) === -1) return null;
+      return url.replace(marker, '/storage/v1/render/image/public/') + '?width=' + w + '&quality=65';
+    }
+
     data.forEach(function (item, i) {
       const hasFormules = !!(item.formules && item.formules.length);
       const btnLabel = item.cardLabel || (hasFormules ? 'Voir les formules' : 'Réserver');
@@ -115,13 +124,23 @@ document.addEventListener('DOMContentLoaded', function () {
       // Le navigateur la charge quand la carte approche de l'écran -> déjà prête
       // au survol, sans rafale au scroll ni téléchargement inutile sur mobile.
       if (canHover && item.image) {
+        const opt = optimizedUrl(item.image, 900);
         const im = document.createElement('img');
         im.className = 'presta-cell-img';
         im.alt = '';
         im.setAttribute('aria-hidden', 'true');
         im.loading = 'lazy';
         im.decoding = 'async';
-        im.src = item.image;
+        if (opt) {
+          // Repli sur l'original si la transformation d'image n'est pas disponible.
+          im.addEventListener('error', function onErr() {
+            im.removeEventListener('error', onErr);
+            im.src = item.image;
+          });
+          im.src = opt;
+        } else {
+          im.src = item.image;
+        }
         art.insertBefore(im, art.firstChild);
       }
 
@@ -152,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const im = new Image();
         if ('fetchPriority' in im) im.fetchPriority = 'low';
         im.decoding = 'async';
-        im.src = item.image;
+        im.src = optimizedUrl(item.image, 900) || item.image;
       });
     }
   }
