@@ -921,12 +921,13 @@ body.modal-open { overflow: hidden; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 70px; row-gap: 44px; align-items: start; }
 .contact-info h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
 .contact-planity { margin: 28px 0 4px; }
-.contact-list { list-style: none; margin: 34px 0; }
-.contact-item { display: flex; flex-direction: column; margin-bottom: 20px; }
-/* Adresse + Téléphone côte à côte (ergonomie) */
-.contact-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-bottom: 20px; }
-.contact-duo .contact-item { margin-bottom: 0; }
-@media (max-width: 560px) { .contact-duo { grid-template-columns: 1fr; } }
+/* La <dl> est elle-même la grille : Adresse + Téléphone côte à côte, Horaires
+   sur toute la largeur. Les groupes dt/dd restent enfants directs de la <dl>
+   (via un seul <div>), structure valide pour les lecteurs d'écran. */
+.contact-list { list-style: none; margin: 34px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; }
+.contact-item { display: flex; flex-direction: column; }
+.hours-item { grid-column: 1 / -1; }
+@media (max-width: 560px) { .contact-list { grid-template-columns: 1fr; } }
 .contact-list dt {
   font-family: var(--font-body);
   text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.72rem;
