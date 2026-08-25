@@ -17,7 +17,26 @@
       '<p style="line-height:1.6">Le fichier de configuration ne s\'est pas chargé. Recharge la page (F5) ; si le problème persiste, contacte le développeur.</p></div>';
     return;
   }
-  const sb = window.supabase.createClient(window.SB_URL, window.SB_KEY);
+  // Nettoyage : supprime toute session persistante laissée par une ancienne
+  // version (elle était stockée dans localStorage et survivait à la fermeture).
+  try {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const k = localStorage.key(i);
+      if (k && k.indexOf('sb-') === 0 && k.indexOf('-auth-token') !== -1) localStorage.removeItem(k);
+    }
+  } catch (e) { /* stockage indisponible : sans conséquence */ }
+
+  // Session stockée dans sessionStorage (propre à l'onglet) : elle est
+  // automatiquement effacée à la FERMETURE de la page/onglet → déconnexion.
+  // Un simple rechargement conserve la session (sessionStorage y survit),
+  // donc travailler reste confortable ; seule la fermeture déconnecte.
+  const sb = window.supabase.createClient(window.SB_URL, window.SB_KEY, {
+    auth: {
+      storage: window.sessionStorage,
+      persistSession: true,
+      autoRefreshToken: true
+    }
+  });
 
   const loginView = document.getElementById('loginView');
   const editorView = document.getElementById('editorView');
