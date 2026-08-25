@@ -292,23 +292,37 @@ document.addEventListener('DOMContentLoaded', function () {
       igPreview.innerHTML = a + a + a;
     }
 
-    fetch(BEHOLD_FEED, { cache: 'no-cache' })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        if (!data) { showIgFallback(); return; }
+    // Rafraîchissement 1×/jour : on garde en mémoire (localStorage) le dernier
+    // flux Behold. Tant qu'on a la version du jour, on l'affiche sans réseau ;
+    // au premier chargement d'un nouveau jour, on va rechercher les nouveautés.
+    const IG_CACHE_KEY = 'tbc_ig_feed';
+    const IG_TODAY = new Date().toISOString().slice(0, 10); // AAAA-MM-JJ
 
-        // Nombre d'abonnés
-        if (typeof data.followersCount === 'number') {
-          const f = document.getElementById('igFollowers');
-          if (f) { f.textContent = data.followersCount.toLocaleString('fr-FR'); f.setAttribute('data-locked', '1'); }
-        }
+    function readIgCache() {
+      try { return JSON.parse(localStorage.getItem(IG_CACHE_KEY) || 'null'); }
+      catch (e) { return null; }
+    }
+    function writeIgCache(data) {
+      try { localStorage.setItem(IG_CACHE_KEY, JSON.stringify({ day: IG_TODAY, data: data })); }
+      catch (e) { /* stockage indisponible : on ignore, le flux reste en direct */ }
+    }
 
-        const posts = (data.posts || []).slice(0, 3);
-        if (!posts.length) { showIgFallback(); return; }
+    // Affiche un flux Behold (abonnés + 3 dernières publications)
+    function renderFeed(data) {
+      if (!data) { showIgFallback(); return; }
 
-        // Remplace les squelettes par les vrais posts
-        igPreview.innerHTML = '';
-        posts.forEach(function (post) {
+      // Nombre d'abonnés
+      if (typeof data.followersCount === 'number') {
+        const f = document.getElementById('igFollowers');
+        if (f) { f.textContent = data.followersCount.toLocaleString('fr-FR'); f.setAttribute('data-locked', '1'); }
+      }
+
+      const posts = (data.posts || []).slice(0, 3);
+      if (!posts.length) { showIgFallback(); return; }
+
+      // Remplace les squelettes par les vrais posts
+      igPreview.innerHTML = '';
+      posts.forEach(function (post) {
           const img = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl) || post.thumbnailUrl || post.mediaUrl;
           const a = document.createElement('a');
           a.className = 'ig-post';
@@ -341,8 +355,27 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           igPreview.appendChild(a);
         });
-      })
-      .catch(function () { showIgFallback(); });
+    }
+
+    // Rafraîchissement quotidien : si on a déjà le flux du jour, on l'affiche
+    // instantanément ; sinon on interroge Behold et on met le cache à jour.
+    const igCache = readIgCache();
+    if (igCache && igCache.day === IG_TODAY && igCache.data) {
+      renderFeed(igCache.data);
+    } else {
+      fetch(BEHOLD_FEED, { cache: 'no-cache' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (!data) throw new Error('flux vide');
+          renderFeed(data);
+          writeIgCache(data);
+        })
+        .catch(function () {
+          // Behold indisponible : on ressort la dernière version connue si possible
+          if (igCache && igCache.data) renderFeed(igCache.data);
+          else showIgFallback();
+        });
+    }
   })();
 
   // Contenu du site : d'abord Supabase (base de données éditable via l'admin),
