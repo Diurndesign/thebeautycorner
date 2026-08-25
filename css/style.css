@@ -348,18 +348,27 @@ section { padding: 100px 0; }
   from { opacity: 0; transform: translateY(26px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* Glissement seul (sans fondu) : réservé au titre, l'élément LCP */
+@keyframes heroSlideUp {
+  from { transform: translateY(20px); }
+  to   { transform: translateY(0); }
+}
 .hero-main .hero-logo,
 .hero-main .eyebrow,
-.hero-main h1,
 .hero-main .hero-tagline,
 .hero-main .hero-actions,
 .hero-review {
   opacity: 0;
   animation: heroFadeUp .9s cubic-bezier(.22, .61, .36, 1) forwards;
 }
+/* Le titre est l'élément LCP : il reste peint dès la première image (pas de
+   fondu d'opacité qui retarderait le LCP), il glisse simplement en place. */
+.hero-main h1 {
+  animation: heroSlideUp .9s cubic-bezier(.22, .61, .36, 1) both;
+  animation-delay: .3s;
+}
 .hero-main .hero-logo    { animation-delay: .15s; }
 .hero-main .eyebrow      { animation-delay: .30s; }
-.hero-main h1            { animation-delay: .45s; }
 .hero-main .hero-tagline { animation-delay: .60s; }
 .hero-main .hero-actions { animation-delay: .75s; }
 .hero-review             { animation-delay: .95s; }
