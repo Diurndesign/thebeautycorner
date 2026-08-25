@@ -371,13 +371,15 @@
   });
 
   /* ---------- Compression d'image (côté navigateur) ----------
-     Redimensionne au besoin (max 2400 px sur le grand côté) et ré-encode
+     Redimensionne au besoin (max 2000 px sur le grand côté) et ré-encode
      en WebP (plus léger que le JPEG à qualité égale) — repli JPEG si le
      navigateur ne sait pas produire de WebP. Si le résultat n'est pas plus
-     léger que l'original, on garde l'original. */
-  const MAX_SIDE = 2400;
-  const WEBP_QUALITY = 0.90;
-  const JPEG_QUALITY = 0.92;
+     léger que l'original, on garde l'original.
+     Réglages resserrés (2000 px / qualité 0.82) : suffisant pour le web et
+     bien plus léger, pour éviter les images de plusieurs Mo. */
+  const MAX_SIDE = 2000;
+  const WEBP_QUALITY = 0.82;
+  const JPEG_QUALITY = 0.85;
 
   function canvasToBlob(canvas, type, quality) {
     return new Promise(function (res) { canvas.toBlob(res, type, quality); });
