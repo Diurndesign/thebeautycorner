@@ -405,6 +405,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const avisSection = document.getElementById('avis');
         if (avisSection) avisSection.style.backgroundImage = "url('" + content.avisImage + "')";
       }
+      if (content.giftcardImage) {
+        const giftImg = document.getElementById('giftcardImg');
+        const giftMedia = document.getElementById('giftcardMedia');
+        if (giftImg && giftMedia) { giftImg.src = content.giftcardImage; giftMedia.hidden = false; }
+      }
 
       applyTexts(content.texts || {});
       renderExpModal(content.texts || {}, content.experience);

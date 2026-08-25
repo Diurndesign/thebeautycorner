@@ -95,7 +95,8 @@
     siteImagesWrap.innerHTML =
       '<div data-siteimg="heroImage">' + imgField('heroImage', c.heroImage, 'Photo du Hero (grande image d\'accueil, en fond)') + '</div>' +
       '<div data-siteimg="aboutImage" style="margin-top:14px;">' + imgField('aboutImage', c.aboutImage, 'Photo de la section « À propos »') + '</div>' +
-      '<div data-siteimg="avisImage" style="margin-top:14px;">' + imgField('avisImage', c.avisImage, 'Fond de la section « Avis » (image en arrière-plan)') + '</div>';
+      '<div data-siteimg="avisImage" style="margin-top:14px;">' + imgField('avisImage', c.avisImage, 'Fond de la section « Avis » (image en arrière-plan)') + '</div>' +
+      '<div data-siteimg="giftcardImage" style="margin-top:14px;">' + imgField('giftcardImage', c.giftcardImage, 'Image de la section « Idée cadeau »') + '</div>';
   }
 
   function imgField(fieldName, url, customLabel) {
@@ -494,6 +495,7 @@
       heroImage: val(siteImagesWrap, 'heroImage'),
       aboutImage: val(siteImagesWrap, 'aboutImage'),
       avisImage: val(siteImagesWrap, 'avisImage'),
+      giftcardImage: val(siteImagesWrap, 'giftcardImage'),
       texts: {},
       experience: collectExp(),
       prestations: [],
@@ -547,6 +549,7 @@
       addUrl(content.heroImage);
       addUrl(content.aboutImage);
       addUrl(content.avisImage);
+      addUrl(content.giftcardImage);
       (content.prestations || []).forEach(function (p) { addUrl(p.image); });
       (content.avantApres || []).forEach(function (b) { addUrl(b.avant); addUrl(b.apres); });
 
