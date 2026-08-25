@@ -569,6 +569,7 @@ section { padding: 100px 0; }
 .experience-title {
   display: block; font-family: var(--font-title);
   font-size: clamp(1.6rem, 3.2vw, 2.3rem); line-height: 1.1; margin-bottom: 12px;
+  color: var(--cream);
 }
 .experience-lead {
   display: block; max-width: 640px;
