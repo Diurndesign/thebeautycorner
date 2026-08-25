@@ -58,15 +58,15 @@
     html { scroll-behavior:smooth; }
     .admin-nav {
       position:sticky; top:0; z-index:30;
-      display:flex; align-items:center; gap:10px;
+      display:flex; align-items:center; gap:10px 12px; flex-wrap:wrap;
       padding:12px 0; margin:0 0 24px;
       background:var(--cream-soft);
       border-bottom:1px solid rgba(129,94,84,.16);
     }
+    /* Onglets sur plusieurs lignes si besoin : la barre reste entière, jamais coupée */
     .admin-nav__tabs {
-      display:flex; gap:8px; flex-wrap:nowrap; overflow-x:auto;
+      display:flex; gap:8px; flex-wrap:wrap;
       flex:1 1 auto; min-width:0;
-      -webkit-overflow-scrolling:touch; scrollbar-width:thin;
     }
     .admin-nav__logout { flex:0 0 auto; }
     .admin-nav a {
