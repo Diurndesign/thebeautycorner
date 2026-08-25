@@ -723,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function openExp() {
     if (!expModal) return;
-    expLastFocus = document.activeElement;
+    expLastFocus = document.getElementById('experienceOpen') || document.activeElement;
     expModal.hidden = false;
     document.body.classList.add('modal-open');
     const closeBtn = expModal.querySelector('.exp-modal-close');

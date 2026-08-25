@@ -39,7 +39,7 @@
   <link rel="preload" href="assets/fonts/Soria.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/CoconatRegular.woff2" as="font" type="font/woff2" crossorigin />
 
-  <link rel="stylesheet" href="css/style.css?v=20260824s" />
+  <link rel="stylesheet" href="css/style.css?v=20260824t" />
 
   <!-- Données structurées : institut de beauté (SEO local + rich results) -->
   <script type="application/ld+json">
@@ -226,18 +226,18 @@
       </div>
 
       <!-- ===== Carte Expérience privée (ouvre un modal), mise en avant ===== -->
-      <button type="button" class="experience-card" id="experienceCard" aria-haspopup="dialog" aria-controls="expModal">
+      <article class="experience-card" id="experienceCard">
         <span class="experience-badge" data-txt="experience.badge">Expérience privée · entre amies</span>
-        <span class="experience-card-body">
-          <span class="experience-eyebrow" data-txt="experience.cardEyebrow">Frères d'Encre Experiences · by Alex</span>
-          <span class="experience-title" data-txt="experience.cardTitle">La soirée beauté entre amies</span>
-          <span class="experience-lead" data-txt="experience.cardLead">EVJF, anniversaire ou simple moment complice&nbsp;: un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.</span>
-          <span class="experience-meta">
+        <div class="experience-card-body">
+          <p class="experience-eyebrow" data-txt="experience.cardEyebrow">Frères d'Encre Experiences · by Alex</p>
+          <h3 class="experience-title" data-txt="experience.cardTitle">La soirée beauté entre amies</h3>
+          <p class="experience-lead" data-txt="experience.cardLead">EVJF, anniversaire ou simple moment complice&nbsp;: un cocon rien que pour vous, en groupe privé de 6 à 10 participantes. Beauté personnalisée, gourmandise et souvenirs à partager.</p>
+          <div class="experience-meta">
             <span class="experience-price" data-txt="experience.cardPrice">À partir de 55&nbsp;€ / pers</span>
-            <span class="experience-more">Découvrir l'expérience →</span>
-          </span>
-        </span>
-      </button>
+            <button type="button" class="experience-more" id="experienceOpen" aria-haspopup="dialog" aria-controls="expModal">Découvrir l'expérience →</button>
+          </div>
+        </div>
+      </article>
 
       <!-- Cartes générées depuis data/content.json (prestations) :
            image + titre + description modifiables via le CMS. -->
@@ -516,6 +516,6 @@
   </div>
 
   <script src="js/config.js?v=20260824a"></script>
-  <script src="js/script.js?v=20260824s"></script>
+  <script src="js/script.js?v=20260824t"></script>
 </body>
 </html>

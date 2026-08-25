@@ -383,9 +383,12 @@ section { padding: 100px 0; }
   max-width: 300px;
   margin-bottom: 90px;
   padding: 26px 28px;
-  background: rgba(246, 236, 218, 0.10);
-  border: 1px solid rgba(246, 236, 218, 0.22);
+  /* Verre sombre : le texte crème reste lisible même au-dessus du fondu crème
+     du bas du hero (sinon le crème traverse le verre et efface le texte). */
+  background: rgba(58, 47, 43, 0.55);
+  border: 1px solid rgba(246, 236, 218, 0.16);
   border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   color: var(--cream);
 }
@@ -576,9 +579,12 @@ section { padding: 100px 0; }
   font-family: var(--font-title); font-size: 1.3rem; color: #fff;
 }
 .experience-more {
+  display: inline-block;
+  border: 0; background: transparent; padding: 0; cursor: pointer;
   font-family: var(--font-body); font-size: .95rem; letter-spacing: .04em;
   color: var(--cream); transition: transform .25s ease;
 }
+.experience-more:focus-visible { outline: 3px solid var(--terracotta); outline-offset: 4px; border-radius: 4px; }
 .experience-card:hover .experience-more { transform: translateX(5px); }
 @media (max-width: 560px) {
   .experience-card { padding: 26px 22px; }
