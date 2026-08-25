@@ -232,7 +232,6 @@
     { title: 'Instagram', fields: [
       ['instagram.handle', 'Identifiant (@…)', 'input'],
       ['instagram.title', 'Titre', 'input'],
-      ['instagram.followers', "Nombre d'abonnés (repli si non connecté)", 'input'],
       ['instagram.subtitle', 'Sous-titre', 'input']
     ] },
     { title: 'Contact', fields: [
