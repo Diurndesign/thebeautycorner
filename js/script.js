@@ -406,9 +406,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (avisSection) avisSection.style.backgroundImage = "url('" + content.avisImage + "')";
       }
       if (content.giftcardImage) {
-        const giftImg = document.getElementById('giftcardImg');
-        const giftMedia = document.getElementById('giftcardMedia');
-        if (giftImg && giftMedia) { giftImg.src = content.giftcardImage; giftMedia.hidden = false; }
+        const giftSection = document.getElementById('giftcard');
+        if (giftSection) {
+          giftSection.style.backgroundImage = "url('" + content.giftcardImage + "')";
+          giftSection.classList.add('has-image');
+        }
       }
 
       applyTexts(content.texts || {});
