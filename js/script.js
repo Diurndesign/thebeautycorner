@@ -140,6 +140,29 @@ document.addEventListener('DOMContentLoaded', function () {
           btn.addEventListener('blur', function () { cell.classList.remove('is-open'); });
         }
       });
+
+      // Préchargement discret (pendant les temps morts) : les images de survol
+      // arrivent en cache AVANT le survol -> affichage instantané, sans la
+      // saccade au scroll (décodage hors du fil principal, une image à la fois).
+      (function prefetchHoverImages() {
+        const urls = cells.map(function (c) {
+          const i = c.querySelector('.presta-cell-img');
+          return i && i.dataset.bg;
+        }).filter(Boolean);
+        let i = 0;
+        function step() {
+          if (i >= urls.length) return;
+          const im = new Image();
+          im.src = urls[i++];
+          const done = im.decode ? im.decode().catch(function () {}) : Promise.resolve();
+          done.then(schedule);
+        }
+        function schedule() {
+          if ('requestIdleCallback' in window) requestIdleCallback(step, { timeout: 2000 });
+          else setTimeout(step, 250);
+        }
+        schedule();
+      })();
     }
   }
 
