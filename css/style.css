@@ -297,7 +297,12 @@ section { padding: 100px 0; }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* Fondu d'apparition : évite que l'image « surgisse » d'un coup une fois
+     téléchargée. Le fond sombre du hero reste visible pendant le fondu,
+     donc jamais de flash blanc ni de hero vide. */
+  animation: heroBgIn .9s ease both;
 }
+@keyframes heroBgIn { from { opacity: 0; } to { opacity: 1; } }
 .hero-overlay {
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(120deg, rgba(58,47,43,0.72) 0%, rgba(129,94,84,0.55) 55%, rgba(88,125,141,0.45) 100%);
@@ -379,7 +384,8 @@ section { padding: 100px 0; }
   .hero-main h1,
   .hero-main .hero-tagline,
   .hero-main .hero-actions,
-  .hero-review { opacity: 1; animation: none; }
+  .hero-review,
+  .hero-bg { opacity: 1; animation: none; }
 }
 
 .btn-blue { background: var(--blue); color: var(--cream); }

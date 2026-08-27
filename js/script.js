@@ -426,10 +426,9 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelectorAll('[data-planity-gift]').forEach(function (a) { a.href = content.planityGift; });
       }
 
-      if (content.heroImage) {
-        const heroBg = document.getElementById('heroBg');
-        if (heroBg) heroBg.style.backgroundImage = "url('" + content.heroImage + "')";
-      }
+      // Le fond du hero est géré en CSS via l'URL stable /api/hero-image
+      // (toujours synchronisée avec l'admin). On n'y touche donc plus ici,
+      // pour éviter un second téléchargement de la même image.
       if (content.aboutImage) {
         const aboutImg = document.getElementById('aboutImg');
         if (aboutImg) aboutImg.src = content.aboutImage;
