@@ -1240,3 +1240,51 @@ body.modal-open { overflow: hidden; }
 .legal ul { padding-left: 22px; margin-bottom: 10px; }
 .legal a { color: var(--blue); }
 .legal-back { margin-top: 40px; }
+
+/* ============================================================
+   Bandeau cookies (RGPD / CNIL) — géré par js/consent.js
+   ============================================================ */
+.cookie-banner {
+  position: fixed;
+  left: 16px; right: 16px; bottom: 16px;
+  z-index: 1000;
+  display: flex; justify-content: center;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .35s ease, transform .35s ease;
+  pointer-events: none;
+}
+.cookie-banner.is-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.cookie-banner__inner {
+  width: 100%; max-width: 640px;
+  display: flex; align-items: center; gap: 20px 26px; flex-wrap: wrap;
+  padding: 20px 24px;
+  background: rgba(58, 47, 43, 0.94);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border: 1px solid rgba(246, 236, 218, 0.16);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 44px rgba(58, 47, 43, 0.34);
+}
+.cookie-banner__text {
+  flex: 1 1 260px; min-width: 0;
+  margin: 0; color: var(--cream);
+  font-size: .9rem; line-height: 1.55;
+}
+.cookie-banner__text a { color: var(--terracotta); text-decoration: underline; }
+.cookie-banner__actions { display: flex; gap: 12px; flex: 0 0 auto; }
+/* « Accepter » et « Refuser » ont la même taille et la même lisibilité
+   (exigence CNIL : refuser doit être aussi simple qu'accepter). */
+.cookie-btn {
+  font: inherit; font-size: .88rem; font-weight: 500;
+  padding: 10px 22px; border-radius: 999px; cursor: pointer;
+  border: 1px solid transparent; transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.cookie-btn:hover { transform: translateY(-1px); }
+.cookie-btn--accept { background: var(--blue); color: var(--cream); }
+.cookie-btn--accept:hover { background: #46656f; }
+.cookie-btn--refuse { background: transparent; color: var(--cream); border-color: rgba(246, 236, 218, 0.45); }
+.cookie-btn--refuse:hover { border-color: var(--cream); }
+.cookie-btn:focus-visible { outline: 3px solid var(--terracotta); outline-offset: 3px; }
+@media (max-width: 480px) {
+  .cookie-banner__actions { width: 100%; }
+  .cookie-btn { flex: 1 1 0; }
+}
